@@ -1,0 +1,205 @@
+ <div class="container-fluid border rounded" name="container2">
+    <div class="row">
+		<div class="col col-sm-2 mh-100">
+
+		</div>
+		<div class="col col-sm-8 mh-100">
+          <div class="card bg-secondary border-info">
+            <h2 class="text-center">Question</h2>
+          </div>
+          <h4 *ngIf="!loaded">Loading Question...</h4>
+          <div *ngIf="loaded">
+            <!--<div class="row">--> <!-- mb-3 float-right -->
+                <div class="card border-info">
+
+                        <form class="form-inline my-2 my-lg-0 justify-content-right">
+                            <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
+                               (ngModelChange)="searchQuestion(searchInput.value)"
+                               type="search" placeholder="Search Question...">
+                        </form>
+
+                </div>
+            <!--</div>-->
+            <div class="card border-info"> <!-- table section -->
+              <div class="card-body table-responsive">
+                <table class="table-sm table-bordered table-hover rounded">
+                  <thead>
+                    <tr>
+			<th>
+				<i class="text-size-10">questionId</i>
+			</th>
+			<th>
+				<i class="text-size-10">questionCategoryId</i>
+			</th>
+			<th>
+				<i class="text-size-10">questionLevelId</i>
+			</th>
+			<th>
+				<i class="text-size-10">answerId</i>
+			</th>
+			<th>
+				<i class="text-size-10">questionTxt</i>
+			</th>
+			<th>
+				<i class="text-size-10">evntTmestmp</i>
+			</th>
+			<th>
+				<i class="text-size-10">evntOperId</i>
+			</th>
+			<th>
+				<i class="text-size-8">Edit Item</i>
+			</th>
+			<th>
+				<i class="text-size-8">Delete Item</i>
+			</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let dto of questionlist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                    <tr class="a">
+			<td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+			<td>
+				<i class="text-size-6">{{dto.questionId}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{this.questioncategorymap.get(dto.questionCategoryId)}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{this.questionlevelmap.get(dto.questionLevelId)}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{this.answermap.get(dto.answerId)}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.questionTxt}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.evntTmestmp}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.evntOperId}}</i>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="editItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-edit" style="color:red"></span>
+				</button>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="deleteItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-trash" style="color:blue"></span>
+				</button>
+			</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- https://www.npmjs.com/package/ngx-pagination -->
+                  <div class="card pagin">
+                      <div class="card-body" *ngIf="!paginationDisabled">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+              <button *ngIf="!editMode && !addMode" (click)="initiateAdd()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">{{this.addbarmsg}}</button>
+              <div class="card card-body mb-3" *ngIf="showQuestionForm">
+                <h2>{{this.formmsg}}</h2>
+                <form (submit)="onSubmit($event)" #Question="ngForm">
+                    <div class="form-group">
+				<label>questionCategoryId</label>
+					<div class="col col-sm-4">
+					<select class="form-control border-info text-center"
+					[(ngModel)]="question.questionCategoryId"
+					required
+					name="questionCategoryId_dropdown">
+						<option *ngFor="let option of questioncategorylist" [value]="option.value">
+							{{ option.viewValue }}
+						</option>
+					</select>
+				</div>
+				<label>questionLevelId</label>
+					<div class="col col-sm-4">
+					<select class="form-control border-info text-center"
+					[(ngModel)]="question.questionLevelId"
+					required
+					name="questionLevelId_dropdown">
+						<option *ngFor="let option of questionlevellist" [value]="option.value">
+							{{ option.viewValue }}
+						</option>
+					</select>
+				</div>
+				<label>answerId</label>
+					<div class="col col-sm-4">
+					<select class="form-control border-info text-center"
+					[(ngModel)]="question.answerId"
+					name="answerId_dropdown">
+						<option *ngFor="let option of answerlist" [value]="option.value">
+							{{ option.viewValue }}
+						</option>
+					</select>
+				</div>
+				<label>questionTxt</label>
+				<input type="text" class="form-control" [(ngModel)]="question.questionTxt" name="questionTxt" #questionTxt="ngModel"
+					maxlength=256
+				>
+				<label>evntTmestmp</label>
+				<input type="date" class="form-control" [(ngModel)]="question.evntTmestmp" name="evntTmestmp" #evntTmestmp="ngModel"
+				>
+				<label>evntOperId</label>
+				<input type="text" class="form-control" [(ngModel)]="question.evntOperId" name="evntOperId" #evntOperId="ngModel"
+					maxlength=10
+				>
+                    </div>
+                  <button *ngIf="addMode || editMode" [disabled]="Question.invalid" (click)="saveResults()" class="btn btn-sm btn-block btn-success text-white mb-3 font-italic">{{this.saveChangesMsg}}</button>
+                  <button *ngIf="addMode || editMode" (click)="reload()" class="btn btn-sm btn-block btn-danger text-white mb-3 font-italic">{{this.cancelMsg}}</button>
+                </form>
+              </div>
+          </div>
+        </div>
+        <div class="col col-sm-2 mh-100">
+
+        </div>
+    </div>
+    <div class="row">
+<div class="card card-body mb-3">
+    <form (submit)="onSubmit($event)">
+<div class="form-group">
+  <label>questionCategoryId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.questionCategoryId" name="questionCategoryId">
+</div>
+        <button (click)="findByQuestionCategoryId()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">findByQuestionCategoryId</button>
+    </form>
+</div><div class="card card-body mb-3">
+    <form (submit)="onSubmit($event)">
+<div class="form-group">
+  <label>questionLevelId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.questionLevelId" name="questionLevelId">
+</div>
+        <button (click)="findByQuestionLevelId()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">findByQuestionLevelId</button>
+    </form>
+</div><div class="card card-body mb-3">
+    <form (submit)="onSubmit($event)">
+<div class="form-group">
+  <label>answerId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
+</div>
+        <button (click)="findByAnswerId()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">findByAnswerId</button>
+    </form>
+</div><div class="card card-body mb-3">
+    <form (submit)="onSubmit($event)">
+<div class="form-group">
+  <label>questionCategoryId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.questionCategoryId" name="questionCategoryId">
+</div>
+<div class="form-group">
+  <label>questionLevelId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.questionLevelId" name="questionLevelId">
+</div>
+<div class="form-group">
+  <label>answerId</label>
+  <input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
+</div>
+        <button (click)="findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId</button>
+    </form>
+</div>	</div>
+</div>

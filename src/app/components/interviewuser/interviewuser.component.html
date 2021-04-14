@@ -1,0 +1,234 @@
+ <div class="container-fluid border rounded" name="container2">
+    <div class="row">
+		<div class="col col-sm-2 mh-100">
+
+		</div>
+		<div class="col col-sm-8 mh-100">
+          <div class="card bg-secondary border-info">
+            <h2 class="text-center">InterviewUser</h2>
+          </div>
+          <h4 *ngIf="!loaded">Loading InterviewUser...</h4>
+          <div *ngIf="loaded">
+            <!--<div class="row">--> <!-- mb-3 float-right -->
+                <div class="card border-info">
+
+                        <form class="form-inline my-2 my-lg-0 justify-content-right">
+                            <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
+                               (ngModelChange)="searchInterviewUser(searchInput.value)"
+                               type="search" placeholder="Search InterviewUser...">
+                        </form>
+
+                </div>
+            <!--</div>-->
+            <div class="card border-info"> <!-- table section -->
+              <div class="card-body table-responsive">
+                <table class="table-sm table-bordered table-hover rounded">
+                  <thead>
+                    <tr>
+			<th>
+				<i class="text-size-10">userId</i>
+			</th>
+			<th>
+				<i class="text-size-10">authorizations</i>
+			</th>
+			<th>
+				<i class="text-size-10">emailaddr</i>
+			</th>
+			<th>
+				<i class="text-size-10">firstname</i>
+			</th>
+			<th>
+				<i class="text-size-10">isuseractive</i>
+			</th>
+			<th>
+				<i class="text-size-10">isusernotlocked</i>
+			</th>
+			<th>
+				<i class="text-size-10">joindate</i>
+			</th>
+			<th>
+				<i class="text-size-10">lastlogindate</i>
+			</th>
+			<th>
+				<i class="text-size-10">lastlogindatedisplay</i>
+			</th>
+			<th>
+				<i class="text-size-10">lastname</i>
+			</th>
+			<th>
+				<i class="text-size-10">password</i>
+			</th>
+			<th>
+				<i class="text-size-10">profileimage</i>
+			</th>
+			<th>
+				<i class="text-size-10">roles</i>
+			</th>
+			<th>
+				<i class="text-size-10">useridentifier</i>
+			</th>
+			<th>
+				<i class="text-size-10">username</i>
+			</th>
+			<th>
+				<i class="text-size-8">Edit Item</i>
+			</th>
+			<th>
+				<i class="text-size-8">Delete Item</i>
+			</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let dto of interviewuserlist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                    <tr class="a">
+			<td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+			<td>
+				<i class="text-size-6">{{dto.userId}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.authorizations}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.emailaddr}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.firstname}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.isuseractive}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.isusernotlocked}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.joindate}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.lastlogindate}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.lastlogindatedisplay}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.lastname}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.password}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.profileimage}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.roles}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.useridentifier}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.username}}</i>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="editItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-edit" style="color:red"></span>
+				</button>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="deleteItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-trash" style="color:blue"></span>
+				</button>
+			</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- https://www.npmjs.com/package/ngx-pagination -->
+                  <div class="card pagin">
+                      <div class="card-body" *ngIf="!paginationDisabled">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+              <button *ngIf="!editMode && !addMode" (click)="initiateAdd()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">{{this.addbarmsg}}</button>
+              <div class="card card-body mb-3" *ngIf="showInterviewUserForm">
+                <h2>{{this.formmsg}}</h2>
+                <form (submit)="onSubmit($event)" #InterviewUser="ngForm">
+                    <div class="form-group">
+				<label>authorizations</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.authorizations" name="authorizations" #authorizations="ngModel"
+				>
+				<label>emailaddr</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.emailaddr" name="emailaddr" #emailaddr="ngModel"
+					maxlength=255
+				>
+				<label>firstname</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.firstname" name="firstname" #firstname="ngModel"
+					maxlength=255
+				>
+				<label>isuseractive</label>
+					<div class="col col-sm-4">
+					<select class="form-control border-info text-center"
+					[(ngModel)]="interviewuser.isuseractive"
+					required
+					name="isuseractive_dropdown">
+						<option [value]="true">true</option>
+						<option [value]="false">false</option>
+					</select>
+				</div>
+				<label>isusernotlocked</label>
+					<div class="col col-sm-4">
+					<select class="form-control border-info text-center"
+					[(ngModel)]="interviewuser.isusernotlocked"
+					required
+					name="isusernotlocked_dropdown">
+						<option [value]="true">true</option>
+						<option [value]="false">false</option>
+					</select>
+				</div>
+				<label>joindate</label>
+				<input type="date" class="form-control" [(ngModel)]="interviewuser.joindate" name="joindate" #joindate="ngModel"
+				>
+				<label>lastlogindate</label>
+				<input type="date" class="form-control" [(ngModel)]="interviewuser.lastlogindate" name="lastlogindate" #lastlogindate="ngModel"
+				>
+				<label>lastlogindatedisplay</label>
+				<input type="date" class="form-control" [(ngModel)]="interviewuser.lastlogindatedisplay" name="lastlogindatedisplay" #lastlogindatedisplay="ngModel"
+				>
+				<label>lastname</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.lastname" name="lastname" #lastname="ngModel"
+					maxlength=255
+				>
+				<label>password</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.password" name="password" #password="ngModel"
+					maxlength=255
+				>
+				<label>profileimage</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.profileimage" name="profileimage" #profileimage="ngModel"
+					maxlength=255
+				>
+				<label>roles</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.roles" name="roles" #roles="ngModel"
+					maxlength=255
+				>
+				<label>useridentifier</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.useridentifier" name="useridentifier" #useridentifier="ngModel"
+					maxlength=255
+				>
+				<label>username</label>
+				<input type="text" class="form-control" [(ngModel)]="interviewuser.username" name="username" #username="ngModel"
+					maxlength=255
+				>
+                    </div>
+                  <button *ngIf="addMode || editMode" [disabled]="InterviewUser.invalid" (click)="saveResults()" class="btn btn-sm btn-block btn-success text-white mb-3 font-italic">{{this.saveChangesMsg}}</button>
+                  <button *ngIf="addMode || editMode" (click)="reload()" class="btn btn-sm btn-block btn-danger text-white mb-3 font-italic">{{this.cancelMsg}}</button>
+                </form>
+              </div>
+          </div>
+        </div>
+        <div class="col col-sm-2 mh-100">
+
+        </div>
+    </div>
+    <div class="row">
+	</div>
+</div>

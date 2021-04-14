@@ -1,0 +1,115 @@
+ <div class="container-fluid border rounded" name="container2">
+    <div class="row">
+		<div class="col col-sm-2 mh-100">
+
+		</div>
+		<div class="col col-sm-8 mh-100">
+          <div class="card bg-secondary border-info">
+            <h2 class="text-center">QuestionCategory</h2>
+          </div>
+          <h4 *ngIf="!loaded">Loading QuestionCategory...</h4>
+          <div *ngIf="loaded">
+            <!--<div class="row">--> <!-- mb-3 float-right -->
+                <div class="card border-info">
+
+                        <form class="form-inline my-2 my-lg-0 justify-content-right">
+                            <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
+                               (ngModelChange)="searchQuestionCategory(searchInput.value)"
+                               type="search" placeholder="Search QuestionCategory...">
+                        </form>
+
+                </div>
+            <!--</div>-->
+            <div class="card border-info"> <!-- table section -->
+              <div class="card-body table-responsive">
+                <table class="table-sm table-bordered table-hover rounded">
+                  <thead>
+                    <tr>
+			<th>
+				<i class="text-size-10">questionCategoryId</i>
+			</th>
+			<th>
+				<i class="text-size-10">questionCategoryDesc</i>
+			</th>
+			<th>
+				<i class="text-size-10">evntTmestmp</i>
+			</th>
+			<th>
+				<i class="text-size-10">evntOperId</i>
+			</th>
+			<th>
+				<i class="text-size-8">Edit Item</i>
+			</th>
+			<th>
+				<i class="text-size-8">Delete Item</i>
+			</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let dto of questioncategorylist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                    <tr class="a">
+			<td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+			<td>
+				<i class="text-size-6">{{dto.questionCategoryId}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.questionCategoryDesc}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.evntTmestmp}}</i>
+			</td>
+			<td>
+				<i class="text-size-6">{{dto.evntOperId}}</i>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="editItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-edit" style="color:red"></span>
+				</button>
+			</td>
+			<td>
+				<button class="btn-edit" type="submit" [disabled]="addMode || editMode" (click)="deleteItem(i + (p-1)*itemsPerPage)">
+					<span class="fas fa-trash" style="color:blue"></span>
+				</button>
+			</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- https://www.npmjs.com/package/ngx-pagination -->
+                  <div class="card pagin">
+                      <div class="card-body" *ngIf="!paginationDisabled">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+              <button *ngIf="!editMode && !addMode" (click)="initiateAdd()" class="btn btn-sm btn-block btn-primary text-white mb-3 font-italic">{{this.addbarmsg}}</button>
+              <div class="card card-body mb-3" *ngIf="showQuestionCategoryForm">
+                <h2>{{this.formmsg}}</h2>
+                <form (submit)="onSubmit($event)" #QuestionCategory="ngForm">
+                    <div class="form-group">
+				<label>questionCategoryDesc</label>
+				<input type="text" class="form-control" [(ngModel)]="questioncategory.questionCategoryDesc" name="questionCategoryDesc" #questionCategoryDesc="ngModel"
+					maxlength=100
+				>
+				<label>evntTmestmp</label>
+				<input type="date" class="form-control" [(ngModel)]="questioncategory.evntTmestmp" name="evntTmestmp" #evntTmestmp="ngModel"
+				>
+				<label>evntOperId</label>
+				<input type="text" class="form-control" [(ngModel)]="questioncategory.evntOperId" name="evntOperId" #evntOperId="ngModel"
+					maxlength=10
+				>
+                    </div>
+                  <button *ngIf="addMode || editMode" [disabled]="QuestionCategory.invalid" (click)="saveResults()" class="btn btn-sm btn-block btn-success text-white mb-3 font-italic">{{this.saveChangesMsg}}</button>
+                  <button *ngIf="addMode || editMode" (click)="reload()" class="btn btn-sm btn-block btn-danger text-white mb-3 font-italic">{{this.cancelMsg}}</button>
+                </form>
+              </div>
+          </div>
+        </div>
+        <div class="col col-sm-2 mh-100">
+
+        </div>
+    </div>
+    <div class="row">
+	</div>
+</div>
