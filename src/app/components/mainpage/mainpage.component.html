@@ -1,0 +1,89 @@
+<div class="container-fluid border rounded" name="container2">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+      <div class="card navbar-dark bg-primary">
+        <h2 class="text-center text-white p3">Welcome to the Interview Question Generator!</h2>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li *ngIf="!isLoggedIn" class="nav-item m-2">
+            <button (click)="displayLogin()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">Login
+            </button>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item m-2">
+            <button (click)="displayRegistration()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+              Register
+            </button>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item m-2">
+            <button (click)="onLogOut()" class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">Logout
+            </button>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item m-2">
+            <button (click)="displayAccountInfo()" class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">Account Info</button>
+          </li>
+          <li *ngIf="isLoggedIn && isAdmin" class="nav-item m-2">
+            <button (click)="gotoAdminConsole()"
+                    class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">Admin
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col col-sm-4">
+        <div class="card bg-white border-white">
+          <h2 class="text-left">Select a Category and Difficulty Level</h2>
+        </div>
+        <form (submit)="onSubmit($event)" #Filter="ngForm">
+          <div class="form-group">
+            <label>Category:</label>
+            <div class="col col-sm-4">
+              <select class="form-control border-info text-center" style="width:300%"
+                      [(ngModel)]="filterCategoryValue"
+                      required
+                      name="questionCategoryId_dropdown">
+                <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                  {{ option.viewValue }}
+                </option>
+              </select>
+            </div>
+            <label>Difficulty:</label>
+            <div class="col col-sm-4">
+              <select class="form-control border-info text-center" style="width:300%"
+                      [(ngModel)]="filterDifficultyValue"
+                      required
+                      name="questionLevelId_dropdown">
+                <option *ngFor="let option of questionlevellist" [value]="option.value">
+                  {{ option.viewValue }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button (click)="showQuestion()" [disabled]="Filter.invalid"
+                  class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.showQuestionsMsg}}</button>
+        </form>
+      </div>
+      <div class="col col-sm-8">
+        <div *ngIf="showQuestionMode || showAnswerMode" >
+          <div class="row">
+            <p>{{questionItem.questionTxt}}</p>
+           <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()"
+                   class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.showAnswerMsg}}</button>
+          </div>
+          <div *ngIf="showAnswerMode" class="row">
+            <p class="bg-warning">Answer:</p>
+          </div>
+          <div *ngIf="showAnswerMode" class="row">
+            <p>{{questionItem.answerTxt}}</p>
+            <button (click)="showNextQuestion()"
+                    class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.nextQuestionMsg}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

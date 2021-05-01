@@ -1,17 +1,17 @@
-export interface InterviewUserDTO{
+export interface InterviewUserDTO {
 	userId?: number;
 	authorizations?: string[];
-	emailaddr?: string;
-	firstname?: string;
-	isuseractive?: boolean;
-	isusernotlocked?: boolean;
-	joindate?: Date;
-	lastlogindate?: Date;
-	lastlogindatedisplay?: Date;
-	lastname?: string;
+	emailAddr?: string;
+	firstName?: string;
+  userActive?: boolean;
+  userNotLocked?: boolean;
+  joinDate?: Date;
+  lastLoginDate?: Date;
+  lastLoginDateDisplay?: Date;
+  lastName?: string;
 	password?: string;
-	profileimage?: string;
+  profileImage?: string;
 	roles?: string;
-	useridentifier?: string;
-	username?: string;
+  userIdentifier?: string;
+  userName?: string;
 }

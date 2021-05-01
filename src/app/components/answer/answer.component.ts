@@ -1,8 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Subscription} from 'rxjs';
 import { ResponseMessage } from '../../models/ResponseMessage';
-import { AnswerService } from '../../services/answer.service';
+import { AnswerService } from '../../services/answer/answer.service';
 import { AnswerDTO } from '../../models/AnswerDTO';
+import {Role} from "../../enum/role.enum";
+import {NotificationType} from "../../enum/notification-type.enum";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {NotificationService} from "../../services/notification/notification.service";
 
 @Component({
   selector: 'app-answer',
@@ -10,7 +14,12 @@ import { AnswerDTO } from '../../models/AnswerDTO';
   styleUrls: ['./answer.component.css']
 })
 export class AnswerComponent implements OnInit, OnDestroy {
-    private subscriptions: Subscription[] = [];
+  userPrivileges:boolean = false;
+  advUserPrivileges:boolean = false;
+  premiumUserPrivileges:boolean = false;
+  adminPrivileges:boolean = false;
+  superPrivileges:boolean = false;
+  private subscriptions: Subscription[] = [];
 	answer: AnswerDTO = {
 		answerId: null,
 		answerTxt: '',
@@ -34,9 +43,16 @@ export class AnswerComponent implements OnInit, OnDestroy {
     formmsg: string = 'Add Answer';
     paginationDisabled: boolean = false;
 
-	constructor( private answerservice: AnswerService ) { }
+	constructor( private answerservice: AnswerService,
+               private authenticationService: AuthenticationService,
+               private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.userPrivileges = this.isUser;
+    this.advUserPrivileges = this.isAdvUser;
+    this.premiumUserPrivileges = this.isPremUser;
+    this.adminPrivileges = this.isAdmin;
+    this.superPrivileges = this.isSuper;
     this.reload();
   }
 
@@ -57,7 +73,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
   }
 
   initiateAdd() {
-    //console.log("initiating item add ....")
+    ////console.log("initiating item add ....")
     this.editMode = false;
     this.addMode = true;
     this.showAnswerForm = true;
@@ -99,7 +115,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(e) {
-    console.log(123);
+    //console.log(123);
     e.preventDefault();
   }
 
@@ -135,7 +151,36 @@ export class AnswerComponent implements OnInit, OnDestroy {
 		);
   }
 
+  public get isUser(): boolean {
+    return this.getUserRole() === Role.SUPER_ADMIN;
+  }
 
+  public get isAdvUser(): boolean {
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isPremUser(): boolean {
+    return this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isSuper(): boolean {
+    return this.getUserRole() === Role.SUPER_ADMIN;
+  }
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().roles;
+  }
+
+  private sendNotificationMessage(notificationType: NotificationType, message: string): void {
+    if (message) {
+      this.notificationService.notify(notificationType, message);
+    } else {
+      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+    }
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
