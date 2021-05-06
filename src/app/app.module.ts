@@ -29,7 +29,7 @@ import {UserinfoGuard} from "./guards/userinfo.guard";
 import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import { MaincontentComponent } from './components/maincontent/maincontent.component';
 import { ConfirmFieldsAreEqualDirective } from './directives/validators/confirm-fields-are-equal.directive';
-
+import { RecaptchaModule } from "ng-recaptcha";
 
 
 @NgModule({
@@ -54,7 +54,8 @@ import { ConfirmFieldsAreEqualDirective } from './directives/validators/confirm-
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    NotificationModule
+    NotificationModule,
+    RecaptchaModule
   ],
   providers: [QuestionService,QuestionCategoryService,AnswerService,QuestionLevelService,InterviewUserService,AuthenticationService,NotificationService,
     AuthenticationGuard,AdminGuard,UserinfoGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],

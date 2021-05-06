@@ -4,6 +4,8 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { InterviewUserDTO } from '../../models/interviewuserDTO';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {QuestionCategoryDTO} from "../../models/QuestionCategoryDTO";
+import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class AuthenticationService {
   jwtHelper = new JwtHelperService();
   loginURL : string = '/interviewuser/login';
   registerURL : string = '/interviewuser/register';
-
+  googleURL : string = `/recaptcha/post`;
   constructor(private http: HttpClient) { }
 
   public login(user: InterviewUserDTO): Observable<HttpResponse<InterviewUserDTO>> {
@@ -25,6 +27,10 @@ export class AuthenticationService {
 
   register(user: InterviewUserDTO): Observable<InterviewUserDTO> {
     return this.http.post<InterviewUserDTO>(`${this.host}${this.registerURL}`, user);
+  }
+
+  postRecaptcha(obj: GoogleRequestDTO): Observable<any> {
+    return this.http.post<GoogleRequestDTO>(`${this.host}${this.googleURL}`, obj);
   }
 
   logOut(): void {

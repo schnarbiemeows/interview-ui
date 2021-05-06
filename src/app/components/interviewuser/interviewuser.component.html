@@ -10,30 +10,30 @@
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav  m-auto">
               <li class="nav-item m-2">
-                <button (click)="showAllUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">ALL
+                <button (click)="showAllUsers()" class="btn btn-sm btn-success text-white m-3 p-3">ALL
                 </button>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showOnlyUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">Users
+                <button (click)="showOnlyUsers()" class="btn btn-sm btn-success text-white m-3 p-3">Users
                 </button>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showOnlyAdmins()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+                <button (click)="showOnlyAdmins()" class="btn btn-sm btn-success text-white m-3 p-3">
                   Admins
                 </button>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showBasicUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+                <button (click)="showBasicUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
                   Basic
                 </button>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showAdvUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+                <button (click)="showAdvUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
                   Adv
                 </button>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showPremiumUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+                <button (click)="showPremiumUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
                   Prem
                 </button>
               </li>
@@ -135,9 +135,9 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div>
       <button *ngIf="!editMode && !addMode" (click)="initiateAdd()"
-              class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">{{this.addbarmsg}}</button>
+              class="btn btn-sm btn-primary text-white m-3 p-3 ">{{this.addbarmsg}}</button>
       <div class="card card-body m-3" *ngIf="showInterviewUserForm">
         <h2>{{this.formmsg}}</h2>
         <form (submit)="onSubmit($event)" #InterviewUser="ngForm">
@@ -196,9 +196,9 @@
             >-->
           </div>
           <button *ngIf="addMode || editMode" [disabled]="InterviewUser.invalid" (click)="saveResults()"
-                  class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                  class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
           <button *ngIf="addMode || editMode" (click)="reload()"
-                  class="btn btn-sm btn-block btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                  class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
         </form>
       </div>
     </div>

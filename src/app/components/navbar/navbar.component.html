@@ -3,21 +3,21 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav  m-auto">
         <li *ngIf="adminPrivileges" class="nav-item m-2">
-          <button (click)="gotoAdminConsole()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">Main
+          <button (click)="gotoAdminConsole()" class="btn btn-sm btn-success text-white m-3 p-3">Main
             Page
           </button>
         </li>
         <li *ngIf="adminPrivileges" class="nav-item m-2">
-          <button (click)="displayUsers()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">Users and Admins
+          <button (click)="displayUsers()" class="btn btn-sm btn-success text-white m-3 p-3">Users and Admins
           </button>
         </li>
         <li *ngIf="adminPrivileges" class="nav-item m-2">
-          <button (click)="displayQuestions()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+          <button (click)="displayQuestions()" class="btn btn-sm btn-success text-white m-3 p-3">
             Questions and Answers
           </button>
         </li>
         <li *ngIf="adminPrivileges" class="nav-item m-2">
-          <button (click)="displayQuestionCategories()" class="btn btn-sm btn-block btn-success text-white m-3 p-3">
+          <button (click)="displayQuestionCategories()" class="btn btn-sm btn-success text-white m-3 p-3">
             Categories and Levels
           </button>
         </li>

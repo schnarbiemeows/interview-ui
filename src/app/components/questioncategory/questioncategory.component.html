@@ -57,9 +57,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isAdmin" class="card">
+      <div *ngIf="isAdmin">
         <button *ngIf="!editModeLevel && !addModeLevel && !editModeCategory && !addModeCategory" (click)="initiateAddLevel()"
-                class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">{{this.addbarmsgLevel}}</button>
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">{{this.addbarmsgLevel}}</button>
         <div class="card card-body m-3" *ngIf="showQuestionLevelForm">
           <h2>{{this.formmsgLevel}}</h2>
           <form (submit)="onSubmit($event)" #QuestionLevel="ngForm">
@@ -71,9 +71,9 @@
             </div>
             <button *ngIf="addModeLevel || editModeLevel" [disabled]="QuestionLevel.invalid"
                     (click)="saveResultsLevel()"
-                    class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeLevel || editModeLevel" (click)="reloadLevel()"
-                    class="btn btn-sm btn-block btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>
@@ -140,9 +140,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isAdmin" class="card">
+      <div *ngIf="isAdmin">
         <button *ngIf="!editModeLevel && !addModeLevel && !editModeCategory && !addModeCategory" (click)="initiateAddCategory()"
-                class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">{{this.addbarmsgCategory}}</button>
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">{{this.addbarmsgCategory}}</button>
         <div class="card card-body m-3" *ngIf="showQuestionCategoryForm">
           <h2>{{this.formmsgCategory}}</h2>
           <form (submit)="onSubmit($event)" #QuestionCategory="ngForm">
@@ -154,9 +154,9 @@
             </div>
             <button *ngIf="addModeCategory || editModeCategory" [disabled]="QuestionCategory.invalid"
                     (click)="saveResultsCategory()"
-                    class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeCategory || editModeCategory" (click)="reloadCategory()"
-                    class="btn btn-sm btn-block btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>

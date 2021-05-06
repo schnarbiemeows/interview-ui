@@ -31,10 +31,10 @@
         </div>
         <button (click)="filter()"
                 [disabled]="addMode || editMode"
-                class="btn btn-sm btn-block btn-success text-white m-3 p-3">{{this.filterMsg}}</button>
+                class="btn btn-sm btn-success text-white m-3 p-3">{{this.filterMsg}}</button>
         <button (click)="resetFullList()"
                 [disabled]="addMode || editMode"
-                class="btn btn-sm btn-block btn-danger text-white m-3 p-3 ">{{this.resetToAllMsg}}</button>
+                class="btn btn-sm btn-danger text-white m-3 p-3 ">{{this.resetToAllMsg}}</button>
       </form>
       <div class="card bg-white">
         <h3 class="text-center">Total Questions</h3>
@@ -43,7 +43,7 @@
 
     </div>
     <div class="col col-sm-10 mh-100">
-      <div class="card bg-secondary border-info">
+      <div class="card bg-light border-light m-3 p-3">
         <h2 class="text-center">Questions and Answers</h2>
       </div>
       <h4 *ngIf="!loaded">Loading Question...</h4>
@@ -54,46 +54,46 @@
           <form class="form-inline my-2 my-lg-0 justify-content-right">
             <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
                    (ngModelChange)="searchQuestion(searchInput.value)"
-                   type="search" placeholder="Search Question...">
+                   type="search" placeholder="Search Q & A ...">
           </form>
 
         </div>
         <!--</div>-->
         <div class="card border-info"> <!-- table section -->
           <div class="card-body table-responsive">
-            <table class="table-sm table-bordered table-hover rounded">
+            <table class="table-sm table-bordered table-hover rounded" style="border-spacing: 5px;">
               <thead>
               <tr>
-                <th style="width: 40%;">
-                  <text class="text-size-10">Question</text>
+                <th class="d-md-table-cell " >
+                  <text class="text-size-10 m-3" style="width: 40%;">Question</text>
                 </th>
-                <th>
-                  <text class="text-size-10" style="width: 40%;">Answer</text>
+                <th class="d-md-table-cell ">
+                  <text class="text-size-10 m-3" style="width: 40%;">Answer</text>
                 </th>
-                <th *ngIf="isAdmin">
-                  <text class="text-size-8"style="width: 10%;">Edit Item</text>
+                <th class="d-md-table-cell " *ngIf="isAdmin">
+                  <text class="text-size-8 m-3"style="width: 10%;">Edit Item</text>
                 </th>
-                <th *ngIf="isSuper">
-                  <text class="text-size-8" style="width: 10%;">Delete Item</text>
+                <th class="d-md-table-cell " *ngIf="isSuper">
+                  <text class="text-size-8 m-3" style="width: 10%;">Delete Item</text>
                 </th>
               </tr>
               </thead>
               <tbody *ngFor="let dto of questionItemlist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
               <tr class="a">
                 <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
-                <td>
-                  <text class="text-size-6" style="width: 40%;">{{dto.questionTxt}}</text>
+                <td class="d-md-table-cell " >
+                  <text class="text-size-6 m-3" style="width: 40%;">{{dto.questionTxt}}</text>
                 </td>
-                <td>
-                  <text class="text-size-6" style="width: 40%;">{{dto.answerTxt}}</text>
+                <td class="d-md-table-cell " >
+                  <text class="text-size-6 m-3" style="width: 40%;">{{dto.answerTxt}}</text>
                 </td>
-                <td *ngIf="isAdmin">
+                <td class="d-md-table-cell " *ngIf="isAdmin">
                   <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
                           (click)="editItem(i + (p-1)*itemsPerPage)">
                     <span class="fa fa-edit" style="color:red"></span>
                   </button>
                 </td>
-                <td *ngIf="isSuper">
+                <td class="d-md-table-cell " *ngIf="isSuper">
                   <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
                           (click)="deleteItem(i + (p-1)*itemsPerPage)">
                     <span class="fa fa-trash" style="color:blue"></span>
@@ -111,9 +111,9 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isAdmin" class="card">
+      <div *ngIf="isAdmin">
         <button *ngIf="!editMode && !addMode" (click)="initiateAdd()"
-                class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">{{this.addbarmsg}}</button>
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">{{this.addbarmsg}}</button>
         <div class="card card-body m-3" *ngIf="showQuestionForm">
           <h2>{{this.formmsg}}</h2>
           <form (submit)="onSubmit($event)" #Question="ngForm">
@@ -150,9 +150,9 @@
                      maxlength=256 >
             </div>
             <button *ngIf="addMode || editMode" [disabled]="Question.invalid" (click)="saveResults()"
-                    class="btn btn-sm btn-block btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
             <button *ngIf="addMode || editMode" (click)="reload()"
-                    class="btn btn-sm btn-block btn-danger text-white m-3 p-3 ">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-danger text-white m-3 p-3 ">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>
@@ -168,7 +168,7 @@
 <label>questionCategoryId</label>
 <input type="number" class="form-control" [(ngModel)]="question.questionCategoryId" name="questionCategoryId">
 </div>
-      <button (click)="findByQuestionCategoryId()" class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">findByQuestionCategoryId</button>
+      <button (click)="findByQuestionCategoryId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryId</button>
   </form>
 </div><div class="card card-body m-3">
   <form (submit)="onSubmit($event)">
@@ -176,7 +176,7 @@
 <label>questionLevelId</label>
 <input type="number" class="form-control" [(ngModel)]="question.questionLevelId" name="questionLevelId">
 </div>
-      <button (click)="findByQuestionLevelId()" class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">findByQuestionLevelId</button>
+      <button (click)="findByQuestionLevelId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionLevelId</button>
   </form>
 </div><div class="card card-body m-3">
   <form (submit)="onSubmit($event)">
@@ -184,7 +184,7 @@
 <label>answerId</label>
 <input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
 </div>
-      <button (click)="findByAnswerId()" class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">findByAnswerId</button>
+      <button (click)="findByAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByAnswerId</button>
   </form>
 </div><div class="card card-body m-3">
   <form (submit)="onSubmit($event)">
@@ -200,7 +200,7 @@
 <label>answerId</label>
 <input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
 </div>
-      <button (click)="findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId()" class="btn btn-sm btn-block btn-primary text-white m-3 p-3 ">findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId</button>
+      <button (click)="findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId</button>
   </form>
 </div>	</div> -->
 </div>

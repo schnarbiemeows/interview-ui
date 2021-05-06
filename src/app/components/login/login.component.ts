@@ -7,6 +7,8 @@ import { NotificationService } from '../../services/notification/notification.se
 import { InterviewUserDTO } from '../../models/InterviewUserDTO';
 import { NotificationType } from '../../enum/notification-type.enum';
 import { HeaderType } from '../../enum/header-type.enum';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
+import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ import { HeaderType } from '../../enum/header-type.enum';
 export class LoginComponent implements OnInit {
 
   public showLoading: boolean;
+  public recaptchaValid: boolean = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
@@ -29,16 +32,33 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    const googleObj: GoogleRequestDTO = new GoogleRequestDTO(captchaResponse);
+    this.subscriptions.push(
+      this.authenticationService.postRecaptcha(googleObj).subscribe(
+        (response: HttpResponse<any>) => {
+          console.log("IT WORKED!");
+          this.recaptchaValid = true;
+        },
+        (errorResponse: any) => {
+          console.log("FAIL");
+          this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
+          this.showLoading = false;
+        }
+      )
+    );
+
+  }
+
+  public onError(errorDetails: RecaptchaErrorParameters): void {
+    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
+  }
+
   public displayRegistration():void {
-    /*this.showLogin = false;
-    this.showRegistration = true;
-    this.showMainPage = false;*/
     this.router.navigate(['register']);
   }
   public displayMainPage():void {
-    /*this.showLogin = false;
-    this.showRegistration = false;
-    this.showMainPage = true;*/
     this.router.navigate(['mainpage']);
   }
 
