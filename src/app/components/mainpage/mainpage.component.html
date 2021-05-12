@@ -104,21 +104,20 @@
       </form>
     </div>
     <div class="col-lg-8">
-        <div *ngIf="showQuestionMode"class="row">
-          <div class="col">
-            <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary my-3">{{this.showAnswerMsg}}</button>
-            <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success my-3">{{this.nextQuestionMsg}}</button>
-            <h3>{{questionItem.questionTxt}}</h3>
+      <div *ngIf="showQuestionMode"class="row">
+        <div class="col">
+          <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary my-3">{{this.showAnswerMsg}}</button>
+          <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success my-3">{{this.nextQuestionMsg}}</button>
+          <h3 class="mb-4">{{questionItem.questionTxt}}</h3>
+        </div>
+      </div>
+      <div *ngIf="showAnswerMode" class="row">
+        <div class="col">
+          <div class="alert alert-info" role="alert">
+            {{questionItem.answerTxt}}
           </div>
         </div>
-        <div *ngIf="showAnswerMode" class="row">
-          <div class="col">
-            
-            <div class="alert alert-info" role="alert">
-              {{questionItem.answerTxt}}
-            </div>
-          </div>
-        </div>
+      </div>
     </div>
   </div>
 </div>
