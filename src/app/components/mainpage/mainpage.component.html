@@ -28,7 +28,7 @@
 </nav>
 <div class="container">
   <div class="row py-2">
-    <div class="col d-none d-md-block">
+    <div class="col d-none d-lg-block my-2">
       <h1>Welcome to the Interview Question Generator!</h1>
     </div>
   </div>
@@ -61,7 +61,8 @@
                 </select>
               </div>
               <div class="col">
-                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary">{{this.showQuestionsMsg}}</button>
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary d-none d-xs-block">{{this.showQuestionsMsg}}</button>
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary d-xs-none btn-block">Start</button>
               </div>
             </div>
           </div>
@@ -105,13 +106,14 @@
     <div class="col-lg-8">
         <div *ngIf="showQuestionMode"class="row">
           <div class="col">
-            <h3>{{questionItem.questionTxt}}</h3>
             <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary my-3">{{this.showAnswerMsg}}</button>
+            <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success my-3">{{this.nextQuestionMsg}}</button>
+            <h3>{{questionItem.questionTxt}}</h3>
           </div>
         </div>
         <div *ngIf="showAnswerMode" class="row">
           <div class="col">
-            <button (click)="showNextQuestion()" class="btn btn-success my-3">{{this.nextQuestionMsg}}</button>
+            
             <div class="alert alert-info" role="alert">
               {{questionItem.answerTxt}}
             </div>
