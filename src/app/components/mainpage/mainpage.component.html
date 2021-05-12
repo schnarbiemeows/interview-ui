@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-2">
       <form (submit)="onSubmit($event)" #Filter="ngForm">
         <div class="form-group d-md-none">
           <div class="container-fluid">
@@ -104,11 +104,17 @@
       </form>
     </div>
     <div class="col-lg-8">
-      <div *ngIf="showQuestionMode"class="row">
-        <div class="col">
-          <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary my-3">{{this.showAnswerMsg}}</button>
-          <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success my-3">{{this.nextQuestionMsg}}</button>
-          <h3 class="mb-4">{{questionItem.questionTxt}}</h3>
+      <div *ngIf="showQuestionMode">
+        <div class="row">
+          <div class="col">
+            <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary mb-3">{{this.showAnswerMsg}}</button>
+            <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success mb-3">{{this.nextQuestionMsg}}</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3 class="mb-4">{{questionItem.questionTxt}}</h3>
+          </div>
         </div>
       </div>
       <div *ngIf="showAnswerMode" class="row">
