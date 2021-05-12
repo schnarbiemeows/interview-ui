@@ -27,15 +27,46 @@
   </div>
 </nav>
 <div class="container">
-  <div class="row py-4">
-    <div class="col">
+  <div class="row py-2">
+    <div class="col d-none d-md-block">
       <h1>Welcome to the Interview Question Generator!</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-4">
       <form (submit)="onSubmit($event)" #Filter="ngForm">
-        <div class="form-group">
+        <div class="form-group d-md-none">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col">
+                <select class="form-control custom-select"
+                    [(ngModel)]="filterCategoryValue"
+                    required
+                    name="questionCategoryId_dropdown">
+                    <option disabled selected>Category</option>
+                  <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                    {{ option.viewValue }}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <select class="form-control custom-select"
+                    [(ngModel)]="filterDifficultyValue"
+                    required
+                    name="questionLevelId_dropdown">
+                    <option  disabled selected>Difficulty</option>
+                  <option *ngFor="let option of questionlevellist" [value]="option.value">
+                    {{ option.viewValue }}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary">{{this.showQuestionsMsg}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group d-none d-md-block">
           <div class="card">
             <div class="card-body">
               <div class="card-title">
@@ -44,7 +75,7 @@
               <div class="card-text">
                 <div class="form-group">
                   <label for="questionCategoryId_dropdown">Category</label>
-                  <select class="form-control"
+                  <select class="form-control custom-select"
                       [(ngModel)]="filterCategoryValue"
                       required
                       name="questionCategoryId_dropdown">
@@ -55,7 +86,7 @@
                 </div>
                 <div class="form-group">
                   <label for="questionLevelId_dropdown">Difficulty</label>
-                  <select class="form-control"
+                  <select class="form-control custom-select"
                       [(ngModel)]="filterDifficultyValue"
                       required
                       name="questionLevelId_dropdown">
@@ -63,9 +94,9 @@
                       {{ option.viewValue }}
                     </option>
                   </select>
-                </div>                
+                </div>
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary float-right">{{this.showQuestionsMsg}}</button>                
               </div>
-              <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary float-right">{{this.showQuestionsMsg}}</button>
             </div>
           </div>
         </div>
