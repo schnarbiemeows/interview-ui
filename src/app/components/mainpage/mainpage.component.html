@@ -36,35 +36,26 @@
     <div class="col-lg-4 mb-2">
       <form (submit)="onSubmit($event)" #Filter="ngForm">
         <div class="form-group d-lg-none">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col">
-                <select class="form-control custom-select"
-                    [(ngModel)]="filterCategoryValue"
-                    required
-                    name="questionCategoryId_dropdown">
-                    <option disabled selected>Category</option>
-                  <option *ngFor="let option of questioncategorylist" [value]="option.value">
-                    {{ option.viewValue }}
-                  </option>
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control custom-select"
-                    [(ngModel)]="filterDifficultyValue"
-                    required
-                    name="questionLevelId_dropdown">
-                    <option  disabled selected>Difficulty</option>
-                  <option *ngFor="let option of questionlevellist" [value]="option.value">
-                    {{ option.viewValue }}
-                  </option>
-                </select>
-              </div>
-              <div class="col">
-                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary d-none d-xs-block">{{this.showQuestionsMsg}}</button>
-                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary d-xs-none btn-block">Start</button>
-              </div>
-            </div>
+          <div class="d-flex justify-content-between">
+            <select class="form-control custom-select"
+              [(ngModel)]="filterCategoryValue"
+              required
+              name="questionCategoryId_dropdown">
+              <option selected disabled>Category</option>
+              <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                {{ option.viewValue }}
+              </option>
+            </select>
+            <select class="form-control custom-select ml-3"
+              [(ngModel)]="filterDifficultyValue"
+              required
+              name="questionLevelId_dropdown">
+              <option  disabled selected>Difficulty</option>
+              <option *ngFor="let option of questionlevellist" [value]="option.value">
+                {{ option.viewValue }}
+              </option>
+            </select>
+            <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary btn-block ml-3">Start</button>
           </div>
         </div>
         <div class="form-group d-none d-lg-block">
