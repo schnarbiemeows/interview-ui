@@ -1,71 +1,66 @@
-<div class="container-fluid border rounded" name="container2">
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-    <div class="container">
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item m-2">
-            <button (click)="displayMainPage()" class="btn btn-sm btn-block btn-success text-white font-italic">Return to Main Page
-            </button>
-          </li>
-          <li class="nav-item m-2">
-            <button (click)="displayRegistration()" class="btn btn-sm btn-block btn-success text-white font-italic">
-              Register
-            </button>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary pt-4">
+  <a href="/" class="navbar-brand text-white d-none d-md-block">Interview Question Generator</a>
+  <a href="/" class="navbar-brand text-white d-md-none">IQG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayMainPage(); false">Return to Main Page</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayRegistration(); false">Register</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row pt-4 pb-2">
+    <div class="col d-none d-md-block mb-2">
+      <h1>Interview Questions Login</h1>
     </div>
-  </nav>
-  <div class="d-flex justify-content-center h-50">
-    <div class="user_card">
-      <div class="d-flex justify-content-center">
-        <div style="margin-top: 10px;margin-bottom:-90px;">
-          <h3>Interview Questions Login</h3>
-        </div>
-      </div>
-      <div class="d-flex justify-content-center form_container">
-        <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
-          <div class="input-group m-3">
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-6">
+      <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="mb-4">
+        <div class="form-group">
+          <div class="input-group">
             <div class="input-group-append">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input type="text" class="form-control" name="userName" placeholder="Username" ngModel
-                   #usernameInput="ngModel" required>
+            <input type="text" class="form-control" name="userName" placeholder="Username" ngModel #usernameInput="ngModel" required>
           </div>
-          <span class="help-block" style="color:red;"
-                *ngIf="usernameInput.invalid && usernameInput.touched">Please enter a username</span>
-          <div class="input-group mb-2">
+          <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Please enter a username</span>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
             <div class="input-group-append">
               <span class="input-group-text"><i class="fas fa-key"></i></span>
             </div>
-            <input type="password" class="form-control" name="password" placeholder="Password"
-                   ngModel
-                   #passwordInput="ngModel" required>
+            <input type="password" class="form-control" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required>
           </div>
-          <span class="help-block" style="color:red;"
-                *ngIf="passwordInput.invalid && passwordInput.touched">Please enter a password.</span>
+          <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched">Please enter a password.</span>
+        </div>
+
+        <div class="form-group">
           <re-captcha
             (resolved)="resolved($event)"
             (error)="onError($event)"
             errorMode="handled"
             siteKey="6Lcdf8YaAAAAACiqLRP6NOWg_-rC74TKyIYG0dl_"
           ></re-captcha>
-          <div class="d-flex justify-content-center mt-3 login_container">
-            <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn login_btn">
-              <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-              <span *ngIf="showLoading">Loading...</span>
-              <span *ngIf="!showLoading">Login</span>
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="mt-4">
-        <div class="d-flex justify-content-center links">
-          Don't have an account? <a routerLink="/register" class="ml-2" style="color: #2C3E50;">Sign Up!</a>
         </div>
+
+        <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-primary login_btn">
+          <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
+          <span *ngIf="showLoading">Loading...</span>
+          <span *ngIf="!showLoading">Login</span>
+        </button>
+      </form>
+      <div class="text-center">
+        Don't have an account? <a routerLink="/register" class="ml-2" style="color: #2C3E50;">Sign Up!</a>
       </div>
     </div>
   </div>
 </div>
-
-
