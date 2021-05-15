@@ -27,7 +27,7 @@
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <span class="input-group-text"><i class="far fa-user"></i></span>
             </div>
             <input type="text" class="form-control" name="userName" placeholder="Username" ngModel #usernameInput="ngModel" required>
           </div>
@@ -52,14 +52,14 @@
           ></re-captcha>
         </div>
 
-        <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-primary login_btn">
+        <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-primary">
           <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
           <span *ngIf="showLoading">Loading...</span>
           <span *ngIf="!showLoading">Login</span>
         </button>
       </form>
       <div class="text-center">
-        Don't have an account? <a routerLink="/register" class="ml-2" style="color: #2C3E50;">Sign Up!</a>
+        Don't have an account? <a routerLink="/register" class="ml-2">Sign Up!</a>
       </div>
     </div>
   </div>
