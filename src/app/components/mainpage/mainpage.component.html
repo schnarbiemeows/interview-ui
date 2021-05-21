@@ -27,14 +27,14 @@
   </div>
 </nav>
 <div class="container">
-  <div class="row py-2">
-    <div class="col d-none d-lg-block my-2">
-      <h1>Welcome to the Interview Question Generator!</h1>
+  <div class="row">
+    <div class="col d-none d-lg-block">
+      <h1 class="mt-4">Welcome to the Interview Question Generator!</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-4 mb-2">
-      <form (submit)="onSubmit($event)" #Filter="ngForm">
+      <form (submit)="onSubmit($event)" #Filter="ngForm" class="mt-4">
         <div class="form-group d-lg-none">
           <div class="d-flex justify-content-between">
             <select class="form-control custom-select"
