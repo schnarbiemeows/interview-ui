@@ -1,89 +1,117 @@
-<div class="container-fluid border rounded" name="container2">
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-    <div class="container-fluid">
-      <div class="card navbar-dark bg-primary">
-        <h2 class="text-center text-white p3">Welcome to the Interview Question Generator!</h2>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li *ngIf="!isLoggedIn" class="nav-item m-2">
-            <button (click)="displayLogin()" class="btn btn-sm btn-success text-white m-3 p-3">Login
-            </button>
-          </li>
-          <li *ngIf="!isLoggedIn" class="nav-item m-2">
-            <button (click)="displayRegistration()" class="btn btn-sm btn-success text-white m-3 p-3">
-              Register
-            </button>
-          </li>
-          <li *ngIf="isLoggedIn" class="nav-item m-2">
-            <button (click)="onLogOut()" class="btn btn-sm btn-success text-white m-3 p-3 ">Logout
-            </button>
-          </li>
-          <li *ngIf="isLoggedIn" class="nav-item m-2">
-            <button (click)="displayAccountInfo()" class="btn btn-sm btn-success text-white m-3 p-3 ">Account Info</button>
-          </li>
-          <li *ngIf="isLoggedIn && isAdmin" class="nav-item m-2">
-            <button (click)="gotoAdminConsole()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">Admin
-            </button>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary pt-4">
+  <a href="/" class="navbar-brand text-white d-none d-md-block">Interview Question Generator</a>
+  <a href="/" class="navbar-brand text-white d-md-none">IQG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul *ngIf="!isLoggedIn" class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayLogin(); false">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayRegistration(); false">Register</a>
+      </li>
+    </ul>
+    <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="onLogOut(); false">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayAccountInfo(); false">Account Info</a>
+      </li>
+      <li *ngIf="isAdmin" class="nav-item">
+        <a class="nav-link" href="#" (click)="gotoAdminConsole(); false">Admin</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row py-2">
+    <div class="col d-none d-lg-block my-2">
+      <h1>Welcome to the Interview Question Generator!</h1>
     </div>
-  </nav>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col col-sm-4">
-        <div class="card bg-white border-white">
-          <h2 class="text-left">Select a Category and Difficulty Level</h2>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 mb-2">
+      <form (submit)="onSubmit($event)" #Filter="ngForm">
+        <div class="form-group d-lg-none">
+          <div class="d-flex justify-content-between">
+            <select class="form-control custom-select"
+              [(ngModel)]="filterCategoryValue"
+              required
+              name="questionCategoryId_dropdown">
+              <option selected disabled>Category</option>
+              <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                {{ option.viewValue }}
+              </option>
+            </select>
+            <select class="form-control custom-select ml-3"
+              [(ngModel)]="filterDifficultyValue"
+              required
+              name="questionLevelId_dropdown">
+              <option  disabled selected>Difficulty</option>
+              <option *ngFor="let option of questionlevellist" [value]="option.value">
+                {{ option.viewValue }}
+              </option>
+            </select>
+            <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary btn-block ml-3">Start</button>
+          </div>
         </div>
-        <form (submit)="onSubmit($event)" #Filter="ngForm">
-          <div class="form-group">
-            <label>Category:</label>
-            <div class="col col-sm-4">
-              <select class="form-control border-info text-center" style="width:300%"
+        <div class="form-group d-none d-lg-block">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">
+                Select a Category and Difficulty
+              </div>
+              <div class="card-text">
+                <div class="form-group">
+                  <label for="questionCategoryId_dropdown">Category</label>
+                  <select class="form-control custom-select"
                       [(ngModel)]="filterCategoryValue"
                       required
                       name="questionCategoryId_dropdown">
-                <option *ngFor="let option of questioncategorylist" [value]="option.value">
-                  {{ option.viewValue }}
-                </option>
-              </select>
-            </div>
-            <label>Difficulty:</label>
-            <div class="col col-sm-4">
-              <select class="form-control border-info text-center" style="width:300%"
+                    <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                      {{ option.viewValue }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="questionLevelId_dropdown">Difficulty</label>
+                  <select class="form-control custom-select"
                       [(ngModel)]="filterDifficultyValue"
                       required
                       name="questionLevelId_dropdown">
-                <option *ngFor="let option of questionlevellist" [value]="option.value">
-                  {{ option.viewValue }}
-                </option>
-              </select>
+                    <option *ngFor="let option of questionlevellist" [value]="option.value">
+                      {{ option.viewValue }}
+                    </option>
+                  </select>
+                </div>
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary float-right">{{this.showQuestionsMsg}}</button>                
+              </div>
             </div>
           </div>
-          <button (click)="showQuestion()" [disabled]="Filter.invalid"
-                  class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.showQuestionsMsg}}</button>
-        </form>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <div *ngIf="showQuestionMode">
+        <div class="row">
+          <div class="col">
+            <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()" class="btn btn-primary mb-3">{{this.showAnswerMsg}}</button>
+            <button *ngIf="showAnswerMode" (click)="showNextQuestion()" class="btn btn-success mb-3">{{this.nextQuestionMsg}}</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3 class="mb-4">{{questionItem.questionTxt}}</h3>
+          </div>
+        </div>
       </div>
-      <div class="col col-sm-8">
-        <div *ngIf="showQuestionMode || showAnswerMode" >
-          <div class="row">
-            <p>{{questionItem.questionTxt}}</p>
-          </div>
-          <div class="row">
-           <button *ngIf="showQuestionMode&&!showAnswerMode" (click)="showAnswer()"
-                   class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.showAnswerMsg}}</button>
-          </div>
-          <div *ngIf="showAnswerMode" class="row">
-            <p class="bg-warning">Answer:</p>
-          </div>
-          <div *ngIf="showAnswerMode" class="row">
-            <p>{{questionItem.answerTxt}}</p>
-          </div>
-          <div class="row" *ngIf="showAnswerMode">
-            <button (click)="showNextQuestion()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.nextQuestionMsg}}</button>
+      <div *ngIf="showAnswerMode" class="row">
+        <div class="col">
+          <div class="alert alert-info" role="alert">
+            {{questionItem.answerTxt}}
           </div>
         </div>
       </div>
