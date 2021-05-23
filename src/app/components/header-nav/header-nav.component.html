@@ -11,10 +11,10 @@
         <a class="nav-link" routerLink="/mainpage">Return to Main Page</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" (click)="displayLogin(); false">Login</a>
+        <a class="nav-link" routerLink="/login">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" (click)="displayRegistration(); false">Register</a>
+        <a class="nav-link" routerLink="/register">Register</a>
       </li>
     </ul>
     <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto">
