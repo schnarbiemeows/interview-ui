@@ -1,13 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-  <div class="container">
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item m-2">
-          <button (click)="displayMainPage()" class="btn btn-sm btn-success text-white m-3 p-3">Return to Main Page
-          </button>
-        </li>
-      </ul>
-    </div>
+  <a href="/" class="navbar-brand text-white d-none d-md-block">Interview Question Generator</a>
+  <a href="/" class="navbar-brand text-white d-md-none">IQG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayMainPage(); false">Main Page</a>
+      </li>
+    </ul>
   </div>
 </nav>
 <div class="container">
@@ -44,18 +47,21 @@
             </div>
             <hr>
             <div class="row">
-              <div class="col-sm-6">
-                <button (click)="changeInfo()" class="btn btn-sm btn-success text-white m-3 p-3">change information
-                </button>
+              <div class="d-none d-lg-block">
+                <div class="col">
+                  <button (click)="changeInfo()" class="btn btn-primary float-right m-3">change information</button>
+                  <button (click)="changePassword()" class="btn btn-primary float-left m-3">change password</button>
+                </div>
               </div>
-              <div class="col-sm-6 text-secondary">
-                <button (click)="changePassword()" class="btn btn-sm btn-success text-white m-3 p-3">change password
-                </button>
+              <div class="d-inline d-lg-none">
+                <div class="col">
+                  <button (click)="changeInfo()" class="btn btn-primary float-right m-3">CHG INFO</button>
+                  <button (click)="changePassword()" class="btn btn-primary float-right m-3">CHG PWD</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
         <div *ngIf="showChangeInfo" class="card m-3">
           <form #infoForm="ngForm" (ngSubmit)="onSubmitInfoChange(infoForm.value)">
             <div class="card-body">
@@ -101,19 +107,18 @@
               </div>
             </div>
             <button type="submit" [disabled]="infoForm.invalid"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}
+                    class="btn btn-primary float-left m-3">{{this.saveChangesMsg}}
               <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
               <span *ngIf="showLoading">Loading...</span>
             </button>
             <button (click)="reload()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-primary float-right m-3">{{this.cancelMsg}}</button>
 
           </form>
         </div>
-
         <div *ngIf="showChangePwd" class="card m-3">
           <form class="form" #passwordForm="ngForm"
-                (ngSubmit)="onSubmitPasswordChange(passwordForm.value)" >
+                (ngSubmit)="onSubmitPasswordChange(passwordForm.value)">
             <div class="card-body">
               <div class="form-group row">
                 <div class="col-sm-6">
@@ -151,16 +156,16 @@
               <hr>
             </div>
             <button type="submit" [disabled]="passwordForm.invalid"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}
+                    class="btn btn-primary float-left m-3">{{this.saveChangesMsg}}
               <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
               <span *ngIf="showLoading">Loading...</span>
             </button>
             <button (click)="reload()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
-           </form>
+                    class="btn btn-primary float-right m-3">{{this.cancelMsg}}</button>
+          </form>
         </div>
-      </div>
-      <div class="col-md-6">
+        <div class="col-md-6">
+        </div>
       </div>
     </div>
   </div>

@@ -42,9 +42,9 @@ export class InterviewUserService {
   updateUserByUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
     return this.http.post<InterviewUserDTO>(this.updateUserByUserURL, data, httpOptions);
   }
-	deleteInterviewUser(id: number): Observable<ResponseMessage> {
+	deleteInterviewUser(username: string): Observable<ResponseMessage> {
 		//let deleteInterviewUserURL_temp = this.deleteInterviewUserURL.replace("{id}",id.toString(10));
-		return this.http.delete<ResponseMessage>(this.deleteInterviewUserURL+`${id}`, httpOptions);
+		return this.http.delete<ResponseMessage>(this.deleteInterviewUserURL+`${username}`, httpOptions);
 	}
 
   forgotPassword(email: string): Observable<CustomHttpRespone> {

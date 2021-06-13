@@ -17,14 +17,29 @@ import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 })
 export class LoginComponent implements OnInit {
 
-  public showLoading: boolean;
+  public showLoading: boolean = false;
   public recaptchaValid: boolean = false;
+  public isFormValid: boolean = false;
+  public forgotPasswordFormInitiated: boolean = false;
+  public forgotUsernameFormInitiated: boolean = false;
+  public email: string;
+  public btnMsg: string;
+  public didntGetEmailMsg:string = "";
+  public recoverUsernameMsg = "Recover Username";
+  public resendResetPasswordMsg: string = "We've sent an email with a password reset link to the email address below";
+  public resendUsernameEmailMsg: string = "We've sent an email with your username to the email address below";
+  public didntGetTheEmailMsg: string = "didn't get the email?";
   private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
               private notificationService: NotificationService) {}
 
   ngOnInit(): void {
+    this.forgotUsernameFormInitiated = false;
+    this.forgotPasswordFormInitiated = false;
+    this.showLoading = false;
+    this.recaptchaValid = false;
+    this.isFormValid = false;
     if (this.authenticationService.isUserLoggedIn()) {
       this.router.navigate(['mainpage']);
     } else {
@@ -33,16 +48,13 @@ export class LoginComponent implements OnInit {
   }
 
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
     const googleObj: GoogleRequestDTO = new GoogleRequestDTO(captchaResponse);
     this.subscriptions.push(
       this.authenticationService.postRecaptcha(googleObj).subscribe(
         (response: HttpResponse<any>) => {
-          console.log("IT WORKED!");
           this.recaptchaValid = true;
         },
         (errorResponse: any) => {
-          console.log("FAIL");
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         }
@@ -63,25 +75,89 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin(user: InterviewUserDTO): void {
-    this.showLoading = true;
+    console.log("here");
+    if(this.validateForm(user)) {
+      this.showLoading = true;
+      this.subscriptions.push(
+        this.authenticationService.login(user).subscribe(
+          (response: HttpResponse<InterviewUserDTO>) => {
+            const token = response.headers.get(HeaderType.JWT_TOKEN);
+            this.authenticationService.saveToken(token);
+            this.authenticationService.addUserToLocalCache(response.body);
+            //
+            this.showLoading = false;
+            this.router.navigate(['mainpage']);
+          },
+          (errorResponse: HttpErrorResponse) => {
+            this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
+            this.showLoading = false;
+          }
+        )
+      );
+    } else {
+      this.sendNotificationMessage(NotificationType.ERROR, 'Please finish filling out the form.');
+      this.showLoading = false;
+    }
+  }
+
+
+  public onForgotPassword(): void {
+    this.didntGetEmailMsg = "";
+    this.email = "";
+    this.btnMsg = "Reset Password";
+    this.forgotPasswordFormInitiated = true;
+    this.clickButton('openForgotPassword');
+  }
+
+  public onForgotUsername(): void {
+    this.didntGetEmailMsg = "";
+    this.email = "";
+    this.recoverUsernameMsg = "Recover Username";
+    this.btnMsg = "Send me my Username";
+    this.forgotUsernameFormInitiated = true;
+    this.clickButton('openForgotUsername');
+  }
+
+  public resetPassword(): void {
+    this.forgotPasswordFormInitiated = false;
     this.subscriptions.push(
-      this.authenticationService.login(user).subscribe(
-        (response: HttpResponse<InterviewUserDTO>) => {
-          const token = response.headers.get(HeaderType.JWT_TOKEN);
-          this.authenticationService.saveToken(token);
-          this.authenticationService.addUserToLocalCache(response.body);
-          //
-          this.showLoading = false;
-          this.router.navigate(['mainpage']);
+      this.authenticationService.resetPassword(this.email).subscribe(
+        (response: HttpResponse<any>) => {
+          this.didntGetEmailMsg = "Didn't get the email?";
+          this.btnMsg = "Resend Email";
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
-          this.showLoading = false;
         }
       )
     );
   }
 
+  public sendUsernameEmail(): void {
+    this.forgotPasswordFormInitiated = false;
+    this.subscriptions.push(
+      this.authenticationService.sendUsernameEmail(this.email).subscribe(
+        (response: HttpResponse<any>) => {
+          this.recoverUsernameMsg = this.resendUsernameEmailMsg;
+          this.didntGetEmailMsg = "Didn't get the email?";
+          this.btnMsg = "Resend Email";
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
+        }
+      )
+    );
+  }
+
+  private clickButton(buttonId: string): void {
+    document.getElementById(buttonId).click();
+  }
+
+  private validateForm(user: InterviewUserDTO):boolean {
+    /*console.log("username = " + user.userName);
+    if(user.userName!=null&&user.userName!=='undefined'&&user.userName!='')*/
+    return true;
+  }
   private sendNotificationMessage(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);

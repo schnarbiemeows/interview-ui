@@ -1,9 +1,8 @@
 <header-nav></header-nav>
-
 <div class="container">
   <div class="row pt-4 pb-2">
     <div class="col d-none d-md-block mb-2">
-      <h1>User Management Portal</h1>
+      <h1 class="text-center">Interview Questions Registration</h1>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -14,7 +13,7 @@
             <div class="input-group-append">
               <span class="input-group-text"><i class="far fa-user"></i></span>
             </div>
-            <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">          
+            <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
           </div>
           <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
         </div>
@@ -45,7 +44,39 @@
           </div>
           <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched">Please enter an email.</span>
         </div>
-        <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="btn btn-primary">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" class="form-control" name="password" placeholder="password" parent="true"
+                   required ngModel #password="ngModel">
+          </div>
+          <span class="help-block" *ngIf="password.invalid && password.touched">Please enter a password</span>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="text" class="form-control" name="newPasswordConfirm" placeholder="confirm password" required ngModel
+                   confirmEqualValidator="password"
+                   #newPasswordConfirm="ngModel">
+          </div>
+          <span class="help-block" style="color:red;"
+                *ngIf="newPasswordConfirm.errors?.required && newPasswordConfirm.touched">Please enter a value</span>
+          <span class="help-block" style="color:red;"
+                *ngIf="newPasswordConfirm.value != '' && newPasswordConfirm.errors?.compare">passwords do not match</span>
+        </div>
+        <div class="form-group">
+          <re-captcha
+            (resolved)="resolved($event)"
+            (error)="onError($event)"
+            errorMode="handled"
+            siteKey="6Ld5pAIbAAAAAEI4mYIibxu-VGnqLtMXikYkR7sc"
+          ></re-captcha>
+        </div>
+        <button [disabled]="registerForm.invalid || showLoading || !recaptchaValid" type="submit" name="button" class="btn btn-primary">
           <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
           <span *ngIf="showLoading">Loading...</span>
           <span *ngIf="!showLoading">Register</span>
