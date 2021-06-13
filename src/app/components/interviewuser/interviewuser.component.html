@@ -16,89 +16,97 @@
           </form>
         </div>
         <div class="card border-info"> <!-- table section -->
-          <div class="card-body table-responsive offset-2">
-            <table class="table-sm table-bordered table-hover rounded">
-              <thead>
-              <tr>
-                <th>
-                  <text class="text-size-10">first name</text>
-                </th>
-                <th>
-                  <text class="text-size-10">last name</text>
-                </th>
-                <th>
-                  <text class="text-size-10">email</text>
-                </th>
-                <th>
-                  <text class="text-size-10">username</text>
-                </th>
-                <th>
-                  <text class="text-size-10">user ID</text>
-                </th>
-                <th>
-                  <text class="text-size-10">roles</text>
-                </th>
-                <th>
-                  <text class="text-size-10">active?</text>
-                </th>
-                <th>
-                  <text class="text-size-10">unlocked?</text>
-                </th>
-                <th>
-                  <text class="text-size-8">Edit Item</text>
-                </th>
-                <th>
-                  <text class="text-size-8">Delete Item</text>
-                </th>
-              </tr>
-              </thead>
-              <tbody
-                *ngFor="let dto of interviewuserlist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-              <tr class="a">
-                <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
-                <td>
-                  <text class="text-size-6">{{dto.firstName}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.lastName}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.emailAddr}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.userName}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.userIdentifier}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.roles}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.userActive}}</text>
-                </td>
-                <td>
-                  <text class="text-size-6">{{dto.userNotLocked}}</text>
-                </td>
-                <td>
-                  <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
-                          (click)="editItem(i + (p-1)*itemsPerPage)">
-                    <span class="fas fa-edit" style="color:red"></span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
-                          (click)="deleteItem(i + (p-1)*itemsPerPage)">
-                    <span class="fas fa-trash" style="color:blue"></span>
-                  </button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <!-- https://www.npmjs.com/package/ngx-pagination -->
-            <div class="card pagin">
-              <div class="card-body" *ngIf="!paginationDisabled">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <div class="card-body table-responsive">
+            <div class="row">
+              <div class="col-sm-2">
+              </div>
+              <div class="col-sm-7">
+                <table class="table-sm align-content-center table-bordered table-hover rounded">
+                  <thead>
+                  <tr>
+                    <th>
+                      <text class="text-size-10">first name</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">last name</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">email</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">username</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">user ID</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">roles</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">active?</text>
+                    </th>
+                    <th>
+                      <text class="text-size-10">unlocked?</text>
+                    </th>
+                    <th>
+                      <text class="text-size-8">Edit Item</text>
+                    </th>
+                    <th>
+                      <text class="text-size-8">Delete Item</text>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody
+                    *ngFor="let dto of interviewuserlist | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                  <tr class="a">
+                    <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+                    <td>
+                      <text class="text-size-6">{{dto.firstName}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.lastName}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.emailAddr}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.userName}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.userIdentifier}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.roles}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.userActive}}</text>
+                    </td>
+                    <td>
+                      <text class="text-size-6">{{dto.userNotLocked}}</text>
+                    </td>
+                    <td>
+                      <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+                              (click)="editItem(i + (p-1)*itemsPerPage)">
+                        <span class="fas fa-edit" style="color:red"></span>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+                              (click)="deleteItem(i + (p-1)*itemsPerPage)">
+                        <span class="fas fa-trash" style="color:blue"></span>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <!-- https://www.npmjs.com/package/ngx-pagination -->
+                <div class="card pagin">
+                  <div class="card-body" *ngIf="!paginationDisabled">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
               </div>
             </div>
           </div>
@@ -172,7 +180,6 @@
         </div>
       </div>
     </div>
-
     <div class="col col-1 justify-content-lg-end">
       <nav class="navbar navbar-dark bg-primary">
           <ul class="navbar-nav align-content-start">
