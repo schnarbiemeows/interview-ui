@@ -33,9 +33,9 @@ import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import { MaincontentComponent } from './components/maincontent/maincontent.component';
 import { ConfirmFieldsAreEqualDirective } from './directives/validators/confirm-fields-are-equal.directive';
 import { RecaptchaModule } from "ng-recaptcha";
+import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import {AboutComponent} from "./components/about/about.component";
 import {AdminComponent} from "./components/admin/admin.component";
-
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import {AdminComponent} from "./components/admin/admin.component";
     LoginComponent,
     RegisterComponent,
     MainpageComponent,
+    HeaderNavComponent,
 	  NavbarComponent,
 		InterviewUserComponent,
 		QuestionCategoryComponent,
