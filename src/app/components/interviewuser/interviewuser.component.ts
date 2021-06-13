@@ -8,8 +8,7 @@ import {InterviewUserDTOWrapper} from "../../models/InterviewUserDTOWrapper";
 
 @Component({
   selector: 'app-interviewuser',
-  templateUrl: './interviewuser.component.html',
-  styleUrls: ['./interviewuser.component.css']
+  templateUrl: './interviewuser.component.html'
 })
 export class InterviewUserComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];

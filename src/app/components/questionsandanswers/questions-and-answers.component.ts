@@ -17,11 +17,10 @@ import {Role} from "../../enum/role.enum";
 import {QuestionAnswerItemDTO} from "../../models/QuestionAnswerItemDTO";
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  selector: 'app-questions-and-answers',
+  templateUrl: './questions-and-answers.component.html'
 })
-export class QuestionComponent implements OnInit, OnDestroy {
+export class QuestionsAndAnswersComponent implements OnInit, OnDestroy {
   userPrivileges: boolean = false;
   advUserPrivileges: boolean = false;
   premiumUserPrivileges: boolean = false;
@@ -37,7 +36,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
    */
   questionItemlist: QuestionAnswerItemDTO[] = [];
   /**
-   * this represents the full list of all question/answer pairs
+   * this represents the full list of all questionsandanswers/answer pairs
    */
   fullquestionItemlist: QuestionAnswerItemDTO[] = [];
 
@@ -80,7 +79,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.adminPrivileges = this.isAdmin;
     this.superPrivileges = this.isSuper;
     /**
-     * load all of the question categories
+     * load all of the questionsandanswers categories
      */
     this.subscriptions.push(
       this.questioncategoryservice.getAllQuestionCategory().subscribe(questioncategorylist => {
@@ -92,7 +91,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
           this.questioncategorymap.set(optionDTO.value, optionDTO.viewValue);
         }
         /**
-         * load all of the question levels
+         * load all of the questionsandanswers levels
          */
         this.subscriptions.push(
           this.questionlevelservice.getAllQuestionLevel().subscribe(questionlevellist => {

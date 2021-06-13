@@ -167,7 +167,7 @@
   <form (submit)="onSubmit($event)">
 <div class="form-group">
 <label>questionCategoryId</label>
-<input type="number" class="form-control" [(ngModel)]="question.questionCategoryId" name="questionCategoryId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionCategoryId" name="questionCategoryId">
 </div>
       <button (click)="findByQuestionCategoryId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryId</button>
   </form>
@@ -175,7 +175,7 @@
   <form (submit)="onSubmit($event)">
 <div class="form-group">
 <label>questionLevelId</label>
-<input type="number" class="form-control" [(ngModel)]="question.questionLevelId" name="questionLevelId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionLevelId" name="questionLevelId">
 </div>
       <button (click)="findByQuestionLevelId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionLevelId</button>
   </form>
@@ -183,7 +183,7 @@
   <form (submit)="onSubmit($event)">
 <div class="form-group">
 <label>answerId</label>
-<input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.answerId" name="answerId">
 </div>
       <button (click)="findByAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByAnswerId</button>
   </form>
@@ -191,15 +191,15 @@
   <form (submit)="onSubmit($event)">
 <div class="form-group">
 <label>questionCategoryId</label>
-<input type="number" class="form-control" [(ngModel)]="question.questionCategoryId" name="questionCategoryId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionCategoryId" name="questionCategoryId">
 </div>
 <div class="form-group">
 <label>questionLevelId</label>
-<input type="number" class="form-control" [(ngModel)]="question.questionLevelId" name="questionLevelId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionLevelId" name="questionLevelId">
 </div>
 <div class="form-group">
 <label>answerId</label>
-<input type="number" class="form-control" [(ngModel)]="question.answerId" name="answerId">
+<input type="number" class="form-control" [(ngModel)]="questionsandanswers.answerId" name="answerId">
 </div>
       <button (click)="findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId</button>
   </form>

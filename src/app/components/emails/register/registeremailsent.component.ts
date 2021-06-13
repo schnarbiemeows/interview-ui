@@ -4,8 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-registeremailsent',
-  templateUrl: './registeremailsent.component.html',
-  styleUrls: ['./registeremailsent.component.css']
+  templateUrl: './registeremailsent.component.html'
 })
 export class RegisterEmailSentComponent implements OnInit, OnDestroy {
 

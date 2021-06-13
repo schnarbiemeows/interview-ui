@@ -16,8 +16,7 @@ import {AnswerService} from "../../services/answer/answer.service";
 
 @Component({
   selector: 'app-mainpage',
-  templateUrl: './mainpage.component.html',
-  styleUrls: ['./mainpage.component.css']
+  templateUrl: './mainpage.component.html'
 })
 export class MainpageComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
@@ -46,7 +45,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
    */
   questionItemlist: QuestionAnswerItemDTO[] = [];
   /**
-   * this represents the full list of all question/answer pairs
+   * this represents the full list of all questionsandanswers/answer pairs
    */
   fullquestionItemlist: QuestionAnswerItemDTO[] = [];
   questionList: QuestionDTO[] = [];
@@ -72,7 +71,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
       this.superPrivileges = this.isSuper;
     }
     /**
-     * load all of the question categories
+     * load all of the questionsandanswers categories
      */
     this.subscriptions.push(
       this.questioncategoryservice.getAllQuestionCategory().subscribe(questioncategorylist => {
@@ -84,7 +83,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
           this.questioncategorymap.set(optionDTO.value, optionDTO.viewValue);
         }
         /**
-         * load all of the question levels
+         * load all of the questionsandanswers levels
          */
         this.subscriptions.push(
           this.questionlevelservice.getAllQuestionLevel().subscribe(questionlevellist => {

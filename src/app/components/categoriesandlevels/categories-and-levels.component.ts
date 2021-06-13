@@ -12,11 +12,10 @@ import {QuestionLevelService} from "../../services/questionlevel/questionlevel.s
 import {InterviewUserDTO} from "../../models/InterviewUserDTO";
 
 @Component({
-  selector: 'app-questioncategory',
-  templateUrl: './questioncategory.component.html',
-  styleUrls: ['./questioncategory.component.css']
+  selector: 'app-categories-and-levels',
+  templateUrl: './categories-and-levels.component.html'
 })
-export class QuestionCategoryComponent implements OnInit, OnDestroy {
+export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
   interviewuser: InterviewUserDTO;
   userPrivileges: boolean = false;
   advUserPrivileges: boolean = false;

@@ -7,7 +7,7 @@ import { NotificationService } from "src/app/services/notification/notification.
 
 @Component({
   selector: 'header-nav',
-  templateUrl: './header-nav.component.html',
+  templateUrl: './header-nav.component.html'
 })
 export class HeaderNavComponent implements OnInit {
   isLoggedIn: boolean = false;
@@ -26,8 +26,8 @@ export class HeaderNavComponent implements OnInit {
   }
 
   private isUrlInAdminDashboardList() {
-    if(this.currentUrl.endsWith("admin")||this.currentUrl.endsWith("question")||
-      this.currentUrl.endsWith("questioncategory")||this.currentUrl.endsWith("interviewuser")) {
+    if(this.currentUrl.endsWith("admin")||this.currentUrl.endsWith("questions-and-answers")||
+      this.currentUrl.endsWith("categories-and-levels")||this.currentUrl.endsWith("interviewuser")) {
       return true;
     }
     return false;
