@@ -11,47 +11,33 @@ import { NotificationService } from "src/app/services/notification/notification.
 })
 export class HeaderNavComponent implements OnInit {
   isLoggedIn: boolean = false;
-
+  isOnAdminDashboard: boolean;
   currentUrl: string;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.isLoggedIn = this.isUserLoggedIn();
     this.currentUrl = this.router.url;
+    this.isOnAdminDashboard = this.isUrlInAdminDashboardList();
   }
 
-  public displayMainPage():void {
-    this.router.navigate(['/mainpage']);
-  }
-
-  public displayLogin(): void {
-    this.router.navigate(['login']);
-  }
-
-  public displayRegistration(): void {
-    this.router.navigate(['register']);
-  }
-
-  public displayAccountInfo() {
-    this.router.navigate(['userinfo']);
-  }
-
-  public gotoAdminConsole():void {
-    this.router.navigate(['/admin']);
+  private isUrlInAdminDashboardList() {
+    if(this.currentUrl.endsWith("admin")||this.currentUrl.endsWith("question")||
+      this.currentUrl.endsWith("questioncategory")||this.currentUrl.endsWith("interviewuser")) {
+      return true;
+    }
+    return false;
   }
 
   public onLogOut(): void {
+    this.isOnAdminDashboard = false;
     this.authenticationService.logOut();
     this.isLoggedIn = false;
     this.sendNotificationMessage(NotificationType.SUCCESS, `You've been successfully logged out`);
-  }
-
-  public showMainPageLink(): boolean {
-    return this.router.url != '/mainpage';
   }
 
   public isUserLoggedIn(): boolean {
@@ -73,4 +59,5 @@ export class HeaderNavComponent implements OnInit {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
     }
   }
+
 }
