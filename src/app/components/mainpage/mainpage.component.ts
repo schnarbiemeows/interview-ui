@@ -265,4 +265,7 @@ export class MainpageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  displayAboutPage() {
+    this.router.navigate(['/about']);
+  }
 }

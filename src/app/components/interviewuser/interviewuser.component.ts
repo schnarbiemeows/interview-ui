@@ -126,7 +126,7 @@ export class InterviewUserComponent implements OnInit, OnDestroy {
 
   deleteItem(i: number) {
 		this.subscriptions.push(
-			this.interviewuserservice.deleteInterviewUser(this.interviewuserlist[i].userId).subscribe(response => {
+			this.interviewuserservice.deleteInterviewUser(this.interviewuserlist[i].userName).subscribe(response => {
 			this.reload();
 			this.paginationDisabled = false;
 			})

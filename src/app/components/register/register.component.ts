@@ -1,11 +1,13 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { NotificationService } from '../../services/notification/notification.service';
 import { InterviewUserDTO } from '../../models/InterviewUserDTO';
 import { NotificationType } from '../../enum/notification-type.enum';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
+import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,7 @@ import { NotificationType } from '../../enum/notification-type.enum';
 export class RegisterComponent implements OnInit {
 
   public showLoading: boolean;
+  public recaptchaValid: boolean = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
@@ -26,16 +29,30 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  resolved(captchaResponse: string) {
+    const googleObj: GoogleRequestDTO = new GoogleRequestDTO(captchaResponse);
+    this.subscriptions.push(
+      this.authenticationService.postRecaptcha(googleObj).subscribe(
+        (response: HttpResponse<any>) => {
+          this.recaptchaValid = true;
+          console.log("IT WORKED!");
+        },
+        (errorResponse: any) => {
+          this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
+          this.showLoading = false;
+        }
+      )
+    );
+  }
+
+  public onError(errorDetails: RecaptchaErrorParameters): void {
+    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
+  }
+
   public displayLogin():void {
-    /*this.showLogin = false;
-    this.showRegistration = true;
-    this.showMainPage = false;*/
     this.router.navigate(['/login']);
   }
   public displayMainPage():void {
-    /*this.showLogin = false;
-    this.showRegistration = false;
-    this.showMainPage = true;*/
     this.router.navigate(['/mainpage']);
   }
 
@@ -45,19 +62,17 @@ export class RegisterComponent implements OnInit {
       this.authenticationService.register(user).subscribe(
         (response: InterviewUserDTO) => {
           this.showLoading = false;
-          this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.
-          Please check your email for password to log in.`);
-          this.router.navigateByUrl('/mainpage');
+          this.router.navigateByUrl('/registeremailsent/'+user.emailAddr);
         },
         (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         }
       )
     );
   }
 
-  private sendNotification(notificationType: NotificationType, message: string): void {
+  private sendNotificationMessage(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {

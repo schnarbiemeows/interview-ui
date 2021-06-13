@@ -6,36 +6,26 @@
     <h4 *ngIf="!loaded">Loading Customers & Administrators...</h4>
     <div *ngIf="loaded">
       <div class="card border-info">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary pt-4">
           <div class="collapse navbar-collapse">
-            <ul class="navbar-nav  m-auto">
+            <ul class="navbar-nav ml-auto">
               <li class="nav-item m-2">
-                <button (click)="showAllUsers()" class="btn btn-sm btn-success text-white m-3 p-3">ALL
-                </button>
+                <a class="nav-link" href="#" (click)="showAllUsers(); false">ALL</a>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showOnlyUsers()" class="btn btn-sm btn-success text-white m-3 p-3">Users
-                </button>
+                <a class="nav-link" href="#" (click)="showOnlyUsers(); false">Users</a>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showOnlyAdmins()" class="btn btn-sm btn-success text-white m-3 p-3">
-                  Admins
-                </button>
+                <a class="nav-link" href="#" (click)="showOnlyAdmins(); false">Admins</a>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showBasicUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
-                  Basic
-                </button>
+                <a class="nav-link" href="#" (click)="showBasicUsers(); false">Basic</a>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showAdvUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
-                  Adv
-                </button>
+                <a class="nav-link" href="#" (click)="showAdvUsers(); false">Adv</a>
               </li>
               <li class="nav-item m-2">
-                <button (click)="showPremiumUsers()" class="btn btn-sm btn-success text-white m-3 p-3">
-                  Prem
-                </button>
+                <a class="nav-link" href="#" (click)="showPremiumUsers(); false">Prem</a>
               </li>
             </ul>
           </div>

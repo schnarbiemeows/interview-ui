@@ -14,6 +14,9 @@ import { QuestionCategoryComponent } from './components/questioncategory/questio
 import { QuestionLevelComponent } from './components/questionlevel/questionlevel.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { QuestionComponent } from './components/question/question.component';
+import { ConfirmEmailComponent } from './components/confirmemail/confirmemail.component';
+import { RegisterEmailSentComponent } from './components/emails/register/registeremailsent.component';
+import { PasswordResetComponent } from './components/emails/passwordreset/passwordreset.component';
 import { QuestionService } from './services/question/question.service';
 import { QuestionCategoryService } from './services/questioncategory/questioncategory.service';
 import { AnswerService } from './services/answer/answer.service';
@@ -30,6 +33,8 @@ import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import { MaincontentComponent } from './components/maincontent/maincontent.component';
 import { ConfirmFieldsAreEqualDirective } from './directives/validators/confirm-fields-are-equal.directive';
 import { RecaptchaModule } from "ng-recaptcha";
+import {AboutComponent} from "./components/about/about.component";
+import {AdminComponent} from "./components/admin/admin.component";
 
 
 @NgModule({
@@ -46,6 +51,11 @@ import { RecaptchaModule } from "ng-recaptcha";
 		QuestionComponent,
 		UserinfoComponent,
     MaincontentComponent,
+    ConfirmEmailComponent,
+    RegisterEmailSentComponent,
+    PasswordResetComponent,
+    AboutComponent,
+    AdminComponent,
     ConfirmFieldsAreEqualDirective
   ],
   imports: [
