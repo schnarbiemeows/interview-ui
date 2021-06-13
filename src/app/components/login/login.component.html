@@ -18,7 +18,10 @@
 <div class="container">
   <div class="row pt-4 pb-2">
     <div class="col d-none d-md-block mb-2">
-      <h1>Interview Questions Login</h1>
+      <h1 class="text-center">Interview Questions Login</h1>
+    </div>
+    <div class="col d-sm-none mb-2">
+      <h1 class="text-center">Login</h1>
     </div>
   </div>
   <div class="row justify-content-center">
@@ -42,25 +45,107 @@
           </div>
           <span class="help-block" *ngIf="passwordInput.invalid && passwordInput.touched">Please enter a password.</span>
         </div>
-
         <div class="form-group">
           <re-captcha
             (resolved)="resolved($event)"
             (error)="onError($event)"
             errorMode="handled"
-            siteKey="6Lcdf8YaAAAAACiqLRP6NOWg_-rC74TKyIYG0dl_"
+            siteKey="6Ld5pAIbAAAAAEI4mYIibxu-VGnqLtMXikYkR7sc"
           ></re-captcha>
         </div>
-
-        <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-primary">
-          <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
-          <span *ngIf="showLoading">Loading...</span>
-          <span *ngIf="!showLoading">Login</span>
-        </button>
+        <div class="d-none d-md-block">
+          <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-primary">
+            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="showLoading">Loading...</span>
+            <span *ngIf="!showLoading">Login</span>
+          </button>
+        </div>
+        <div class="d-sm-none">
+          <button type="submit" [disabled]="loginForm.invalid || showLoading || !recaptchaValid" name="button" class="btn btn-block btn-primary">
+            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="showLoading">Loading...</span>
+            <span *ngIf="!showLoading">Login</span>
+          </button>
+        </div>
       </form>
       <div class="text-center">
         Don't have an account? <a routerLink="/register" class="ml-2">Sign Up!</a>
       </div>
+      <div class="text-center">
+        <a class="nav-link" href="#" (click)="onForgotPassword(); false">Forgot Password?</a>
+      </div>
+      <div class="text-center">
+        <a class="nav-link" href="#" (click)="onForgotUsername(); false">Forgot Username?</a>
+      </div>
+      <button [hidden]="true" type="button" id="openForgotPassword" data-toggle="modal" data-target="#forgotPasswordModal">
+      </button>
+      <button [hidden]="true" type="button" id="openForgotUsername" data-toggle="modal" data-target="#forgotUsernameModal">
+      </button>
+      <!-- forgot password -->
+      <div class="modal draggable fade bd-example-modal-lg" id="forgotPasswordModal" tabindex="-1"
+           role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center">Recover Password</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="">
+                <form #forgotPasswordForm="ngForm">
+                  <div *ngIf="forgotPasswordFormInitiated" class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" required
+                           [(ngModel)]="email" class="form-control">
+                  </div>
+                  <div *ngIf="!forgotPasswordFormInitiated" class="">
+                    {{resendResetPasswordMsg}}
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" (click)="resetPassword()" [disabled]="forgotPasswordForm.invalid" class="btn btn-primary">{{btnMsg}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- forgot username -->
+      <div class="modal draggable fade bd-example-modal-lg" id="forgotUsernameModal" tabindex="-1"
+           role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center">{{recoverUsernameMsg}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="">
+                <form #forgotUsernameForm="ngForm">
+                  <div *ngIf="forgotUsernameFormInitiated" class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" required
+                           [(ngModel)]="email" class="form-control">
+                  </div>
+                  <div *ngIf="!forgotUsernameFormInitiated" class="">
+                    {{resendUsernameEmailMsg}}
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div>{{didntGetEmailMsg}}</div>
+              <button type="button" (click)="sendUsernameEmail()" [disabled]="forgotUsernameForm.invalid" class="btn btn-primary">{{btnMsg}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

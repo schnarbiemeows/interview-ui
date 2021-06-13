@@ -20,8 +20,11 @@
       <li class="nav-item">
         <a class="nav-link" href="#" (click)="displayAccountInfo(); false">Account Info</a>
       </li>
-      <li *ngIf="isAdmin" class="nav-item">
+      <li *ngIf="isAdmin" class="d-none d-md-block nav-item">
         <a class="nav-link" href="#" (click)="gotoAdminConsole(); false">Admin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="displayAboutPage(); false">About</a>
       </li>
     </ul>
   </div>
@@ -87,7 +90,7 @@
                     </option>
                   </select>
                 </div>
-                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary float-right">{{this.showQuestionsMsg}}</button>                
+                <button (click)="showQuestion()" [disabled]="Filter.invalid" class="btn btn-primary float-right">{{this.showQuestionsMsg}}</button>
               </div>
             </div>
           </div>

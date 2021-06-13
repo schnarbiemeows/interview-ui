@@ -6,6 +6,8 @@ import { InterviewUserDTO } from '../../models/interviewuserDTO';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {QuestionCategoryDTO} from "../../models/QuestionCategoryDTO";
 import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
+import {CheckResetPasswordResponseDTO} from "../../models/CheckResetPasswordResponseDTO";
+import {PasswordResetDTO} from "../../models/PasswordResetDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,11 @@ export class AuthenticationService {
   jwtHelper = new JwtHelperService();
   loginURL : string = '/interviewuser/login';
   registerURL : string = '/interviewuser/register';
+  confirmEmailURL : string = '/interviewuser/confirmemail';
+  resetPasswordURL : string = '/interviewuser/forgotpassword';
+  checkResetURL : string = '/interviewuser/checkreset';
+  finalizeResetURL : string = '/interviewuser/finalizepassword';
+  sendUsernameEmailURL : string = '/interviewuser/forgotusername';
   googleURL : string = `/recaptcha/post`;
   constructor(private http: HttpClient) { }
 
@@ -27,6 +34,26 @@ export class AuthenticationService {
 
   register(user: InterviewUserDTO): Observable<InterviewUserDTO> {
     return this.http.post<InterviewUserDTO>(`${this.host}${this.registerURL}`, user);
+  }
+
+  confirmEmail(id: string): Observable<InterviewUserDTO> {
+    return this.http.post<InterviewUserDTO>(`${this.host}${this.confirmEmailURL}`, id);
+  }
+
+  resetPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.host}${this.resetPasswordURL}`, email);
+  }
+
+  checkReset(code: string): Observable<CheckResetPasswordResponseDTO> {
+    return this.http.post<CheckResetPasswordResponseDTO>(`${this.host}${this.checkResetURL}`, code);
+  }
+
+  finalizeReset(dto: PasswordResetDTO): Observable<InterviewUserDTO> {
+    return this.http.post<InterviewUserDTO>(`${this.host}${this.finalizeResetURL}`, dto);
+  }
+
+  sendUsernameEmail(email: string): Observable<any> {
+    return this.http.post<any>(`${this.host}${this.sendUsernameEmailURL}`, email);
   }
 
   postRecaptcha(obj: GoogleRequestDTO): Observable<any> {

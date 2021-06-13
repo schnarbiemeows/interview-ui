@@ -1,3 +1,4 @@
+<!--<app-navbar></app-navbar>-->
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary pt-4">
   <a href="/" class="navbar-brand text-white d-none d-md-block">Interview Question Generator Console</a>
   <a href="/" class="navbar-brand text-white d-md-none">IQG Console</a>
@@ -21,4 +22,36 @@
     </ul>
   </div>
 </nav>
+<div class="container">
+  <div *ngIf="showUsers">
+    <app-interviewuser></app-interviewuser>
+  </div>
+  <div *ngIf="showQuestions">
+    <app-question></app-question>
+  </div>
+  <div *ngIf="showQuestionCategories">
+    <app-questioncategory></app-questioncategory>
+  </div>
+</div>
 
+<!--<ul class="navbar-nav  m-auto">
+      <li *ngIf="adminPrivileges" class="nav-item m-2">
+        <button (click)="gotoAdminConsole()" class="btn btn-sm btn-success text-white m-3 p-3">Main
+          Page
+        </button>
+      </li>
+      <li *ngIf="adminPrivileges" class="nav-item m-2">
+        <button (click)="displayUsers()" class="btn btn-sm btn-success text-white m-3 p-3">Users and Admins
+        </button>
+      </li>
+      <li *ngIf="adminPrivileges" class="nav-item m-2">
+        <button (click)="displayQuestions()" class="btn btn-sm btn-success text-white m-3 p-3">
+          Questions and Answers
+        </button>
+      </li>
+      <li *ngIf="adminPrivileges" class="nav-item m-2">
+        <button (click)="displayQuestionCategories()" class="btn btn-sm btn-success text-white m-3 p-3">
+          Categories and Levels
+        </button>
+      </li>
+    </ul>-->
