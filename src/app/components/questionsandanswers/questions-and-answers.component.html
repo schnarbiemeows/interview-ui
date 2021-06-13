@@ -1,50 +1,47 @@
 <header-nav></header-nav>
-<div class="container-fluid border rounded" name="container2">
+<div class="container-fluid border rounded">
   <div class="row">
-    <div class="col col-sm-2 mh-100">
-      <div class="card bg-secondary border-info">
-        <h2 class="text-center">Filter</h2>
-      </div>
-      <form (submit)="onSubmit($event)" #Filter="ngForm">
-        <div class="form-group">
-          <label class="p-3">Category:</label>
-          <div class="col col-sm-4">
-            <select class="form-control border-info text-center" style="width: 250px;" [disabled]="addMode || editMode"
-                    [(ngModel)]="filterCategoryValue"
-                    required
-                    name="questionCategoryId_dropdown">
-              <option *ngFor="let option of questioncategorylist" [value]="option.value">
-                {{ option.viewValue }}
-              </option>
-            </select>
-          </div>
-          <label class="p-3">Difficulty:</label>
-          <div class="col col-sm-4">
-            <select class="form-control border-info text-center" style="width: 250px;" [disabled]="addMode || editMode"
-                    [(ngModel)]="filterDifficultyValue"
-                    required
-                    name="questionLevelId_dropdown">
-              <option *ngFor="let option of questionlevellist" [value]="option.value">
-                {{ option.viewValue }}
-              </option>
-            </select>
-          </div>
+    <div class="col col-3">
+      <div class="card border-info">
+        <h2 class="card-header text-center bg-secondary">Filter</h2>
+        <div class="card-body p-1">
+          <form (submit)="onSubmit($event)" #Filter="ngForm">
+            <div class="form-group">
+              <label for="category">Category:</label>
+                <select id="category" class="form-control border-info text-center" [disabled]="addMode || editMode"
+                        [(ngModel)]="filterCategoryValue"
+                        required
+                        name="questionCategoryId_dropdown">
+                  <option *ngFor="let option of questioncategorylist" [value]="option.value">
+                    {{ option.viewValue }}
+                  </option>
+                </select>
+              <label for="level">Difficulty:</label>
+                <select id="level" class="form-control border-info text-center" [disabled]="addMode || editMode"
+                        [(ngModel)]="filterDifficultyValue"
+                        required
+                        name="questionLevelId_dropdown">
+                  <option *ngFor="let option of questionlevellist" [value]="option.value">
+                    {{ option.viewValue }}
+                  </option>
+                </select>
+            </div>
+            <button (click)="filter()"
+                    [disabled]="addMode || editMode"
+                    class="btn btn-sm btn-primary text-white m-3 p-3">{{this.filterMsg}}</button>
+            <button (click)="resetFullList()"
+                    [disabled]="addMode || editMode"
+                    class="btn btn-sm btn-primary text-white m-3 p-3 ">{{this.resetToAllMsg}}</button>
+          </form>
         </div>
-        <button (click)="filter()"
-                [disabled]="addMode || editMode"
-                class="btn btn-sm btn-success text-white m-3 p-3">{{this.filterMsg}}</button>
-        <button (click)="resetFullList()"
-                [disabled]="addMode || editMode"
-                class="btn btn-sm btn-danger text-white m-3 p-3 ">{{this.resetToAllMsg}}</button>
-      </form>
-      <div class="card bg-white">
-        <h3 class="text-center">Total Questions</h3>
-        <h3 class="text-center">{{this.totalQuestions}}</h3>
+        <div class="card-footer bg-white">
+          <h3 class="text-center">Total Questions</h3>
+          <h3 class="text-center">{{this.totalQuestions}}</h3>
+        </div>
       </div>
-
     </div>
-    <div class="col col-sm-10 mh-100">
-      <div class="card bg-light border-light m-3 p-3">
+    <div class="col col-9">
+      <div class="card bg-secondary border-info">
         <h2 class="text-center">Questions and Answers</h2>
       </div>
       <h4 *ngIf="!loaded">Loading Question...</h4>
@@ -162,46 +159,4 @@
 
     </div>-->
   </div>
-  <!-- <div class="row">
-<div class="card card-body m-3">
-  <form (submit)="onSubmit($event)">
-<div class="form-group">
-<label>questionCategoryId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionCategoryId" name="questionCategoryId">
-</div>
-      <button (click)="findByQuestionCategoryId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryId</button>
-  </form>
-</div><div class="card card-body m-3">
-  <form (submit)="onSubmit($event)">
-<div class="form-group">
-<label>questionLevelId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionLevelId" name="questionLevelId">
-</div>
-      <button (click)="findByQuestionLevelId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionLevelId</button>
-  </form>
-</div><div class="card card-body m-3">
-  <form (submit)="onSubmit($event)">
-<div class="form-group">
-<label>answerId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.answerId" name="answerId">
-</div>
-      <button (click)="findByAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByAnswerId</button>
-  </form>
-</div><div class="card card-body m-3">
-  <form (submit)="onSubmit($event)">
-<div class="form-group">
-<label>questionCategoryId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionCategoryId" name="questionCategoryId">
-</div>
-<div class="form-group">
-<label>questionLevelId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.questionLevelId" name="questionLevelId">
-</div>
-<div class="form-group">
-<label>answerId</label>
-<input type="number" class="form-control" [(ngModel)]="questionsandanswers.answerId" name="answerId">
-</div>
-      <button (click)="findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId()" class="btn btn-sm btn-primary text-white m-3 p-3 ">findByQuestionCategoryIdAndQuestionLevelIdAndAnswerId</button>
-  </form>
-</div>	</div> -->
 </div>

@@ -1,12 +1,10 @@
 <header-nav></header-nav>
-<div class="container-fluid border rounded" name="container2">
+<div class="container-fluid border rounded">
   <div class="row">
-    <div class="col col-sm-4 mh-100">
-    </div>
     <!-------------------------------------------- LEVELS ------------------------------------------------------------->
-    <div class="col col-sm-4 mh-100">
+    <div class="col col-3 offset-2">
       <div class="card bg-secondary border-info">
-        <h2 class="text-center">Levels</h2>
+        <h2 class="card-header text-center">Levels</h2>
       </div>
       <h4 *ngIf="!loadedLevel">Loading Levels...</h4>
       <div *ngIf="loadedLevel">
@@ -19,7 +17,7 @@
         </div>
         <div class="card border-info"> <!-- table section -->
           <div class="card-body table-responsive">
-            <table class="table-sm table-bordered table-hover rounded">
+            <table class="table table-bordered table-hover rounded">
               <thead>
               <tr>
                 <th>
@@ -72,17 +70,17 @@
             </div>
             <button *ngIf="addModeLevel || editModeLevel" [disabled]="QuestionLevel.invalid"
                     (click)="saveResultsLevel()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeLevel || editModeLevel" (click)="reloadLevel()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>
     </div>
     <!-------------------------------------------- CATEGORIES ------------------------------------------------------------->
-    <div class="col col-sm-4 mh-100">
+    <div class="col col-4 offset-2">
       <div class="card bg-secondary border-info">
-        <h2 class="text-center">Categories</h2>
+        <h2 class="card-header text-center">Categories</h2>
       </div>
       <h4 *ngIf="!loadedCategory">Loading Categories...</h4>
       <div *ngIf="loadedCategory">
@@ -97,7 +95,7 @@
         <!--</div>-->
         <div class="card border-info"> <!-- table section -->
           <div class="card-body table-responsive">
-            <table class="table-sm table-bordered table-hover rounded">
+            <table class="table table-bordered table-hover rounded">
               <thead>
               <tr>
                 <th>
@@ -155,9 +153,9 @@
             </div>
             <button *ngIf="addModeCategory || editModeCategory" [disabled]="QuestionCategory.invalid"
                     (click)="saveResultsCategory()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeCategory || editModeCategory" (click)="reloadCategory()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>
