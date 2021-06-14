@@ -142,10 +142,12 @@
               <input type="text" class="form-control" [(ngModel)]="questionItem.questionTxt" name="questionTxt"
                      #questionTxt="ngModel"
                      maxlength=256 >
-              <label>Answer:</label>
-              <input type="text" class="form-control" [(ngModel)]="questionItem.answerTxt" name="answerTxt"
-                     #answerTxt="ngModel"
-                     maxlength=256 >
+              <div class="col col-sm-4">
+                <label>Answer:</label>
+                <textarea rows="10" class="form-control" [(ngModel)]="questionItem.answerTxt" name="answerTxt"
+                       #answerTxt="ngModel"
+                          maxlength=256 ></textarea>
+              </div>
             </div>
             <button *ngIf="addMode || editMode" [disabled]="Question.invalid" (click)="saveResults()"
                     class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>

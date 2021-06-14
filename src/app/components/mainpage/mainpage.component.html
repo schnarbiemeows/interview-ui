@@ -82,10 +82,8 @@
         </div>
       </div>
       <div *ngIf="showAnswerMode" class="row">
-        <div class="col">
-          <div class="alert alert-info" role="alert">
-            {{questionItem.answerTxt}}
-          </div>
+        <div class="col-12">
+          <textarea class="alert alert-info w-100" rows="10" role="alert">{{questionItem.answerTxt}}</textarea>
         </div>
       </div>
     </div>
