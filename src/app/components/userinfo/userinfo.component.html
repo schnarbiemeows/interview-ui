@@ -1,142 +1,144 @@
 <header-nav></header-nav>
-<div class="container">
-  <div class="main-body">
-    <div class="row gutters-sm">
-      <div class="col-md-6 offest-3">
-        <div *ngIf="showUserInfo" class="card m-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Full Name</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{interviewuser?.firstName}} {{interviewuser?.lastName}}
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{interviewuser?.emailAddr}}
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">User Name</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{interviewuser?.userName}}
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="d-none d-lg-block">
-                <div class="col">
-                  <button (click)="changeInfo()" class="btn btn-primary float-right m-3">change information</button>
-                  <button (click)="changePassword()" class="btn btn-primary float-left m-3">change password</button>
+<div class="jumbotron-fluid" id="maincontainer">
+  <div class="container">
+    <div class="main-body">
+      <div class="row gutters-sm">
+        <div class="col-md-6 offest-3">
+          <div *ngIf="showUserInfo" class="card m-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{interviewuser?.firstName}} {{interviewuser?.lastName}}
                 </div>
               </div>
-              <div class="d-inline d-lg-none">
-                <div class="col">
-                  <button (click)="changeInfo()" class="btn btn-primary float-right m-3">CHG INFO</button>
-                  <button (click)="changePassword()" class="btn btn-primary float-right m-3">CHG PWD</button>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{interviewuser?.emailAddr}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">User Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{interviewuser?.userName}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="d-none d-lg-block">
+                  <div class="col">
+                    <button (click)="changeInfo()" class="btn btn-primary border-dark float-right m-3">change information</button>
+                    <button (click)="changePassword()" class="btn btn-primary border-dark float-left m-3">change password</button>
+                  </div>
+                </div>
+                <div class="d-inline d-lg-none">
+                  <div class="col">
+                    <button (click)="changeInfo()" class="btn btn-primary border-dark float-right m-3">CHG INFO</button>
+                    <button (click)="changePassword()" class="btn btn-primary border-dark float-right m-3">CHG PWD</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="showChangeInfo" class="card">
-          <form #infoForm="ngForm" (ngSubmit)="onSubmitInfoChange(infoForm.value)">
-            <div class="card-body">
-                <div class="form-group">
-                  <label for="newFirstName">First Name</label>
-                  <input type="text" class="form-control" id="newFirstName" name="newFirstName" placeholder="first name" ngModel
-                         [(ngModel)]='changeUserInfoForm.newFirstName'
-                         #firstNameInput="ngModel" required>
-                  <span class="help-block" style="color:red;"
-                        *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
-                </div>
-                <div class="form-group">
-                  <label for="newLastName">Last Name</label>
-                  <input type="text" class="form-control" id="newLastName" name="newLastName" placeholder="last name" ngModel
-                         [(ngModel)]='changeUserInfoForm.newLastName'
-                         #lastNameInput="ngModel" required>
-                  <span class="help-block" style="color:red;"
-                        *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter a last name</span>
-                </div>
-                <div class="form-group">
-                  <label for="newEmailAddr">Email</label>
-                  <input type="text" class="form-control" id="newEmailAddr" name="newEmailAddr" placeholder="email" ngModel
-                         [(ngModel)]='changeUserInfoForm.newEmailAddr'
-                         #emailInput="ngModel" required>
-                  <span class="help-block" style="color:red;"
-                        *ngIf="emailInput.invalid && emailInput.touched">Please enter an email address</span>
-                </div>
-                <div class="form-group">
-                  <label for="newUserName">User Name</label>
-                  <input type="text" class="form-control" id="newUserName" name="newUserName" placeholder="user name" ngModel
-                         [(ngModel)]='changeUserInfoForm.newUserName'
-                         #userNameInput="ngModel" required>
-                  <span class="help-block" style="color:red;"
-                        *ngIf="userNameInput.invalid && userNameInput.touched">Please enter a user name</span>
+          <div *ngIf="showChangeInfo" class="card">
+            <form #infoForm="ngForm" (ngSubmit)="onSubmitInfoChange(infoForm.value)">
+              <div class="card-body">
+                  <div class="form-group">
+                    <label for="newFirstName">First Name</label>
+                    <input type="text" class="form-control" id="newFirstName" name="newFirstName" placeholder="first name" ngModel
+                           [(ngModel)]='changeUserInfoForm.newFirstName'
+                           #firstNameInput="ngModel" required>
+                    <span class="help-block" style="color:red;"
+                          *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="newLastName">Last Name</label>
+                    <input type="text" class="form-control" id="newLastName" name="newLastName" placeholder="last name" ngModel
+                           [(ngModel)]='changeUserInfoForm.newLastName'
+                           #lastNameInput="ngModel" required>
+                    <span class="help-block" style="color:red;"
+                          *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter a last name</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="newEmailAddr">Email</label>
+                    <input type="text" class="form-control" id="newEmailAddr" name="newEmailAddr" placeholder="email" ngModel
+                           [(ngModel)]='changeUserInfoForm.newEmailAddr'
+                           #emailInput="ngModel" required>
+                    <span class="help-block" style="color:red;"
+                          *ngIf="emailInput.invalid && emailInput.touched">Please enter an email address</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="newUserName">User Name</label>
+                    <input type="text" class="form-control" id="newUserName" name="newUserName" placeholder="user name" ngModel
+                           [(ngModel)]='changeUserInfoForm.newUserName'
+                           #userNameInput="ngModel" required>
+                    <span class="help-block" style="color:red;"
+                          *ngIf="userNameInput.invalid && userNameInput.touched">Please enter a user name</span>
 
+                </div>
               </div>
-            </div>
-            <button type="submit" [disabled]="infoForm.invalid"
-                    class="btn btn-primary float-left m-3">{{this.saveChangesMsg}}
-              <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
-              <span *ngIf="showLoading">Loading...</span>
-            </button>
-            <button (click)="reload()"
-                    class="btn btn-primary float-right m-3">{{this.cancelMsg}}</button>
+              <button type="submit" [disabled]="infoForm.invalid"
+                      class="btn btn-primary border-dark float-left m-3">{{this.saveChangesMsg}}
+                <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
+                <span *ngIf="showLoading">Loading...</span>
+              </button>
+              <button (click)="reload()"
+                      class="btn btn-secondary border-dark float-right m-3">{{this.cancelMsg}}</button>
 
-          </form>
-        </div>
-        <div *ngIf="showChangePwd" class="card m-3">
-          <form class="form" #passwordForm="ngForm"
-                (ngSubmit)="onSubmitPasswordChange(passwordForm.value)">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="oldpassword">old password</label>
-                <input type="password" class="form-control" id="oldpassword" name="password" placeholder=""
-                       ngModel [(ngModel)]='changePasswordForm.oldPassword'
-                       #password="ngModel" required>
-                <span class="help-block" style="color:red;"
-                      *ngIf="password.invalid && password.touched">password is required</span>
+            </form>
+          </div>
+          <div *ngIf="showChangePwd" class="card m-3">
+            <form class="form" #passwordForm="ngForm"
+                  (ngSubmit)="onSubmitPasswordChange(passwordForm.value)">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="oldpassword">old password</label>
+                  <input type="password" class="form-control" id="oldpassword" name="password" placeholder=""
+                         ngModel [(ngModel)]='changePasswordForm.oldPassword'
+                         #password="ngModel" required>
+                  <span class="help-block" style="color:red;"
+                        *ngIf="password.invalid && password.touched">password is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="newpassword">new password</label>
+                  <input type="password" class="form-control" id="newpassword" name="newPassword" placeholder="" parent="true"
+                         ngModel [(ngModel)]="changePasswordForm.newPassword"
+                         #newPassword="ngModel" required>
+                  <span class="help-block" style="color:red;"
+                        *ngIf="newPassword.invalid && newPassword.touched">Please enter a new password</span>
+                </div>
+                <div class="form-group">
+                  <label for="repeatpassword">repeat new password</label>
+                  <input type="text" class="form-control" id="repeatpassword" name="newPasswordConfirm" placeholder=""
+                         ngModel [(ngModel)]="changePasswordForm.newPasswordConfirm"
+                         confirmEqualValidator="newPassword"
+                         #newPasswordConfirm="ngModel" required>
+                  <span class="help-block" style="color:red;"
+                        *ngIf="newPasswordConfirm.errors?.required && newPasswordConfirm.touched">Please enter a value</span>
+                  <span class="help-block" style="color:red;"
+                        *ngIf="newPasswordConfirm.value != '' && newPasswordConfirm.errors?.compare">passwords do not match</span>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="newpassword">new password</label>
-                <input type="password" class="form-control" id="newpassword" name="newPassword" placeholder="" parent="true"
-                       ngModel [(ngModel)]="changePasswordForm.newPassword"
-                       #newPassword="ngModel" required>
-                <span class="help-block" style="color:red;"
-                      *ngIf="newPassword.invalid && newPassword.touched">Please enter a new password</span>
-              </div>
-              <div class="form-group">
-                <label for="repeatpassword">repeat new password</label>
-                <input type="text" class="form-control" id="repeatpassword" name="newPasswordConfirm" placeholder=""
-                       ngModel [(ngModel)]="changePasswordForm.newPasswordConfirm"
-                       confirmEqualValidator="newPassword"
-                       #newPasswordConfirm="ngModel" required>
-                <span class="help-block" style="color:red;"
-                      *ngIf="newPasswordConfirm.errors?.required && newPasswordConfirm.touched">Please enter a value</span>
-                <span class="help-block" style="color:red;"
-                      *ngIf="newPasswordConfirm.value != '' && newPasswordConfirm.errors?.compare">passwords do not match</span>
-              </div>
-            </div>
-            <button type="submit" [disabled]="passwordForm.invalid"
-                    class="btn btn-primary float-left m-3">{{this.saveChangesMsg}}
-              <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
-              <span *ngIf="showLoading">Loading...</span>
-            </button>
-            <button (click)="reload()"
-                    class="btn btn-primary float-right m-3">{{this.cancelMsg}}</button>
-          </form>
-        </div>
-        <div class="col-md-6">
+              <button type="submit" [disabled]="passwordForm.invalid"
+                      class="btn btn-primary border-dark float-left m-3">{{this.saveChangesMsg}}
+                <text *ngIf="showLoading" class="fas fa-spinner fa-spin"></text>&nbsp;&nbsp;
+                <span *ngIf="showLoading">Loading...</span>
+              </button>
+              <button (click)="reload()"
+                      class="btn btn-secondary border-dark float-right m-3">{{this.cancelMsg}}</button>
+            </form>
+          </div>
+          <div class="col-md-6">
+          </div>
         </div>
       </div>
     </div>

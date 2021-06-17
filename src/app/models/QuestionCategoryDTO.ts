@@ -3,4 +3,5 @@ export interface QuestionCategoryDTO{
 	questionCategoryDesc?: string;
 	evntTmestmp?: Date;
 	evntOperId?: string;
+  displayCde?: string;
 }

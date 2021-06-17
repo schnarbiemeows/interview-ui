@@ -27,7 +27,8 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
     questionCategoryId: null,
     questionCategoryDesc: '',
     evntTmestmp: null,
-    evntOperId: ''
+    evntOperId: '',
+    displayCde: ''
   };
   questioncategorylist: QuestionCategoryDTO[];
   fullquestioncategorylist: QuestionCategoryDTO[];
@@ -86,7 +87,8 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
       if (!this.isNullOrUndefined(questioncategory.questionCategoryId) && questioncategory.questionCategoryId.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         !this.isNullOrUndefined(questioncategory.questionCategoryDesc) && questioncategory.questionCategoryDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         !this.isNullOrUndefined(questioncategory.evntTmestmp) && questioncategory.evntTmestmp.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        !this.isNullOrUndefined(questioncategory.evntOperId) && questioncategory.evntOperId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+        !this.isNullOrUndefined(questioncategory.evntOperId) && questioncategory.evntOperId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        !this.isNullOrUndefined(questioncategory.displayCde) && questioncategory.displayCde.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
         results.push(questioncategory);
       }
     }
@@ -121,7 +123,8 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
       questionCategoryId: null,
       questionCategoryDesc: '',
       evntTmestmp: null,
-      evntOperId: ''
+      evntOperId: '',
+      displayCde: ''
     };
   }
 
@@ -149,6 +152,7 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
           this.questioncategory.questionCategoryDesc = '';
           this.questioncategory.evntTmestmp = null;
           this.questioncategory.evntOperId = '';
+          this.questioncategory.displayCde = '';
           this.paginationDisabledCategory = false;
         })
       );
@@ -161,6 +165,7 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
           this.questioncategory.questionCategoryDesc = '';
           this.questioncategory.evntTmestmp = null;
           this.questioncategory.evntOperId = '';
+          this.questioncategory.displayCde = '';
           this.paginationDisabledCategory = false;
         })
       );

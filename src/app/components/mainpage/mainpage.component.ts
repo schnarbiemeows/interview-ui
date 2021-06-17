@@ -77,11 +77,13 @@ export class MainpageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.questioncategoryservice.getAllQuestionCategory().subscribe(questioncategorylist => {
         for (let entry of questioncategorylist) {
-          let optionDTO = new ForeignKeyOptionsDTO();
-          optionDTO.value = entry.questionCategoryId;
-          optionDTO.viewValue = entry.questionCategoryDesc;
-          this.questioncategorylist.push(optionDTO);
-          this.questioncategorymap.set(optionDTO.value, optionDTO.viewValue);
+          if(entry.displayCde === 'Y' || this.isAdmin) {
+            let optionDTO = new ForeignKeyOptionsDTO();
+            optionDTO.value = entry.questionCategoryId;
+            optionDTO.viewValue = entry.questionCategoryDesc;
+            this.questioncategorylist.push(optionDTO);
+            this.questioncategorymap.set(optionDTO.value, optionDTO.viewValue);
+          }
         }
         /**
          * load all of the questionsandanswers levels
@@ -125,10 +127,6 @@ export class MainpageComponent implements OnInit, OnDestroy {
             this.copyFullListIntoDisplayList();
             this.loaded = true;
             this.showQuestionForm = false;
-            /*this.editMode = false;
-            this.addMode = false;
-            this.paginationDisabled = false;*/
-            //this.totalQuestions = this.fullquestionItemlist.length;
             this.filterCategoryValue = null;
             this.filterDifficultyValue = null;
           })
