@@ -12,11 +12,10 @@ import {QuestionLevelService} from "../../services/questionlevel/questionlevel.s
 import {InterviewUserDTO} from "../../models/InterviewUserDTO";
 
 @Component({
-  selector: 'app-questioncategory',
-  templateUrl: './questioncategory.component.html',
-  styleUrls: ['./questioncategory.component.css']
+  selector: 'app-categories-and-levels',
+  templateUrl: './categories-and-levels.component.html'
 })
-export class QuestionCategoryComponent implements OnInit, OnDestroy {
+export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
   interviewuser: InterviewUserDTO;
   userPrivileges: boolean = false;
   advUserPrivileges: boolean = false;
@@ -28,7 +27,8 @@ export class QuestionCategoryComponent implements OnInit, OnDestroy {
     questionCategoryId: null,
     questionCategoryDesc: '',
     evntTmestmp: null,
-    evntOperId: ''
+    evntOperId: '',
+    displayCde: ''
   };
   questioncategorylist: QuestionCategoryDTO[];
   fullquestioncategorylist: QuestionCategoryDTO[];
@@ -87,7 +87,8 @@ export class QuestionCategoryComponent implements OnInit, OnDestroy {
       if (!this.isNullOrUndefined(questioncategory.questionCategoryId) && questioncategory.questionCategoryId.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         !this.isNullOrUndefined(questioncategory.questionCategoryDesc) && questioncategory.questionCategoryDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         !this.isNullOrUndefined(questioncategory.evntTmestmp) && questioncategory.evntTmestmp.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        !this.isNullOrUndefined(questioncategory.evntOperId) && questioncategory.evntOperId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+        !this.isNullOrUndefined(questioncategory.evntOperId) && questioncategory.evntOperId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        !this.isNullOrUndefined(questioncategory.displayCde) && questioncategory.displayCde.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
         results.push(questioncategory);
       }
     }
@@ -122,7 +123,8 @@ export class QuestionCategoryComponent implements OnInit, OnDestroy {
       questionCategoryId: null,
       questionCategoryDesc: '',
       evntTmestmp: null,
-      evntOperId: ''
+      evntOperId: '',
+      displayCde: ''
     };
   }
 
@@ -150,6 +152,7 @@ export class QuestionCategoryComponent implements OnInit, OnDestroy {
           this.questioncategory.questionCategoryDesc = '';
           this.questioncategory.evntTmestmp = null;
           this.questioncategory.evntOperId = '';
+          this.questioncategory.displayCde = '';
           this.paginationDisabledCategory = false;
         })
       );
@@ -162,6 +165,7 @@ export class QuestionCategoryComponent implements OnInit, OnDestroy {
           this.questioncategory.questionCategoryDesc = '';
           this.questioncategory.evntTmestmp = null;
           this.questioncategory.evntOperId = '';
+          this.questioncategory.displayCde = '';
           this.paginationDisabledCategory = false;
         })
       );

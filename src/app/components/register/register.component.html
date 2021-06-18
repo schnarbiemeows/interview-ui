@@ -1,90 +1,92 @@
 <header-nav></header-nav>
-<div class="container">
-  <div class="row pt-4 pb-2">
-    <div class="col d-none d-md-block mb-2">
-      <h1 class="text-center">Interview Questions Registration</h1>
+<div class="jumbotron-fluid" id="maincontainer">
+  <div class="container">
+    <div class="row pt-4 pb-2">
+      <div class="col d-none d-md-block mb-2">
+        <h1 class="text-center">Interview Questions Registration</h1>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-10 col-md-6">
-      <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" class="mb-4">
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="far fa-user"></i></span>
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-6">
+        <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" class="mb-4">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
             </div>
-            <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
+            <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
           </div>
-          <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="far fa-user"></i></span>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="lastName" placeholder="Last name" required ngModel #lastNameInput="ngModel">
             </div>
-            <input type="text" class="form-control" name="lastName" placeholder="Last name" required ngModel #lastNameInput="ngModel">
+            <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter a last name</span>
           </div>
-          <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter a last name</span>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="far fa-id-card"></i></span>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-id-card"></i></span>
+              </div>
+              <input type="text" class="form-control" name="userName" placeholder="Username" required ngModel #usernameInput="ngModel">
             </div>
-            <input type="text" class="form-control" name="userName" placeholder="Username" required ngModel #usernameInput="ngModel">
+            <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Please enter a username</span>
           </div>
-          <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched">Please enter a username</span>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="far fa-envelope"></i></span>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+              </div>
+              <input type="text" class="form-control" name="emailAddr" placeholder="Email" required ngModel #emailInput="ngModel">
             </div>
-            <input type="text" class="form-control" name="emailAddr" placeholder="Email" required ngModel #emailInput="ngModel">
+            <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched">Please enter an email.</span>
           </div>
-          <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched">Please enter an email.</span>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-key"></i></span>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="password" class="form-control" name="password" placeholder="password" parent="true"
+                     required ngModel #password="ngModel">
             </div>
-            <input type="password" class="form-control" name="password" placeholder="password" parent="true"
-                   required ngModel #password="ngModel">
+            <span class="help-block" *ngIf="password.invalid && password.touched">Please enter a password</span>
           </div>
-          <span class="help-block" *ngIf="password.invalid && password.touched">Please enter a password</span>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text"><i class="fas fa-key"></i></span>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="text" class="form-control" name="newPasswordConfirm" placeholder="confirm password" required ngModel
+                     confirmEqualValidator="password"
+                     #newPasswordConfirm="ngModel">
             </div>
-            <input type="text" class="form-control" name="newPasswordConfirm" placeholder="confirm password" required ngModel
-                   confirmEqualValidator="password"
-                   #newPasswordConfirm="ngModel">
+            <span class="help-block" style="color:red;"
+                  *ngIf="newPasswordConfirm.errors?.required && newPasswordConfirm.touched">Please enter a value</span>
+            <span class="help-block" style="color:red;"
+                  *ngIf="newPasswordConfirm.value != '' && newPasswordConfirm.errors?.compare">passwords do not match</span>
           </div>
-          <span class="help-block" style="color:red;"
-                *ngIf="newPasswordConfirm.errors?.required && newPasswordConfirm.touched">Please enter a value</span>
-          <span class="help-block" style="color:red;"
-                *ngIf="newPasswordConfirm.value != '' && newPasswordConfirm.errors?.compare">passwords do not match</span>
+          <div class="form-group">
+            <re-captcha
+              (resolved)="resolved($event)"
+              (error)="onError($event)"
+              errorMode="handled"
+              siteKey="6Ld5pAIbAAAAAEI4mYIibxu-VGnqLtMXikYkR7sc"
+            ></re-captcha>
+          </div>
+          <button [disabled]="registerForm.invalid || showLoading || !recaptchaValid" type="submit" name="button" class="btn btn-primary border-dark">
+            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="showLoading">Loading...</span>
+            <span *ngIf="!showLoading">Register</span>
+          </button>
+        </form>
+        <div class="text-center">
+          Already have an account? <a routerLink="/login" class="ml-2">Log In</a>
         </div>
-        <div class="form-group">
-          <re-captcha
-            (resolved)="resolved($event)"
-            (error)="onError($event)"
-            errorMode="handled"
-            siteKey="6Ld5pAIbAAAAAEI4mYIibxu-VGnqLtMXikYkR7sc"
-          ></re-captcha>
-        </div>
-        <button [disabled]="registerForm.invalid || showLoading || !recaptchaValid" type="submit" name="button" class="btn btn-primary">
-          <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>
-          <span *ngIf="showLoading">Loading...</span>
-          <span *ngIf="!showLoading">Register</span>
-        </button>
-      </form>
-      <div class="text-center">
-        Already have an account? <a routerLink="/login" class="ml-2">Log In</a>
       </div>
     </div>
   </div>
-</div>
+<div>

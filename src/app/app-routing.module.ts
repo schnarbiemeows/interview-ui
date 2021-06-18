@@ -4,12 +4,9 @@ import { LoginComponent } from './components/login/login.component';
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { RegisterComponent } from './components/register/register.component';
 import { InterviewUserComponent } from './components/interviewuser/interviewuser.component';
-import { QuestionCategoryComponent } from './components/questioncategory/questioncategory.component';
-import { QuestionLevelComponent } from './components/questionlevel/questionlevel.component';
-import { AnswerComponent } from './components/answer/answer.component';
-import { QuestionComponent } from './components/question/question.component';
+import { CategoriesAndLevelsComponent } from './components/categoriesandlevels/categories-and-levels.component';
+import { QuestionsAndAnswersComponent } from './components/questionsandanswers/questions-and-answers.component';
 import {AdminGuard} from "./guards/admin.guard";
-import {NavbarComponent} from "./components/navbar/navbar.component";
 import {UserinfoGuard} from "./guards/userinfo.guard";
 import {UserinfoComponent} from "./components/userinfo/userinfo.component";
 import {ConfirmEmailComponent} from "./components/confirmemail/confirmemail.component";
@@ -31,10 +28,8 @@ const routes: Routes = [
 { path: 'userinfo', component: UserinfoComponent },
 { path: 'about', component: AboutComponent },
 { path: 'interviewuser', component: InterviewUserComponent, canActivate: [AdminGuard] },
-{ path: 'questioncategory', component: QuestionCategoryComponent, canActivate: [AdminGuard] },
-{ path: 'questionlevel', component: QuestionLevelComponent, canActivate: [AdminGuard] },
-{ path: 'answer', component: AnswerComponent, canActivate: [AdminGuard] },
-{ path: 'question', component: QuestionComponent, canActivate: [AdminGuard] },
+{ path: 'categories-and-levels', component: CategoriesAndLevelsComponent, canActivate: [AdminGuard] },
+{ path: 'questions-and-answers', component: QuestionsAndAnswersComponent, canActivate: [AdminGuard] },
 { path: '', redirectTo: '/mainpage', pathMatch: 'full' }
 ];
 

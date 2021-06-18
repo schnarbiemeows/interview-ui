@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { environment } from '../../../environments/environment';
 import { ResponseMessage } from '../../models/ResponseMessage';
 import { QuestionDTO } from '../../models/QuestionDTO';
-import {QuestionAnswerItemDTO} from "../../models/QuestionAnswerItemDTO";
+import { QuestionAnswerItemDTO } from "../../models/QuestionAnswerItemDTO";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

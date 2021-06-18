@@ -12,8 +12,7 @@ import {ChangePasswordForm} from "../../userinfo/userinfo.component";
 
 @Component({
   selector: 'app-passwordreset',
-  templateUrl: './passwordreset.component.html',
-  styleUrls: ['./passwordreset.component.css']
+  templateUrl: './passwordreset.component.html'
 })
 export class PasswordResetComponent implements OnInit, OnDestroy {
 

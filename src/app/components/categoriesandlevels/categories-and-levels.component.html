@@ -1,11 +1,10 @@
-<div class="container-fluid border rounded" name="container2">
+<header-nav></header-nav>
+<div class="container-fluid border rounded">
   <div class="row">
-    <div class="col col-sm-4 mh-100">
-    </div>
     <!-------------------------------------------- LEVELS ------------------------------------------------------------->
-    <div class="col col-sm-4 mh-100">
+    <div class="col col-4 offset-1">
       <div class="card bg-secondary border-info">
-        <h2 class="text-center">Levels</h2>
+        <h2 class="card-header text-center">Levels</h2>
       </div>
       <h4 *ngIf="!loadedLevel">Loading Levels...</h4>
       <div *ngIf="loadedLevel">
@@ -18,34 +17,34 @@
         </div>
         <div class="card border-info"> <!-- table section -->
           <div class="card-body table-responsive">
-            <table class="table-sm table-bordered table-hover rounded">
+            <table class="table table-bordered table-hover rounded">
               <thead>
-              <tr>
-                <th>
+              <tr class="d-flex">
+                <th class="col-6 text-center">
                   <text class="text-size-10 p-3">Level</text>
                 </th>
-                <th *ngIf="isAdmin">
+                <th *ngIf="isAdmin" class="col-3 text-center">
                   <text class="text-size-8 p-3">Edit Item</text>
                 </th>
-                <th *ngIf="isSuper">
-                  <text class="text-size-8 p-3">Delete Item</text>
+                <th *ngIf="isSuper" class="col-3 text-center">
+                  <text class="text-size-8 p-2">Delete Item</text>
                 </th>
               </tr>
               </thead>
               <tbody
                 *ngFor="let dto of questionlevellist; let i = index">
-              <tr class="a">
+              <tr class="d-flex">
                 <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
-                <td>
+                <td class="col-6 text-center">
                   <text class="text-size-6">{{dto.questionLevelDesc}}</text>
                 </td>
-                <td *ngIf="isAdmin">
+                <td *ngIf="isAdmin" class="col-3 text-center">
                   <button class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
                           (click)="editLevelItem(i + (pl-1)*itemsPerPage)">
                     <span class="fas fa-edit" style="color:red"></span>
                   </button>
                 </td>
-                <td *ngIf="isSuper">
+                <td *ngIf="isSuper" class="col-3 text-center">
                   <button class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
                           (click)="deleteLevelItem(i + (pl-1)*itemsPerPage)">
                     <span class="fas fa-trash" style="color:blue"></span>
@@ -71,17 +70,17 @@
             </div>
             <button *ngIf="addModeLevel || editModeLevel" [disabled]="QuestionLevel.invalid"
                     (click)="saveResultsLevel()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeLevel || editModeLevel" (click)="reloadLevel()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>
     </div>
     <!-------------------------------------------- CATEGORIES ------------------------------------------------------------->
-    <div class="col col-sm-4 mh-100">
+    <div class="col col-5 offset-1">
       <div class="card bg-secondary border-info">
-        <h2 class="text-center">Categories</h2>
+        <h2 class="card-header text-center">Categories</h2>
       </div>
       <h4 *ngIf="!loadedCategory">Loading Categories...</h4>
       <div *ngIf="loadedCategory">
@@ -96,34 +95,40 @@
         <!--</div>-->
         <div class="card border-info"> <!-- table section -->
           <div class="card-body table-responsive">
-            <table class="table-sm table-bordered table-hover rounded">
+            <table class="table table-bordered table-hover rounded">
               <thead>
-              <tr>
-                <th>
+              <tr class="d-flex">
+                <th class="col-6 text-center">
                   <text class="text-size-10 p-3">Category</text>
                 </th>
-                <th *ngIf="isAdmin">
-                  <text class="text-size-8 p-3">Edit Item</text>
+                <th class="col-2 text-center">
+                  <text class="text-size-8 p-3">Display</text>
                 </th>
-                <th *ngIf="isSuper">
-                  <text class="text-size-8 p-3">Delete Item</text>
+                <th *ngIf="isAdmin" class="col-2 text-center">
+                  <text class="text-size-6 p-2">Edit Item</text>
+                </th>
+                <th *ngIf="isSuper" class="col-2 text-center">
+                  <text class="text-size-6 p-1">Delete Item</text>
                 </th>
               </tr>
               </thead>
               <tbody
                 *ngFor="let dto of questioncategorylist | paginate: { itemsPerPage: 10, currentPage: pc }; let i = index">
-              <tr class="a">
+              <tr class="d-flex">
                 <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
-                <td>
+                <td class="col-6">
                   <text class="text-size-6">{{dto.questionCategoryDesc}}</text>
                 </td>
-                <td *ngIf="isAdmin">
+                <td class="col-2 text-center">
+                  <text class="text-size-6">{{dto.displayCde}}</text>
+                </td>
+                <td *ngIf="isAdmin" class="col-2 text-center">
                   <button class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
                           (click)="editCategoryItem(i + (pc-1)*itemsPerPage)">
                     <span class="fas fa-edit" style="color:red"></span>
                   </button>
                 </td>
-                <td *ngIf="isSuper">
+                <td *ngIf="isSuper" class="col-2 text-center">
                   <button class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
                           (click)="deleteCategoryItem(i + (pc-1)*itemsPerPage)">
                     <span class="fas fa-trash" style="color:blue"></span>
@@ -152,11 +157,17 @@
                      name="questionCategoryDesc" #questionCategoryDesc="ngModel"
                      maxlength=100>
             </div>
+            <div class="form-group">
+              <label>Display</label>
+              <input type="text" class="form-control" [(ngModel)]="questioncategory.displayCde"
+                     name="displayCde" #displayCde="ngModel"
+                     maxlength=1>
+            </div>
             <button *ngIf="addModeCategory || editModeCategory" [disabled]="QuestionCategory.invalid"
                     (click)="saveResultsCategory()"
-                    class="btn btn-sm btn-success text-white m-3 p-3 ">{{this.saveChangesMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.saveChangesMsg}}</button>
             <button *ngIf="addModeCategory || editModeCategory" (click)="reloadCategory()"
-                    class="btn btn-sm btn-danger text-white m-3 p-3">{{this.cancelMsg}}</button>
+                    class="btn btn-sm btn-primary text-white m-3 p-2">{{this.cancelMsg}}</button>
           </form>
         </div>
       </div>

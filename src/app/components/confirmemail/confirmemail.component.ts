@@ -11,8 +11,7 @@ import {NotificationService} from "../../services/notification/notification.serv
 
 @Component({
   selector: 'app-confirmemail',
-  templateUrl: './confirmemail.component.html',
-  styleUrls: ['./confirmemail.component.css']
+  templateUrl: './confirmemail.component.html'
 })
 export class ConfirmEmailComponent implements OnInit, OnDestroy {
 
