@@ -207,7 +207,10 @@ export class MainpageComponent implements OnInit, OnDestroy {
   }
 
   public get isAdmin(): boolean {
-    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    if(this.isUserLoggedIn()) {
+      return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    }
+   return false;
   }
 
   public get isSuper(): boolean {
