@@ -24,7 +24,7 @@ const routes: Routes = [
 { path: 'confirmemail/:code', component: ConfirmEmailComponent},
 { path: 'registeremailsent/:email', component: RegisterEmailSentComponent},
 { path: 'passwordreset/:code', component: PasswordResetComponent},
-{ path: 'maincontent', component: RegisterComponent },
+{ path: 'maincontent', component: RegisterComponent }, /* is this a mistake? */
 { path: 'userinfo', component: UserinfoComponent },
 { path: 'about', component: AboutComponent },
 { path: 'interviewuser', component: InterviewUserComponent, canActivate: [AdminGuard] },
