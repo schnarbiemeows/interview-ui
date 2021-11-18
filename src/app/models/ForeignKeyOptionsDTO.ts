@@ -1,4 +1,4 @@
 export class ForeignKeyOptionsDTO {
-	value: any;
+	value: number;
 	viewValue: any;
 }

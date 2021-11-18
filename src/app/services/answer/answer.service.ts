@@ -10,7 +10,9 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AnswerService {
   host = environment.apiUrl;
 	getAllAnswerURL : string = `${this.host}/answer/all`;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { environment } from '../../../environments/environment';
 import { ResponseMessage } from '../../models/ResponseMessage';
 import { QuestionDTO } from '../../models/QuestionDTO';
@@ -11,7 +10,9 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class QuestionService {
   host = environment.apiUrl;
 	getAllQuestionURL : string = `${this.host}/question/all`;

@@ -9,6 +9,7 @@ export class QuestionAnswerItemDTO {
   answerId?: number;
   questionTxt?: string;
   answerTxt?: string;
+  evntOperId?: string;
 
   constructor() {
     this.questionId = null;
