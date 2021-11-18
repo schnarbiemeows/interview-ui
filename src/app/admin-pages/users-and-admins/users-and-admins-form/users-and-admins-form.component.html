@@ -1,0 +1,62 @@
+<h2 *ngIf="addMode">Add User</h2>
+<h2 *ngIf="editMode">Edit User</h2>
+<form (submit)="onSubmit($event)" #InterviewUser="ngForm">
+  <div class="form-group">
+    <label>roles</label>
+    <select class="form-control" [(ngModel)]="item.roles" name="roles" #roles="ngModel" required>
+      <option value="ROLE_BASIC_USER">USER</option>
+      <option value="ROLE_ADV_USER">ADV_USER</option>
+      <option value="ROLE_PREMIUM_USER">PREMIUM_USER</option>
+      <option value="ROLE_ADMIN">ADMIN</option>
+      <option value="ROLE_SUPER">SUPER ADMIN</option>
+    </select>
+    <label>firstName</label>
+    <input type="text" class="form-control" [(ngModel)]="item.firstName" name="firstName"
+           #firstName="ngModel" required NgModel
+           maxlength=255 >
+    <label>lastName</label>
+    <input type="text" class="form-control" [(ngModel)]="item.lastName" name="lastName"
+           #lastName="ngModel" required NgModel
+           maxlength=255 >
+    <label>userName</label>
+    <input type="text" class="form-control" [(ngModel)]="item.newUserName" name="userName"
+           #userName="ngModel" required NgModel
+           maxlength=255 >
+    <label>password</label>
+    <input type="text" class="form-control" [(ngModel)]="item.password" name="password"
+           #password="ngModel" required NgModel
+           maxlength=255 >
+    <label>emailAddr</label>
+    <input type="text" class="form-control" [(ngModel)]="item.emailAddr" name="emailAddr"
+           #emailAddr="ngModel" required NgModel
+           maxlength=255 >
+    <label>userActive</label>
+    <div class="col col-sm-4">
+      <select class="form-control border-info text-center"
+              [(ngModel)]="item.userActive"
+              required NgModel
+              name="userActive_dropdown">
+        <option [value]="true">true</option>
+        <option [value]="false">false</option>
+      </select>
+    </div>
+    <label>userNotLocked</label>
+    <div class="col col-sm-4">
+      <select class="form-control border-info text-center"
+              [(ngModel)]="item.userNotLocked"
+              required NgModel
+              name="userNotLocked_dropdown">
+        <option [value]="true">true</option>
+        <option [value]="false">false</option>
+      </select>
+    </div>
+    <!--<label>profileImage</label>
+    <input type="text" class="form-control" [(ngModel)]="interviewuser.profileImage" name="profileImage" #profileImage="ngModel"
+      maxlength=255
+    >-->
+  </div>
+  <button *ngIf="addMode || editMode" [disabled]="InterviewUser.invalid" (click)="saveAddOrEdit()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Save Changes</button>
+  <button *ngIf="addMode || editMode" (click)="cancel()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Cancel</button>
+</form>

@@ -1,0 +1,56 @@
+<header-nav></header-nav>
+<div class="container-fluid border rounded">
+  <div class="row">
+    <div class="col col-3">
+      <app-filter-questions-and-answers
+        [totalQuestions]="totalQuestions"
+        [questioncategorylist]="questioncategorylist"
+        [questionlevellist]="questionlevellist"
+        [filterCategoryValue]="filterCategoryValue"
+        [filterDifficultyValue]="filterDifficultyValue"
+        [editMode]="editMode"
+        [addMode]="addMode"
+        (filterParams)="filter($event)"
+        (reset)="resetFullList()"></app-filter-questions-and-answers>
+    </div>
+    <div class="col col-9">
+      <div class="card bg-secondary border-info">
+        <h2 class="text-center">Questions and Answers</h2>
+      </div>
+      <h4 *ngIf="!loaded">Loading Question...</h4>
+      <div *ngIf="loaded">
+        <!-- search question level -->
+        <app-search
+          [placeholder]="sqlSrchMsg"
+          (searchTerm)="search($event)"
+        ></app-search>
+        <app-questions-and-answers-list
+          [questionAnswerList]="questionAnswerlist"
+          [paginationDisabled]="paginationDisabled"
+          [isAdmin]="isAdmin"
+          [isSuper]="isSuper"
+          [editMode]="editMode"
+          [addMode]="addMode"
+          (relayEdit)="editItem($event)"
+          (relayDelete)="deleteItem($event)"
+        ></app-questions-and-answers-list>
+      </div>
+      <div *ngIf="isAdmin">
+        <button *ngIf="!editMode && !addMode" (click)="initiateAdd()"
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">Add Question</button>
+        <div class="card card-body m-3" *ngIf="showForm">
+          <app-questions-and-answers-form
+            [item]="questionAnswerItem"
+            [questioncategorylist]="questionCategoryFormList"
+            [questionlevellist]="questionLevelFormList"
+            [editMode]="editMode"
+            [addMode]="addMode"
+            (cancelAction)="receiveFormCancel()"
+            (saveAdd)="receiveFormSaveAdd($event)"
+            (saveEdit)="receiveFormSaveEdit($event)"
+          ></app-questions-and-answers-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

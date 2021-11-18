@@ -1,0 +1,21 @@
+<div class="d-flex d-block table-responsive">
+  <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+  <td class="col-5 text-center" >
+    <div class="text-size-6 p-1" >{{item.questionTxt}}</div>
+  </td>
+  <td class="col-5 text-center" >
+    <div class="text-size-6 p-1" >{{item.answerTxt}}</div>
+  </td>
+  <td class="col-1 text-center" *ngIf="isAdmin">
+    <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+            (click)="editItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-edit" style="color:red"></span>
+    </button>
+  </td>
+  <td class="col-1 text-center" *ngIf="isSuper">
+    <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+            (click)="deleteItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-trash" style="color:blue"></span>
+    </button>
+  </td>
+</div>

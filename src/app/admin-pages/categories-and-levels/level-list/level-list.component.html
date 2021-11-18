@@ -1,0 +1,33 @@
+<div class="card border-info">
+<div class="card-body table-responsive">
+  <table class="table table-bordered table-hover rounded">
+    <thead>
+    <tr class="d-flex">
+      <th class="col-6 text-center">
+        <div class="text-size-10 p-3">Level</div>
+      </th>
+      <th *ngIf="isAdmin" class="col-3 text-center">
+        <div class="text-size-8 p-1 pt-3">Edit Item</div>
+      </th>
+      <th *ngIf="isSuper" class="col-3 text-center">
+        <div class="text-size-8 p-1 pt-3">Delete Item</div>
+      </th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let dto of levelList; let i = index">
+      <app-level-list-item
+        [i]="i"
+        [item]="dto"
+        [addModeCategory]="addModeCategory"
+        [addModeLevel]="addModeLevel"
+        [editModeCategory]="editModeCategory"
+        [editModeLevel]="editModeLevel"
+        [isAdmin]="isAdmin"
+        [isSuper]="isSuper"
+        (onEdit)="receiveAndRelayEdit($event)"
+        (onDelete)="receiveAndRelayDelete($event)"
+      ></app-level-list-item>
+    </tbody>
+  </table>
+</div>
+</div>

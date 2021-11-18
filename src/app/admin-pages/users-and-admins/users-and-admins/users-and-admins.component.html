@@ -1,0 +1,48 @@
+<header-nav></header-nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-11">
+      <div class="card bg-secondary border-info">
+        <h2 class="text-center">Customers & Administrators</h2>
+      </div>
+      <h4 *ngIf="!loaded">Loading Customers & Administrators...</h4>
+      <div *ngIf="loaded">
+        <!-- search interview users -->
+        <app-search
+          [placeholder]="sqlSrchMsg"
+          (searchTerm)="search($event)"
+        ></app-search>
+        <app-users-and-admins-list
+          [inteviewUserList]="userlist"
+          [paginationDisabled]="paginationDisabled"
+          [isAdmin]="isAdmin"
+          [isSuper]="isSuper"
+          [editMode]="editMode"
+          [addMode]="addMode"
+          (relayEdit)="editItem($event)"
+          (relayDelete)="deleteItem($event)"
+        ></app-users-and-admins-list>
+      </div>
+      <div>
+        <button *ngIf="!editMode && !addMode" (click)="initiateAdd()"
+                class="btn btn-sm btn-primary text-white m-3 p-2 ">Add User</button>
+        <div class="card card-body m-3" *ngIf="showForm">
+          <app-users-and-admins-form
+          [item]="userItem"
+          [editMode]="editMode"
+          [addMode]="addMode"
+          (cancelAction)="receiveFormCancel()"
+          (saveAdd)="receiveFormSaveAdd($event)"
+          (saveEdit)="receiveFormSaveEdit($event)"
+          ></app-users-and-admins-form>
+        </div>
+      </div>
+    </div>
+    <div class="col col-1 justify-content-lg-end">
+      <app-users-and-admins-sidebar
+        (filterEvent)="receiveFilterRequest($event)">
+      </app-users-and-admins-sidebar>
+
+    </div>
+  </div>
+</div>

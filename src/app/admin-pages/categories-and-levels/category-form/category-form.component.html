@@ -1,0 +1,21 @@
+<h2 *ngIf="addModeCategory">Add Category</h2>
+<h2 *ngIf="editModeCategory">Edit Category</h2>
+<form (submit)="onSubmit($event)" #QuestionCategory="ngForm">
+  <div class="form-group">
+    <label>Category Description</label>
+    <input type="text" class="form-control" [(ngModel)]="item.questionCategoryDesc"
+           name="questionCategoryDesc" #questionCategoryDesc="ngModel" required ngModel
+           maxlength=100>
+  </div>
+  <div class="form-group">
+    <label>Display</label>
+    <input type="text" class="form-control" [(ngModel)]="item.displayCde"
+           name="displayCde" #displayCde="ngModel" required ngModel
+           maxlength=1>
+  </div>
+  <button *ngIf="addModeCategory || editModeCategory" [disabled]="QuestionCategory.invalid"
+          (click)="saveAddOrEdit()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Save Changes</button>
+  <button *ngIf="addModeCategory || editModeCategory" (click)="cancel()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Cancel</button>
+</form>

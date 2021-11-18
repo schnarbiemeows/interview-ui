@@ -1,0 +1,54 @@
+<h2 *ngIf="addMode">Add Question/Answer</h2>
+<h2 *ngIf="editMode">Edit Question/Answer</h2>
+<form (submit)="onSubmit($event)" #Question="ngForm">
+  <div class="form-group">
+    <div class="row my-2">
+      <div class="col col-sm-4">
+        <label>Category:</label>
+        <select class="form-control border-info text-center"
+                [(ngModel)]="item.questionCategoryId"
+                required ngModel
+                name="questionCategoryId_dropdown">
+          <option *ngFor="let option of questioncategorylist" [value]="option.value">
+            {{ option.viewValue }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col col-sm-4">
+        <label>Difficulty:</label>
+        <select class="form-control border-info text-center"
+                [(ngModel)]="item.questionLevelId"
+                required ngModel
+                name="questionLevelId_dropdown">
+          <option *ngFor="let option of questionlevellist" [value]="option.value">
+            {{ option.viewValue }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col">
+          <label>Question:</label>
+          <input type="text" class="form-control" required ngModel
+                 [(ngModel)]="item.questionTxt" name="questionTxt"
+                 #questionTxt="ngModel"
+                 maxlength=256 >
+        </div>
+    </div>
+    <div class="row my-2">
+      <div class="col col-sm-4">
+        <label>Answer:</label>
+        <textarea rows="10" class="form-control" required ngModel
+                  [(ngModel)]="item.answerTxt" name="answerTxt"
+                  #answerTxt="ngModel"
+                  maxlength=2048></textarea>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="addMode || editMode" [disabled]="Question.invalid" (click)="saveAddOrEdit()"
+          class="btn btn-sm btn-success text-white m-3 p-3 ">Save Changes</button>
+  <button *ngIf="addMode || editMode" (click)="cancel()"
+          class="btn btn-sm btn-danger text-white m-3 p-3 ">Cancel</button>
+</form>

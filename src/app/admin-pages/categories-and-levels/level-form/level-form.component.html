@@ -1,0 +1,15 @@
+<h2 *ngIf="addModeLevel">Add Difficulty Level</h2>
+<h2 *ngIf="editModeLevel">Edit Difficulty Level</h2>
+<form (submit)="onSubmit($event)" #QuestionLevel="ngForm">
+  <div class="form-group">
+    <label>Level Description</label>
+    <input type="text" class="form-control" [(ngModel)]="item.questionLevelDesc"
+           name="questionLevelDesc" #questionLevelDesc="ngModel" required ngModel
+           maxlength="100">
+  </div>
+  <button *ngIf="addModeLevel || editModeLevel" [disabled]="QuestionLevel.invalid"
+          (click)="saveAddOrEdit()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Save Changes</button>
+  <button *ngIf="addModeLevel || editModeLevel" (click)="cancel()"
+          class="btn btn-sm btn-primary text-white m-3 p-2">Cancel</button>
+</form>

@@ -1,0 +1,18 @@
+<tr class="d-flex">
+  <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+  <td class="col-6 text-center">
+    <div class="text-size-6">{{item.questionLevelDesc}}</div>
+  </td>
+  <td *ngIf="isAdmin" class="col-3 text-center">
+    <button id="btn1" class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
+            (click)="editLevelItem(i)">
+      <span class="fas fa-edit" style="color:red"></span>
+    </button>
+  </td>
+  <td *ngIf="isSuper" class="col-3 text-center">
+    <button id="btn2" class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
+            (click)="deleteLevelItem(i)">
+      <span class="fas fa-trash" style="color:blue"></span>
+    </button>
+  </td>
+</tr>

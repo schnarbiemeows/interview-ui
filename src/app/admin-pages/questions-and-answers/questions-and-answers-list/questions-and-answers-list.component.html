@@ -1,0 +1,43 @@
+<div class="card border-info"> <!-- table section -->
+  <div class="card-body table-responsive">
+    <table class="table-sm table-bordered table-hover table-responsive rounded">
+      <thead class="d-flex d-block">
+      <!--<tr class="d-flex d-block">-->
+        <th class="col-5 text-center">
+          <div class="text-size-10 p-3" >Question</div>
+        </th>
+        <th class="col-5 text-center">
+          <div class="text-size-10 p-3" >Answer</div>
+        </th>
+        <th class="col-1 text-center" *ngIf="isAdmin">
+          <div class="text-size-8 p-1 pt-3">Edit Item</div>
+        </th>
+        <th class="col-1 text-center" *ngIf="isSuper">
+          <div class="text-size-8 p-1 pt-3" >Delete Item</div>
+        </th>
+      <!--</tr>-->
+      </thead>
+      <tbody class="table-responsive">
+        <tr class="table-responsive"
+            *ngFor="let dto of questionAnswerList | paginate: { itemsPerPage: 10, currentPage: pc }; let i = index">
+          <app-questions-and-answers-list-item
+            [i]="i"
+            [item]="dto"
+            [pc]="pc"
+            [addMode]="addMode"
+            [editMode]="editMode"
+            [isAdmin]="isAdmin"
+            [isSuper]="isSuper"
+            (onEdit)="receiveAndRelayEdit($event)"
+            (onDelete)="receiveAndRelayDelete($event)"
+          ></app-questions-and-answers-list-item>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card pagin">
+      <div class="card-body" *ngIf="!paginationDisabled">
+        <pagination-controls (pageChange)="pc = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

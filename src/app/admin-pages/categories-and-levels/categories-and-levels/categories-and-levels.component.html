@@ -1,0 +1,88 @@
+<header-nav></header-nav>
+<div class="row">
+  <!-------------------------------------------- LEVELS ------------------------------------------------------------->
+  <div class="col col-4 offset-1">
+    <div class="card bg-secondary border-info">
+      <h2 class="card-header text-center">Levels</h2>
+    </div>
+    <h4 *ngIf="!loadedLevel">Loading Levels...</h4>
+    <div *ngIf="loadedLevel">
+      <!-- search question level -->
+      <app-search
+        [placeholder]="sqlLvlSrchMsg"
+        (searchTerm)="searchLevel($event)"
+      ></app-search>
+      <app-level-list
+        [levelList]="questionlevellist"
+        [addModeCategory]="addCatgMode"
+        [addModeLevel]="addLvlMode"
+        [editModeCategory]="editCatgMode"
+        [editModeLevel]="editLvlMode"
+        [isAdmin]="isAdmin"
+        [isSuper]="isSuper"
+        (relayEdit)="receiveAndRelayInitiateEditLevel($event)"
+        (relayDelete)="receiveAndRelayDeleteLevel($event)"
+      ></app-level-list>
+      <div *ngIf="isAdmin">
+        <button *ngIf="!editLvlMode && !addLvlMode && !editCatgMode && !addCatgMode" (click)="initiateAddLevel()"
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">Add Difficulty Level</button>
+        <div class="card card-body m-3" *ngIf="showQuestionLevelForm">
+          <app-level-form
+            [item]="levelItem"
+            [addModeCategory]="addCatgMode"
+            [addModeLevel]="addLvlMode"
+            [editModeCategory]="editCatgMode"
+            [editModeLevel]="editLvlMode"
+            (saveAdd)="receiveLevelFormSaveAdd($event)"
+            (saveEdit)="receiveLevelFormSaveEdit($event)"
+            (cancelAction)="receiveLevelFormCancel($event)"
+          ></app-level-form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------- CATEGORIES ------------------------------------------------------------->
+  <div class="col col-5 offset-1">
+    <div class="card bg-secondary border-info">
+      <h2 class="card-header text-center">Categories</h2>
+    </div>
+    <h4 *ngIf="!loadedCategory">Loading Categories...</h4>
+    <div *ngIf="loadedCategory">
+      <!-- search question category -->
+      <app-search
+        [placeholder]="sqlCatgSrchMsg"
+        (searchTerm)="searchCategory($event)"
+        ></app-search>
+      <app-category-list [categorylist]="questioncategorylist"
+         [addModeCategory]="addCatgMode"
+         [addModeLevel]="addLvlMode"
+         [editModeCategory]="editCatgMode"
+         [editModeLevel]="editLvlMode"
+         [isAdmin]="isAdmin"
+         [isSuper]="isSuper"
+         [paginationDisabledCategory]="paginationDisabledCategory"
+         (relayEdit)="receiveAndRelayInitiateEditCategory($event)"
+         (relayDelete)="receiveAndRelayDeleteCategory($event)"
+      ></app-category-list>
+      <div *ngIf="isAdmin">
+        <button *ngIf="!editLvlMode && !addLvlMode && !editCatgMode && !addCatgMode" (click)="initiateAddCategory()"
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">Add Category</button>
+
+        <div class="card card-body m-3" *ngIf="showQuestionCategoryForm">
+          <app-category-form
+            [item]="categoryItem"
+            [addModeCategory]="addCatgMode"
+            [addModeLevel]="addLvlMode"
+            [editModeCategory]="editCatgMode"
+            [editModeLevel]="editLvlMode"
+            (saveAdd)="receiveCategoryFormSaveAdd($event)"
+            (saveEdit)="receiveCategoryFormSaveEdit($event)"
+            (cancelAction)="receiveCategoryFormCancel($event)"
+          ></app-category-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+</div>

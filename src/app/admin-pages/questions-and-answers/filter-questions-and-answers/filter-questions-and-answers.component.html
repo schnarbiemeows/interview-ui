@@ -1,0 +1,38 @@
+
+  <div class="card border-info">
+    <h2 class="card-header text-center bg-secondary">Filter Q & A</h2>
+    <div class="card-body p-1">
+      <form (submit)="onSubmit($event)" #Filter="ngForm">
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select id="category" class="form-control border-info text-center" [disabled]="addMode || editMode"
+                  [(ngModel)]="filterCategoryValue"
+                  required
+                  name="questionCategoryId_dropdown">
+            <option *ngFor="let option of questioncategorylist" [value]="option.value">
+              {{ option.viewValue }}
+            </option>
+          </select>
+          <label for="level">Difficulty:</label>
+          <select id="level" class="form-control border-info text-center" [disabled]="addMode || editMode"
+                  [(ngModel)]="filterDifficultyValue"
+                  required
+                  name="questionLevelId_dropdown">
+            <option *ngFor="let option of questionlevellist" [value]="option.value">
+              {{ option.viewValue }}
+            </option>
+          </select>
+        </div>
+        <button (click)="filter()"
+                [disabled]="addMode || editMode"
+                class="btn btn-sm btn-primary text-white m-3 p-3">Filter</button>
+        <button (click)="resetFullList()"
+                [disabled]="addMode || editMode"
+                class="btn btn-sm btn-primary text-white m-3 p-3 ">View All</button>
+      </form>
+    </div>
+    <div class="card-footer bg-white">
+      <h3 class="text-center">Total Questions</h3>
+      <h3 class="text-center">{{this.totalQuestions}}</h3>
+    </div>
+  </div>

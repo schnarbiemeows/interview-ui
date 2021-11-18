@@ -1,0 +1,21 @@
+<tr class="d-flex">
+  <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+  <td class="col-6">
+    <div class="text-size-6">{{item.questionCategoryDesc}}</div>
+  </td>
+  <td class="col-2 text-center">
+    <div class="text-size-6">{{item.displayCde}}</div>
+  </td>
+  <td *ngIf="isAdmin" class="col-2 text-center">
+    <button id="btn1" class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
+            (click)="editCategoryItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-edit" style="color:red"></span>
+    </button>
+  </td>
+  <td *ngIf="isSuper" class="col-2 text-center">
+    <button id="btn2" class="btn-edit" type="submit" [disabled]="addModeCategory || editModeCategory || addModeLevel || editModeLevel"
+            (click)="deleteCategoryItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-trash" style="color:blue"></span>
+    </button>
+  </td>
+</tr>

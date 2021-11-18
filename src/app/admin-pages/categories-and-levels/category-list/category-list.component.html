@@ -1,0 +1,44 @@
+<div class="card border-info">
+  <div class="card-body table-responsive">
+    <table class="table table-bordered table-hover rounded">
+      <thead>
+      <tr class="d-flex">
+        <th class="col-6 text-center">
+          <div class="text-size-10 p-3">Category</div>
+        </th>
+        <th class="col-2 text-center">
+          <div class="text-size-8 p-3">Display</div>
+        </th>
+        <th *ngIf="isAdmin" class="col-2 text-center">
+          <div class="text-size-6 p-1 pt-3">Edit Item</div>
+        </th>
+        <th *ngIf="isSuper" class="col-2 text-center">
+          <div class="text-size-6 p-1 pt-3">Delete Item</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody
+        *ngFor="let dto of categorylist | paginate: { itemsPerPage: 10, currentPage: pc }; let i = index">
+        <app-category-list-item
+          [i]="i"
+          [item]="dto"
+          [pc]="pc"
+          [addModeCategory]="addModeCategory"
+          [addModeLevel]="addModeLevel"
+          [editModeCategory]="editModeCategory"
+          [editModeLevel]="editModeLevel"
+          [isAdmin]="isAdmin"
+          [isSuper]="isSuper"
+          (onEdit)="receiveAndRelayEdit($event)"
+          (onDelete)="receiveAndRelayDelete($event)"
+        >
+        </app-category-list-item>
+      </tbody>
+    </table>
+    <div class="card pagin">
+      <div class="card-body" *ngIf="!paginationDisabledCategory">
+        <pagination-controls (pageChange)="pc = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

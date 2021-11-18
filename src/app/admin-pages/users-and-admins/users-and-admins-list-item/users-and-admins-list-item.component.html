@@ -1,0 +1,39 @@
+<div class="d-flex d-block table-responsive">
+  <td [hidden]="alwaysHidden">{{ i + 1 }}</td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.firstName}}</div>
+  </td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.lastName}}</div>
+  </td>
+  <td class="col-2 text-center">
+    <div class="text-size-6 p-1" >{{item.emailAddr}}</div>
+  </td>
+  <td class="col-2 text-center">
+    <div class="text-size-6 p-1" >{{item.userName}}</div>
+  </td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.userIdentifier}}</div>
+  </td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.roles}}</div>
+  </td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.userActive}}</div>
+  </td>
+  <td class="col-1 text-center">
+    <div class="text-size-6 p-1" >{{item.userNotLocked}}</div>
+  </td>
+  <td class="col-1 text-center" *ngIf="isAdmin">
+    <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+            (click)="editItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-edit" style="color:red"></span>
+    </button>
+  </td>
+  <td class="col-1 text-center" *ngIf="isSuper">
+    <button class="btn-edit" type="submit" [disabled]="addMode || editMode"
+            (click)="deleteItem(i + (pc-1)*itemsPerPage)">
+      <span class="fas fa-trash" style="color:blue"></span>
+    </button>
+  </td>
+</div>
