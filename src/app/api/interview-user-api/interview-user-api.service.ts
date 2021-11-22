@@ -14,6 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class InterviewUserApiService {
+  testUsers:InterviewUserDTO[] = null;
   host = environment.apiUrl;
   getAllInterviewUserURL : string = `${this.host}/interviewuser/all`;
   findInterviewUserByIdURL : string = `${this.host}/interviewuser/findById/`;
@@ -21,8 +22,8 @@ export class InterviewUserApiService {
   updateInterviewUserURL : string = `${this.host}/interviewuser/update`;
   updateUserByUserURL : string = `${this.host}/interviewuser/updateuserbyuser`;
   deleteInterviewUserURL : string = `${this.host}/interviewuser/delete/`;
-  forgotPwdURL : string = `${this.host}/interviewuser/forgotpassword/`;
-  forgotUsernameURL : string = `${this.host}/interviewuser/forgotusername/`;
+  /*forgotPwdURL : string = `${this.host}/interviewuser/forgotpassword/`;
+  forgotUsernameURL : string = `${this.host}/interviewuser/forgotusername/`;*/
   constructor(private http: HttpClient) { }
 
   getAllInterviewUser(): Observable<InterviewUserDTO[]> {
@@ -43,11 +44,10 @@ export class InterviewUserApiService {
     return this.http.post<InterviewUserDTO>(this.updateUserByUserURL, data, httpOptions);
   }
   deleteInterviewUser(username: string): Observable<ResponseMessage> {
-    //let deleteInterviewUserURL_temp = this.deleteInterviewUserURL.replace("{id}",id.toString(10));
     return this.http.delete<ResponseMessage>(this.deleteInterviewUserURL+`${username}`, httpOptions);
   }
 
-  forgotPassword(email: string): Observable<CustomHttpRespone> {
+  /*forgotPassword(email: string): Observable<CustomHttpRespone> {
     return this.http.get<CustomHttpRespone>(this.forgotPwdURL+`${email}`);
   }
 
@@ -64,5 +64,5 @@ export class InterviewUserApiService {
       return JSON.parse(localStorage.getItem('users'));
     }
     return null;
-  }
+  }*/
 }

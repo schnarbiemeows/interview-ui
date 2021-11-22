@@ -4,15 +4,15 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { InterviewUserDTO } from '../../models/interviewuserDTO';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {QuestionCategoryDTO} from "../../models/QuestionCategoryDTO";
 import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
-import {CheckResetPasswordResponseDTO} from "../../models/CheckResetPasswordResponseDTO";
+import {CheckPasswordResetResponseDTO} from "../../models/CheckPasswordResetResponseDTO";
 import {PasswordResetDTO} from "../../models/PasswordResetDTO";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationApiService {
+  testUser:InterviewUserDTO = null;
   host = environment.apiUrl;
   token: string;
   loggedInUsername: string;
@@ -43,8 +43,8 @@ export class AuthenticationApiService {
     return this.http.post<any>(`${this.host}${this.resetPasswordURL}`, email);
   }
 
-  checkReset(code: string): Observable<CheckResetPasswordResponseDTO> {
-    return this.http.post<CheckResetPasswordResponseDTO>(`${this.host}${this.checkResetURL}`, code);
+  checkReset(code: string): Observable<CheckPasswordResetResponseDTO> {
+    return this.http.post<CheckPasswordResetResponseDTO>(`${this.host}${this.checkResetURL}`, code);
   }
 
   finalizeReset(dto: PasswordResetDTO): Observable<InterviewUserDTO> {

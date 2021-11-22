@@ -14,21 +14,16 @@ import {QuestionLevelApiService} from "../../api/question-level-api/question-lev
 import {QuestionLevelApiServiceStub} from "../../../testing/question-level-api-service-stub";
 import {AnswerService} from "../../services/answer/answer.service";
 import {AnswerServiceStub} from "../../../testing/answer-service-stub";
+import {FormsModule} from "@angular/forms";
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
   let fixture: ComponentFixture<MainPageComponent>;
   let httpTestingController: HttpTestingController;
-  let authService: AuthenticationServiceStub;
-  let notificationService: NotificationServiceStub;
-  let questionservice: QuestionServiceStub;
-  let questioncategoryservice: QuestionCategoryApiServiceStub;
-  let questionlevelservice: QuestionLevelApiServiceStub;
-  let answerservice: AnswerServiceStub;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule,FormsModule],
       declarations: [ MainPageComponent ],
       providers: [HttpTestingController,{ provide: NotificationService, useClass: NotificationServiceStub},
         { provide: AuthenticationService, useClass: AuthenticationServiceStub},
@@ -39,12 +34,6 @@ describe('MainPageComponent', () => {
     })
     .compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
-    authService = TestBed.inject(AuthenticationService) as AuthenticationServiceStub;
-    notificationService = TestBed.inject(NotificationService) as NotificationServiceStub;
-    questionservice = TestBed.inject(QuestionService) as QuestionServiceStub;
-    questioncategoryservice = TestBed.inject(QuestionCategoryApiService) as QuestionCategoryApiServiceStub;
-    questionlevelservice = TestBed.inject(QuestionLevelApiService) as QuestionLevelApiServiceStub;
-    answerservice = TestBed.inject(AnswerService) as AnswerServiceStub;
   });
 
   beforeEach(() => {

@@ -1,11 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CategoryListItemComponent } from './category-list-item.component';
 import {QuestionCategoryDTO} from "../../../models/QuestionCategoryDTO";
 import {Component} from "@angular/core";
-import {QuestionLevelDTO} from "../../../models/QuestionLevelDTO";
-import {LevelListItemComponent} from "../level-list-item/level-list-item.component";
-import {By} from "@angular/platform-browser";
 
 @Component({
   template: '<app-category-list-item\n' +
@@ -66,18 +62,15 @@ describe('CategoryListItemComponent', () => {
   });
 
   it('questionCategoryDesc and displayCde should have contents', () => {
-    // this works, I know
     const descriptionDisplay: HTMLElement = fixture.nativeElement.querySelectorAll('div')[0];
-    console.log("descriptionDisplay.textContent = " + descriptionDisplay.textContent);
     expect(descriptionDisplay.textContent).toBe(component.dto.questionCategoryDesc);
     const codeDisplay: HTMLElement = fixture.nativeElement.querySelectorAll('div')[1];
-    console.log("displayCde.textContent = " + codeDisplay.textContent);
     expect(codeDisplay.textContent).toBe(component.dto.displayCde);
   });
   it('both buttons should be disabled', () => {
-    let btn1disabled: boolean = fixture.debugElement.nativeElement.querySelector('#btn1').disabled;
+    let btn1disabled: boolean = fixture.debugElement.nativeElement.querySelectorAll('button')[0].disabled;
     expect(btn1disabled).toBeTrue();
-    let btn2disabled: boolean = fixture.debugElement.nativeElement.querySelector('#btn2').disabled;
+    let btn2disabled: boolean = fixture.debugElement.nativeElement.querySelectorAll('button')[1].disabled;
     expect(btn2disabled).toBeTrue();
   });
   it('both buttons should be enabled', () => {
@@ -86,9 +79,9 @@ describe('CategoryListItemComponent', () => {
     component.addModeLevel = false;
     component.editModeLevel = false;
     fixture.detectChanges();
-    const btn1disabled: boolean  = fixture.debugElement.nativeElement.querySelector('#btn1').disabled;
+    const btn1disabled: boolean  = fixture.debugElement.nativeElement.querySelectorAll('button')[0].disabled;
     expect(btn1disabled).toBeFalse();
-    const btn2disabled: boolean = fixture.debugElement.nativeElement.querySelector('#btn2').disabled;
+    const btn2disabled: boolean = fixture.debugElement.nativeElement.querySelectorAll('button')[1].disabled;
     expect(btn2disabled).toBeFalse();
   });
   it('first buttons should be visible, second one should not', () => {
@@ -99,10 +92,8 @@ describe('CategoryListItemComponent', () => {
     component.isAdmin = true;
     component.isSuper = false;
     fixture.detectChanges();
-    const btn1disabled = fixture.debugElement.query(By.css('#btn1'));
-    expect(btn1disabled).toBeTruthy();
-    const btn2disabled = fixture.debugElement.query(By.css('#btn2'));
-    expect(btn2disabled).toBeFalsy();
+    const btnlist = fixture.nativeElement.querySelectorAll('button');
+    expect(btnlist.length).toEqual(1);
   });
   it('click the first button', () => {
     component.addModeCategory = false;
@@ -110,7 +101,7 @@ describe('CategoryListItemComponent', () => {
     component.addModeLevel = false;
     component.editModeLevel = false;
     fixture.detectChanges();
-    const btn1: HTMLButtonElement = fixture.nativeElement.querySelector('#btn1');
+    const btn1: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[0];
     btn1.click();
     expect(component.isEdit).toBeTrue();
   });
@@ -120,7 +111,7 @@ describe('CategoryListItemComponent', () => {
     component.addModeLevel = false;
     component.editModeLevel = false;
     fixture.detectChanges();
-    const btn2: HTMLButtonElement = fixture.nativeElement.querySelector('#btn2');
+    const btn2: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[1];
     btn2.click();
     expect(component.isDelete).toBeTrue();
   });

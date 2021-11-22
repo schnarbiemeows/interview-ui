@@ -6,17 +6,16 @@ import {NotificationServiceStub} from "../../../testing/notification-service-stu
 import {HttpTestingController} from "@angular/common/http/testing";
 import {NotificationService} from "../../services/notification/notification.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {FormsModule} from "@angular/forms";
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
   let httpTestingController: HttpTestingController;
-  let authService: AuthenticationServiceStub;
-  let notificationService: NotificationServiceStub;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, FormsModule],
       declarations: [ LoginPageComponent ],
       providers: [HttpTestingController,
         { provide: NotificationService, useClass: NotificationServiceStub},
@@ -24,8 +23,6 @@ describe('LoginPageComponent', () => {
     })
     .compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
-    authService = TestBed.inject(AuthenticationService) as AuthenticationServiceStub;
-    notificationService = TestBed.inject(NotificationService) as NotificationServiceStub;
   });
 
   beforeEach(() => {

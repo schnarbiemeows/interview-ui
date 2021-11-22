@@ -1,17 +1,20 @@
 import {QuestionLevelDTO} from "../app/models/QuestionLevelDTO";
+import {BehaviorSubject, Subscription} from "rxjs";
 
 export class QuestionLevelServiceStub {
 
-  public changeLoaded(input: any) {
-    //this.loadedLevel.next(input);
-  }
-  public changeAddMode(input: any) {
-    //this.addModeLevel.next(input);
-  }
-
-  public changeEditMode(input: any) {
-    //this.editModeLevel.next(input);
-  }
+  private subscriptions: Subscription[] = [];
+  private loadedLevel = new BehaviorSubject<boolean>(false);
+  private addModeLevel = new BehaviorSubject<boolean>(false);
+  private editModeLevel = new BehaviorSubject<boolean>(false);
+  private showQuestionLevelForm = new BehaviorSubject<boolean>(false);
+  private questionlevellist = new BehaviorSubject<QuestionLevelDTO[]>(null);
+  private fullquestionlevellist: QuestionLevelDTO[]= [];
+  public loaded$ = this.loadedLevel.asObservable();
+  public addMode$ = this.addModeLevel.asObservable();
+  public editMode$ = this.editModeLevel.asObservable();
+  public showForm$ = this.showQuestionLevelForm.asObservable();
+  public questionlevellist$ = this.questionlevellist.asObservable();
 
   public changeShowForm(input: any) {
     //this.showQuestionLevelForm.next(input);

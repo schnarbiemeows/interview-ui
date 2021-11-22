@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
-import {QuestionCategoryDTO} from "../../models/QuestionCategoryDTO";
-import {QuestionCategoryApiService} from "../../api/question-category-api/question-category-api.service";
 import {QuestionLevelApiService} from "../../api/question-level-api/question-level-api.service";
 import {QuestionLevelDTO} from "../../models/QuestionLevelDTO";
 
@@ -29,17 +27,16 @@ export class QuestionLevelService {
   public showForm$ = this.showQuestionLevelForm.asObservable();
   public questionlevellist$ = this.questionlevellist.asObservable();
 
-
   constructor(private api: QuestionLevelApiService) { }
 
-  public changeLoaded(input: any) {
+  /*public changeLoaded(input: any) {
     this.loadedLevel.next(input);
-  }
-  public changeAddMode(input: any) {
+  }*/
+  private changeAddMode(input: any) {
     this.addModeLevel.next(input);
   }
 
-  public changeEditMode(input: any) {
+  private changeEditMode(input: any) {
     this.editModeLevel.next(input);
   }
 
@@ -62,12 +59,12 @@ export class QuestionLevelService {
   }
 
   public searchQuestionLevel(searchTerm: string): void {
-    const results: QuestionLevelDTO[] = [];
-    for (const questionlevel of this.fullquestionlevellist) {
+    const results: QuestionLevelDTO[] = this.fullquestionlevellist.filter(rec => !this.isNullOrUndefined(rec.questionLevelDesc) && rec.questionLevelDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+    /*for (const questionlevel of this.fullquestionlevellist) {
       if(!this.isNullOrUndefined(questionlevel.questionLevelDesc) && questionlevel.questionLevelDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
         results.push(questionlevel);
       }
-    }
+    }*/
     this.questionlevellist.next(results);
     if (results.length === 0 || !searchTerm) {
       this.questionlevellist.next(this.fullquestionlevellist);
@@ -86,7 +83,7 @@ export class QuestionLevelService {
     return this.levelItem;
   }
 
-  initiateEditLevelItem(i: number): QuestionLevelDTO {
+  public initiateEditLevelItem(i: number): QuestionLevelDTO {
     this.changeEditMode(true);
     this.levelItem = this.questionlevellist.getValue()[i];
     this.showQuestionLevelForm.next(true);
@@ -117,6 +114,7 @@ export class QuestionLevelService {
   }
 
   public destroy() {
+    console.log("calling the QuestionLevelService.destroy() method");
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 

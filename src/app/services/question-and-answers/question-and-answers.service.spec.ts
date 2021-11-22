@@ -4,14 +4,12 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 
 describe('QuestionAndAnswersService', () => {
   let service: QuestionAndAnswersService;
-  let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(QuestionAndAnswersService);
-    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {

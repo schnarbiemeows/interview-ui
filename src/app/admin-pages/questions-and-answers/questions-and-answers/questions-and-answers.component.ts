@@ -15,8 +15,8 @@ import {InterviewUserDTO} from "../../../models/InterviewUserDTO";
 @Component({
   selector: 'app-questions-and-answers2',
   templateUrl: './questions-and-answers.component.html',
-  styleUrls: ['./questions-and-answers.component.css'],
-  providers: [QuestionCategoryService, QuestionLevelService,QuestionAndAnswersService]
+  styleUrls: ['./questions-and-answers.component.css']
+  //providers: [QuestionCategoryService, QuestionLevelService,QuestionAndAnswersService]
 })
 export class QuestionsAndAnswersComponent implements OnInit {
 
@@ -36,9 +36,9 @@ export class QuestionsAndAnswersComponent implements OnInit {
    * this represents a record in the list, as well as the backing bean for the add/edit form
    */
   public questionAnswerItem: QuestionAnswerItemDTO;
-  public totalQuestions: number;
-  public filterCategoryValue: number;
-  public filterDifficultyValue: number;
+  public totalQuestions: number;  // for the filter
+  public filterCategoryValue: number; // for the filter
+  public filterDifficultyValue: number; // for the filter
   /**
    * 13 total Subscriptions
    */
@@ -157,15 +157,15 @@ export class QuestionsAndAnswersComponent implements OnInit {
   }
 
   public get isUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.USER;
   }
 
   public get isAdvUser(): boolean {
-    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.ADV_USER;
   }
 
   public get isPremUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.PREMIUM_USER;
   }
 
   public get isAdmin(): boolean {

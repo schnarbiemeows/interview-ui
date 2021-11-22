@@ -1,12 +1,34 @@
 import {QuestionCategoryDTO} from "../app/models/QuestionCategoryDTO";
 import {QuestionCategoryService} from "../app/services/questioncategory/question-category.service";
 import {Injectable} from "@angular/core";
+import {BehaviorSubject, Subscription} from "rxjs";
 
 
-@Injectable({
-  providedIn: 'root'
-})
+
 export class QuestionCategoryServiceStub {
+
+  private subscriptions: Subscription[] = [];
+  private categoryItem: QuestionCategoryDTO = {
+    questionCategoryId: null,
+    questionCategoryDesc: '',
+    evntTmestmp: null,
+    evntOperId: '',
+    displayCde: ''
+  };
+  private loadedCategory = new BehaviorSubject<boolean>(false);
+  private addModeCategory = new BehaviorSubject<boolean>(false);
+  private editModeCategory = new BehaviorSubject<boolean>(false);
+  private showQuestionCategoryForm = new BehaviorSubject<boolean>(false);
+  private questioncategorylist = new BehaviorSubject<QuestionCategoryDTO[]>(null);
+  private fullquestioncategorylist: QuestionCategoryDTO[] = [];
+  private paginationDisabledCategory = new BehaviorSubject<boolean>(false);
+  public loaded$ = this.loadedCategory.asObservable();
+  public addMode$ = this.addModeCategory.asObservable();
+  public editMode$ = this.editModeCategory.asObservable();
+  public showForm$ = this.showQuestionCategoryForm.asObservable();
+  public questioncategorylist$ = this.questioncategorylist.asObservable();
+  public paginationDisabled$ = this.paginationDisabledCategory.asObservable();
+
   public changeLoaded(input: any) {
     console.log("inside QuestionCategoryServiceStub.changeLoaded method");
   }

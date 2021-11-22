@@ -7,7 +7,6 @@ export class InterviewUserDTOWrapper {
 	newPassword?: string;
   newPasswordConfirm?: string;
   newUserName?: string;
-
   userId?: number;
   authorizations?: string[];
   emailAddr?: string;

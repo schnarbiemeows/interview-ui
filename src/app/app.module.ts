@@ -27,14 +27,11 @@ import {QuestionCategoryService} from "./services/questioncategory/question-cate
 import {QuestionLevelService} from "./services/questionlevel/question-level.service";
 import {InterviewUserService} from "./services/interviewuser/interview-user.service";
 import {AuthenticationService} from "./services/authentication/authentication.service";
-import {QuestionAndAnswersServiceStub} from "../testing/questions-and-answers-service-stub";
-import {TestMockComponent} from "./test-mock/test-mock.component";
-import {RealServiceService} from "./services/real-service.service";
+import {QuestionAndAnswersService} from "./services/question-and-answers/question-and-answers.service";
 
 @NgModule({
   declarations: [
 	  AppComponent,
-    TestMockComponent,
     ConfirmFieldsAreEqualDirective
   ],
   imports: [
@@ -49,13 +46,21 @@ import {RealServiceService} from "./services/real-service.service";
     SharedModule
   ],
 
-  providers: [QuestionService,QuestionApiService,
-    QuestionCategoryService, QuestionCategoryApiService,
-    AnswerService,AnswerApiService,
-    QuestionLevelService,QuestionLevelApiService,
-    InterviewUserService,InterviewUserApiService,
-    AuthenticationService,AuthenticationApiService,
-    NotificationService,RealServiceService,
+  providers: [
+    QuestionService,
+    QuestionApiService,
+    QuestionCategoryService,
+    QuestionCategoryApiService,
+    AnswerService,
+    AnswerApiService,
+    QuestionLevelService,
+    QuestionLevelApiService,
+    InterviewUserService,
+    InterviewUserApiService,
+    AuthenticationService,
+    AuthenticationApiService,
+    NotificationService,
+    QuestionAndAnswersService,
     AuthenticationGuard,AdminGuard,UserinfoGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })

@@ -3,7 +3,7 @@ import {InterviewUserDTO} from "../../models/InterviewUserDTO";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {AuthenticationApiService} from "../../api/authentication-api/authentication-api.service";
 import {Observable} from "rxjs";
-import {CheckResetPasswordResponseDTO} from "../../models/CheckResetPasswordResponseDTO";
+import {CheckPasswordResetResponseDTO} from "../../models/CheckPasswordResetResponseDTO";
 import {PasswordResetDTO} from "../../models/PasswordResetDTO";
 import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 import {HttpResponse} from "@angular/common/http";
@@ -37,7 +37,8 @@ export class AuthenticationService {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  getUserFromLocalCache(): InterviewUserDTO {
+  public getUserFromLocalCache(): InterviewUserDTO {
+    console.log("inside AuthenticationService.getUserFromLocalCache method");
     return JSON.parse(localStorage.getItem('user'));
   }
 
@@ -64,7 +65,7 @@ export class AuthenticationService {
     }
   }
 
-  checkReset(code: string): Observable<CheckResetPasswordResponseDTO> {
+  checkReset(code: string): Observable<CheckPasswordResetResponseDTO> {
     return this.api.checkReset(code);
   }
 

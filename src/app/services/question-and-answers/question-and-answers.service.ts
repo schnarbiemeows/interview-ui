@@ -54,10 +54,13 @@ export class QuestionAndAnswersService {
   constructor(private questionApi: QuestionApiService,
               private answerApi: AnswerApiService,
               private questionCategoryApi: QuestionCategoryApiService,
-              private questionLevelApi: QuestionLevelApiService) { }
+              private questionLevelApi: QuestionLevelApiService) {
+    console.log("inside the QuestionAndAnswersService constructor");
+  }
 
 
   public reload() {
+    console.log("inside the QuestionAndAnswersService.reload method");
     this.loaded.next(false);
     /**
      * load all of the questions
@@ -93,6 +96,7 @@ export class QuestionAndAnswersService {
   }
 
   public getCategories() {
+    console.log("inside the QuestionAndAnswersService.getCategories method");
     this.subscriptions.push(
       this.questionCategoryApi.getAllQuestionCategory().subscribe(questioncategorylist => {
         for (let entry of questioncategorylist) {
@@ -108,6 +112,7 @@ export class QuestionAndAnswersService {
   }
 
   public getLevels() {
+    console.log("inside the QuestionAndAnswersService.getLevels method");
     this.subscriptions.push(
       this.questionLevelApi.getAllQuestionLevel().subscribe(questionlevellist => {
         for (let entry of questionlevellist) {
@@ -123,6 +128,7 @@ export class QuestionAndAnswersService {
   }
 
   public initiateAdd(): QuestionAnswerItemDTO {
+    console.log("inside the QuestionAndAnswersService.initiateAdd method");
     this.editMode.next(false);
     this.addMode.next(true);
     this.showQuestionForm.next(true);
@@ -150,6 +156,7 @@ export class QuestionAndAnswersService {
   }
 
   public initiateEditItem(i: number): QuestionAnswerItemDTO {
+    console.log("inside the QuestionAndAnswersService.initiateEditItem method");
     this.editMode.next(true);
     this.paginationDisabled.next(true);
     this.showQuestionForm.next(true);
@@ -160,7 +167,7 @@ export class QuestionAndAnswersService {
   }
 
   public deleteItem(i: number) {
-    console.log("XXX inside stub + i = " + i);
+    console.log("inside the QuestionAndAnswersService.deleteItem method");
     this.subscriptions.push(
       this.questionApi.deleteQuestion(this.questionItemlist.getValue()[i].questionId).subscribe(response => {
         this.reload();
@@ -188,6 +195,7 @@ export class QuestionAndAnswersService {
   }
 
   public saveResults(questionAnswerItem: QuestionAnswerItemDTO) {
+    console.log("inside the QuestionAndAnswersService.saveResults method");
     if (this.addMode.getValue()) {
       this.subscriptions.push(
         this.questionApi.createQuestionAnswerPair(questionAnswerItem).subscribe(question => {
@@ -224,6 +232,7 @@ export class QuestionAndAnswersService {
   }
 
   public filter(params: FilterParamsDTO) {
+    console.log("inside the QuestionAndAnswersService.filter method");
     this.reFilter(params.filterCategoryValue, params.filterDifficultyValue);
   }
 
@@ -243,6 +252,7 @@ export class QuestionAndAnswersService {
   }
 
   public resetFullList() {
+    console.log("inside the QuestionAndAnswersService.resetFullList method");
     this.questionItemlist.next(this.fullquestionItemlist);
     this.totalQuestions.next(this.questionItemlist.getValue().length);
     this.filterCategoryValue.next(null);
@@ -254,6 +264,7 @@ export class QuestionAndAnswersService {
   }
 
   public destroy() {
+    console.log("inside the QuestionAndAnswersService.destroy method");
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

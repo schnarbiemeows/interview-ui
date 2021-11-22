@@ -9,6 +9,8 @@ import {QuestionCategoryServiceStub} from "../../../../testing/question-category
 import {QuestionLevelService} from "../../../services/questionlevel/question-level.service";
 import {QuestionLevelServiceStub} from "../../../../testing/question-level-service-stub";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {QuestionLevelDTO} from "../../../models/QuestionLevelDTO";
+import {QuestionCategoryDTO} from "../../../models/QuestionCategoryDTO";
 
 describe('CategoriesAndLevelsComponent', () => {
   let component: CategoriesAndLevelsComponent;
@@ -32,8 +34,6 @@ describe('CategoriesAndLevelsComponent', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
     authService = TestBed.inject(AuthenticationService) as AuthenticationServiceStub;
     notificationService = TestBed.inject(NotificationService) as NotificationServiceStub;
-    levelService = TestBed.inject(QuestionLevelService) as QuestionLevelServiceStub;
-    categoryService = TestBed.inject(QuestionCategoryService) as QuestionCategoryServiceStub;
   });
 
   beforeEach(() => {
@@ -43,6 +43,117 @@ describe('CategoriesAndLevelsComponent', () => {
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('should get isUser()', () => {
+    let torf = component.isUser;
+    //console.log("component. = " + component.)
+    expect(torf).toBeTrue();
+  });
+  it('should get isAdvUser()', () => {
+    let torf = component.isAdvUser;
+    expect(torf).toBeFalse();
+  });
+  it('should get isPremUser()', () => {
+    let torf = component.isPremUser;
+    expect(torf).toBeFalse();
+  });
+  it('should get isAdmin()', () => {
+    let torf = component.isAdmin;
+    expect(torf).toBeFalse();
+  });
+  it('should get isSuper()', () => {
+    let torf = component.isSuper;
+    expect(torf).toBeFalse();
+  });
+  it('should reloadCategory()', () => {
+    component.reloadCategory();
+    expect(component).toBeTruthy();
+  });
+  it('should reloadLevel()', () => {
+    component.reloadLevel();
+    expect(component).toBeTruthy();
+  });
+  it('should searchCategory()', () => {
+    component.searchCategory('params');
+    expect(component).toBeTruthy();
+  });
+  it('should searchLevel()', () => {
+    component.searchLevel('params');
+    expect(component).toBeTruthy();
+  });
+  it('should initiateAddCategory()', () => {
+    component.initiateAddCategory();
+    expect(component).toBeTruthy();
+  });
+  it('should initiateAddLevel()', () => {
+    component.initiateAddLevel();
+    expect(component).toBeTruthy();
+  });
+  it('should receiveAndRelayInitiateEditCategory()', () => {
+    component.receiveAndRelayInitiateEditCategory(0);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveAndRelayDeleteCategory()', () => {
+    component.receiveAndRelayDeleteCategory(0);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveAndRelayInitiateEditLevel()', () => {
+    component.receiveAndRelayInitiateEditLevel(0);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveAndRelayDeleteLevel()', () => {
+    component.receiveAndRelayDeleteLevel(0);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveLevelFormSaveAdd()', () => {
+    let item: QuestionLevelDTO = {
+      questionLevelId: 0,
+      questionLevelDesc: '',
+      evntTmestmp: null,
+      evntOperId: ''
+    };
+    component.receiveLevelFormSaveAdd(item);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveCategoryFormSaveAdd()', () => {
+    let item:QuestionCategoryDTO = {
+      questionCategoryId: 0,
+      questionCategoryDesc: '',
+      evntTmestmp: null,
+      evntOperId: '',
+      displayCde: ''
+    };
+    component.receiveCategoryFormSaveAdd(item);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveLevelFormSaveEdit()', () => {
+    let item: QuestionLevelDTO = {
+      questionLevelId: 0,
+      questionLevelDesc: '',
+      evntTmestmp: null,
+      evntOperId: ''
+    };
+    component.receiveLevelFormSaveEdit(item);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveCategoryFormSaveEdit()', () => {
+    let item:QuestionCategoryDTO = {
+      questionCategoryId: 0,
+      questionCategoryDesc: '',
+      evntTmestmp: null,
+      evntOperId: '',
+      displayCde: ''
+    };
+    component.receiveCategoryFormSaveEdit(item);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveLevelFormCancel()', () => {
+    component.receiveLevelFormCancel(null);
+    expect(component).toBeTruthy();
+  });
+  it('should receiveCategoryFormCancel()', () => {
+    component.receiveCategoryFormCancel(null);
     expect(component).toBeTruthy();
   });
 });

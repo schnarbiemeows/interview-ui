@@ -1,10 +1,6 @@
 export class ResponseMessage {
-
-    constructor(
-        private message: string
-    ){}
-
-    public get_message(): string {
-		return this.message;
-	}
+  public message:string;
+  constructor(message?: string) {
+    this.message = message;
+  }
 }

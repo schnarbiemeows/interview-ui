@@ -27,7 +27,6 @@ export class AnswerService {
 		return this.http.get<AnswerDTO[]>(this.getAllAnswerURL);
 	}
 	findAnswerById(id: number): Observable<AnswerDTO> {
-		//let findAnswerByIdURL_temp = this.findAnswerByIdURL.replace("{id}",id.toString(10));
 		return this.http.get<AnswerDTO>(this.findAnswerByIdURL+`${id}`);
 	}
 	createAnswer(data: AnswerDTO): Observable<AnswerDTO> {
@@ -37,7 +36,6 @@ export class AnswerService {
 		return this.http.post<AnswerDTO>(this.updateAnswerURL, data, httpOptions);
 	}
 	deleteAnswer(id: number): Observable<ResponseMessage> {
-		//let deleteAnswerURL_temp = this.deleteAnswerURL.replace("{id}",id.toString(10));
 		return this.http.delete<ResponseMessage>(this.deleteAnswerURL+`${id}`, httpOptions);
 	}
 

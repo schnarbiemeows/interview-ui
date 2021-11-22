@@ -65,12 +65,12 @@ export class QuestionCategoryService {
   }
 
   public searchQuestionCategory(searchTerm: string): void {
-    const results: QuestionCategoryDTO[] = [];
-    for (const questioncategory of this.fullquestioncategorylist) {
+    const results: QuestionCategoryDTO[] = this.fullquestioncategorylist.filter(rec => !this.isNullOrUndefined(rec.questionCategoryDesc) && rec.questionCategoryDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+    /*for (const questioncategory of this.fullquestioncategorylist) {
       if (!this.isNullOrUndefined(questioncategory.questionCategoryDesc) && questioncategory.questionCategoryDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
         results.push(questioncategory);
       }
-    }
+    }*/
     this.questioncategorylist.next(results);
     if (results.length === 0 || !searchTerm) {
       this.questioncategorylist.next(this.fullquestioncategorylist);

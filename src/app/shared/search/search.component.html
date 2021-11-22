@@ -1,6 +1,6 @@
 <div class="card border-info">
   <form class="form-inline my-2 my-lg-0 justify-content-right">
-    <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
+    <input id="searchTerm" name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
            (ngModelChange)="searchQuestionCategory(searchInput.value)"
            type="search" placeholder="{{placeholder}}">
   </form>

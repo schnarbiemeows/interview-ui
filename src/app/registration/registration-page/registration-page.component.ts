@@ -34,7 +34,6 @@ export class RegistrationPageComponent implements OnInit {
       this.authenticationService.postRecaptcha(googleObj).subscribe(
         (response: HttpResponse<any>) => {
           this.recaptchaValid = true;
-          console.log("IT WORKED!");
         },
         (errorResponse: any) => {
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);

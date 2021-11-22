@@ -116,7 +116,6 @@ export class InterviewUserService {
   }
 
   showAllUsers() {
-    const results: InterviewUserDTO[] = [];
     this.interviewuserlist.next(this.fullinterviewuserlist);
   }
 

@@ -77,15 +77,15 @@ export class AdminPageComponent implements OnInit {
     this.showAnswers = true;
   }
   public get isUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.USER;
   }
 
   public get isAdvUser(): boolean {
-    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.ADV_USER;
   }
 
   public get isPremUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.PREMIUM_USER;
   }
 
   public get isAdmin(): boolean {

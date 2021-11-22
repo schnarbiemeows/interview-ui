@@ -1,29 +1,46 @@
 import {Observable} from "rxjs/Observable";
 import {QuestionCategoryDTO} from "../app/models/QuestionCategoryDTO";
 import {ResponseMessage} from "../app/models/ResponseMessage";
+import {of} from "rxjs/observable/of";
 
 export class QuestionCategoryApiServiceStub {
 
+  categories:QuestionCategoryDTO[] = [{
+    questionCategoryId: 0,
+    questionCategoryDesc: "Java - Core",
+    evntTmestmp: null,
+    evntOperId: "admin",
+    displayCde: "Y"
+  },{
+    questionCategoryId: 1,
+    questionCategoryDesc: "Python",
+    evntTmestmp: null,
+    evntOperId: "admin",
+    displayCde: "Y"
+  },{
+    questionCategoryId: 2,
+    questionCategoryDesc: "Scala",
+    evntTmestmp: null,
+    evntOperId: "admin",
+    displayCde: "Y"
+  }];
   getAllQuestionCategory(): Observable<QuestionCategoryDTO[]> {
-    //return this.http.get<QuestionCategoryDTO[]>(this.getAllQuestionCategoryURL);
-    return null;
+    return of(this.categories);
   }
   findQuestionCategoryById(id: number): Observable<QuestionCategoryDTO> {
-    //let findQuestionCategoryByIdURL_temp = this.findQuestionCategoryByIdURL.replace("{id}",id.toString(10));
-    //return this.http.get<QuestionCategoryDTO>(this.findQuestionCategoryByIdURL+`${id}`);
-    return null;
+    return of(this.categories[id]);
   }
   createQuestionCategory(data: QuestionCategoryDTO): Observable<QuestionCategoryDTO> {
-    //return this.http.post<QuestionCategoryDTO>(this.createQuestionCategoryURL, data, httpOptions);
-    return null;
+    data.questionCategoryId = this.categories.length+1;
+    this.categories.push(data);
+    return of(data);
   }
   updateQuestionCategory(data: QuestionCategoryDTO): Observable<QuestionCategoryDTO> {
-    //return this.http.post<QuestionCategoryDTO>(this.updateQuestionCategoryURL, data, httpOptions);
-    return null;
+    this.categories[data.questionCategoryId] = data;
+    return of(data);
   }
   deleteQuestionCategory(id: number): Observable<ResponseMessage> {
-    //let deleteQuestionCategoryURL_temp = this.deleteQuestionCategoryURL.replace("{id}",id.toString(10));
-    //return this.http.delete<ResponseMessage>(this.deleteQuestionCategoryURL+`${id}`, httpOptions);
-    return null;
+    this.categories = this.categories.filter(rec => rec.questionCategoryId != id);
+    return of(new ResponseMessage("successfully deleted"));
   }
 }

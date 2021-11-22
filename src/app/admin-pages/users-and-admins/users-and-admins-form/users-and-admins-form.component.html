@@ -11,7 +11,7 @@
       <option value="ROLE_SUPER">SUPER ADMIN</option>
     </select>
     <label>firstName</label>
-    <input type="text" class="form-control" [(ngModel)]="item.firstName" name="firstName"
+    <input type="text" class="form-control" [(ngModel)]="item.firstName" name="firstName" id="firstName"
            #firstName="ngModel" required NgModel
            maxlength=255 >
     <label>lastName</label>
@@ -35,7 +35,8 @@
       <select class="form-control border-info text-center"
               [(ngModel)]="item.userActive"
               required NgModel
-              name="userActive_dropdown">
+              #userActive="ngModel"
+              name="userActive">
         <option [value]="true">true</option>
         <option [value]="false">false</option>
       </select>
@@ -45,7 +46,8 @@
       <select class="form-control border-info text-center"
               [(ngModel)]="item.userNotLocked"
               required NgModel
-              name="userNotLocked_dropdown">
+              #userNotLocked="ngModel"
+              name="userNotLocked">
         <option [value]="true">true</option>
         <option [value]="false">false</option>
       </select>
@@ -54,6 +56,7 @@
     <input type="text" class="form-control" [(ngModel)]="interviewuser.profileImage" name="profileImage" #profileImage="ngModel"
       maxlength=255
     >-->
+    <!-- [disabled]="InterviewUser.invalid" -->
   </div>
   <button *ngIf="addMode || editMode" [disabled]="InterviewUser.invalid" (click)="saveAddOrEdit()"
           class="btn btn-sm btn-primary text-white m-3 p-2">Save Changes</button>

@@ -27,7 +27,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   saveAddOrEdit() {
-    if(this.addModeLevel==true) {
+    if(this.addModeCategory==true) {
       console.log("saving category action");
       this.saveAdd.emit(this.item);
     } else {

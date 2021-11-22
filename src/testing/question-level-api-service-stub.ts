@@ -1,29 +1,44 @@
 import {Observable} from "rxjs/Observable";
 import {QuestionLevelDTO} from "../app/models/QuestionLevelDTO";
 import {ResponseMessage} from "../app/models/ResponseMessage";
+import {of} from "rxjs/observable/of";
 
 export class QuestionLevelApiServiceStub {
 
+  private levelItems:QuestionLevelDTO[] = [{
+    questionLevelId: 0,
+    questionLevelDesc: 'EASY',
+    evntTmestmp: null,
+    evntOperId: 'admin'
+  },{
+    questionLevelId: 1,
+    questionLevelDesc: 'MEDIUM',
+    evntTmestmp: null,
+    evntOperId: 'admin'
+  },{
+    questionLevelId: 2,
+    questionLevelDesc: 'HARD',
+    evntTmestmp: null,
+    evntOperId: 'admin'
+  }];
+
   getAllQuestionLevel(): Observable<QuestionLevelDTO[]> {
-    //return this.http.get<QuestionLevelDTO[]>(this.getAllQuestionLevelURL);
-    return null;
+    return of(this.levelItems);
   }
   findQuestionLevelById(id: number): Observable<QuestionLevelDTO> {
-    //let findQuestionLevelByIdURL_temp = this.findQuestionLevelByIdURL.replace("{id}",id.toString(10));
-    //return this.http.get<QuestionLevelDTO>(this.findQuestionLevelByIdURL+`${id}`);
-    return null;
+    return of(this.levelItems[id]);
   }
   createQuestionLevel(data: QuestionLevelDTO): Observable<QuestionLevelDTO> {
-    //return this.http.post<QuestionLevelDTO>(this.createQuestionLevelURL, data, httpOptions);
-    return null;
+    data.questionLevelId = this.levelItems.length+1;
+    this.levelItems.push(data);
+    return of(data);
   }
   updateQuestionLevel(data: QuestionLevelDTO): Observable<QuestionLevelDTO> {
-    //return this.http.post<QuestionLevelDTO>(this.updateQuestionLevelURL, data, httpOptions);
-    return null;
+    this.levelItems[data.questionLevelId] = data;
+    return of(data);
   }
   deleteQuestionLevel(id: number): Observable<ResponseMessage> {
-    //let deleteQuestionLevelURL_temp = this.deleteQuestionLevelURL.replace("{id}",id.toString(10));
-    //return this.http.delete<ResponseMessage>(this.deleteQuestionLevelURL+`${id}`, httpOptions);
-    return null;
+    this.levelItems = this.levelItems.filter(rec => rec.questionLevelId != id);
+    return of(new ResponseMessage("successfully deleted"));
   }
 }

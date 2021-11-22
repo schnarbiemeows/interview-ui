@@ -89,10 +89,6 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
     this.interviewuserwrapper.newEmailAddr = this.changeUserInfoForm.newEmailAddr;
     this.interviewuserwrapper.newFirstName = this.changeUserInfoForm.newFirstName;
     this.interviewuserwrapper.newLastName = this.changeUserInfoForm.newLastName;
-    //console.log("first name = " + this.interviewuserwrapper.newFirstName);
-    //console.log("last name = " + this.interviewuserwrapper.newLastName);
-    //console.log("user name = " + this.interviewuserwrapper.newUserName);
-    //console.log("email = " + this.interviewuserwrapper.newEmailAddr);
     this.subscriptions.push(
       this.interviewUserService.updateUserByUser(this.interviewuserwrapper).subscribe(newuserinfo => {
         this.authenticationService.addUserToLocalCache(newuserinfo);
@@ -109,11 +105,6 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
     this.showLoading = true;
     this.interviewuserwrapper.newPassword = this.changePasswordForm.newPassword;
     this.interviewuserwrapper.password = this.changePasswordForm.oldPassword;
-    //console.log("password = " + this.interviewuserwrapper.newPassword)
-    //console.log("first name = " + this.interviewuserwrapper.newFirstName)
-    //console.log("last name = " + this.interviewuserwrapper.newLastName)
-    //console.log("user name = " + this.interviewuserwrapper.newUserName)
-    //console.log("email = " + this.interviewuserwrapper.newEmailAddr)
     this.subscriptions.push(
       this.interviewUserService.updateUserByUser(this.interviewuserwrapper).subscribe(newuserinfo => {
           this.authenticationService.addUserToLocalCache(newuserinfo);
@@ -123,7 +114,6 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
 
         },
         (errorResponse: HttpErrorResponse) => {
-          //console.log("ERROR");
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         })

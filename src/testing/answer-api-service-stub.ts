@@ -3,7 +3,7 @@ import {AnswerDTO} from "../app/models/AnswerDTO";
 import {ResponseMessage} from "../app/models/ResponseMessage";
 import {of} from "rxjs/observable/of";
 
-export class AnswerServiceStub {
+export class AnswerApiServiceStub {
   answers:AnswerDTO[] = [
     {
       answerId: 0,
@@ -17,13 +17,13 @@ export class AnswerServiceStub {
       evntTmestmp: null,
       evntOperId: "admin"
     },
-    {
-      answerId: 2,
-      answerTxt: "a cool language",
-      evntTmestmp: null,
-      evntOperId: "admin"
-    }
-  ];
+      {
+        answerId: 2,
+        answerTxt: "a cool language",
+        evntTmestmp: null,
+        evntOperId: "admin"
+      }
+    ];
   public getAllAnswer(): Observable<AnswerDTO[]> {
     return of(this.answers);
   }

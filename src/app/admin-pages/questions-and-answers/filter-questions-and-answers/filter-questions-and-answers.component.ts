@@ -23,7 +23,6 @@ export class FilterQuestionsAndAnswersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("XXX category = " + this.filterCategoryValue + " , level = " + this.filterDifficultyValue);
   }
 
   onSubmit(e) {
@@ -31,8 +30,6 @@ export class FilterQuestionsAndAnswersComponent implements OnInit {
   }
 
   public filter() {
-    console.log("filter action filter");
-    console.log("category = " + this.filterCategoryValue + " , level = " + this.filterDifficultyValue);
     let filterParams: FilterParamsDTO = {
       filterCategoryValue: this.filterCategoryValue,
       filterDifficultyValue: this.filterDifficultyValue
@@ -41,7 +38,6 @@ export class FilterQuestionsAndAnswersComponent implements OnInit {
   }
 
   public resetFullList() {
-    console.log("filter action cancelled");
     this.filterCategoryValue = null;
     this.filterDifficultyValue = null;
     this.reset.emit();

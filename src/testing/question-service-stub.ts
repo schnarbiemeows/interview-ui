@@ -2,61 +2,61 @@ import {Observable} from "rxjs/Observable";
 import {QuestionDTO} from "../app/models/QuestionDTO";
 import {QuestionAnswerItemDTO} from "../app/models/QuestionAnswerItemDTO";
 import {ResponseMessage} from "../app/models/ResponseMessage";
+import {of} from "rxjs/observable/of";
 
 export class QuestionServiceStub {
+  questions:QuestionDTO[] = [{
+    questionId: 0,
+    questionCategoryId: 0,
+    questionLevelId: 0,
+    answerId: 0,
+    questionTxt: "what is Java?",
+    evntTmestmp: null,
+    evntOperId: "admin"
+  },{
+    questionId: 1,
+    questionCategoryId: 1,
+    questionLevelId: 0,
+    answerId: 1,
+    questionTxt: "what is Python?",
+    evntTmestmp: null,
+    evntOperId: "admin"
+  },{
+    questionId: 2,
+    questionCategoryId: 2,
+    questionLevelId: 0,
+    answerId: 2,
+    questionTxt: "what is Scala?",
+    evntTmestmp: null,
+    evntOperId: "admin"
+  }];
+  public getAllQuestion(): Observable<QuestionDTO[]> {
+    return of(this.questions);
+  }
+  public findQuestionById(id: number): Observable<QuestionDTO> {
+    return of(this.questions[id]);
+  }
+  public createQuestion(data: QuestionDTO): Observable<QuestionDTO> {
+    data.questionId = this.questions.length+1;
+    this.questions.push(data);
+    return of(data);
+  }
 
-  getAllQuestion(): Observable<QuestionDTO[]> {
-    //return this.http.get<QuestionDTO[]>(this.getAllQuestionURL);
-    return null;
-  }
-  findQuestionById(id: number): Observable<QuestionDTO> {
-    //let findQuestionByIdURL_temp = this.findQuestionByIdURL.replace("{id}",id.toString(10));
-    //return this.http.get<QuestionDTO>(this.findQuestionByIdURL+`${id}`);
-    return null;
-  }
-  createQuestion(data: QuestionDTO): Observable<QuestionDTO> {
-    //return this.http.post<QuestionDTO>(this.createQuestionURL, data, httpOptions);
-    return null;
+  public createQuestionAnswerPair(data: QuestionAnswerItemDTO): Observable<QuestionAnswerItemDTO> {
+    return of(data);
   }
 
-  createQuestionAnswerPair(data: QuestionAnswerItemDTO): Observable<QuestionAnswerItemDTO> {
-    //return this.http.post<QuestionAnswerItemDTO>(this.createQuestionAnswerURL, data, httpOptions);
-    return null;
+  public updateQuestionAnswerPair(data: QuestionAnswerItemDTO): Observable<QuestionAnswerItemDTO> {
+    return of(data);
   }
 
-  updateQuestionAnswerPair(data: QuestionAnswerItemDTO): Observable<QuestionAnswerItemDTO> {
-    //return this.http.post<QuestionAnswerItemDTO>(this.updateQuestionAnswerURL, data, httpOptions);
-    return null;
+  public updateQuestion(data: QuestionDTO): Observable<QuestionDTO> {
+    this.questions[data.questionId] = data;
+    return of(data);
+  }
+  public deleteQuestion(id: number): Observable<ResponseMessage> {
+    this.questions = this.questions.filter(rec => rec.questionId != id);
+    return of(new ResponseMessage("successfully deleted"));
   }
 
-  updateQuestion(data: QuestionDTO): Observable<QuestionDTO> {
-    //return this.http.post<QuestionDTO>(this.updateQuestionURL, data, httpOptions);
-    return null;
-  }
-  deleteQuestion(id: number): Observable<ResponseMessage> {
-    //let deleteQuestionURL_temp = this.deleteQuestionURL.replace("{id}",id.toString(10));
-    //return this.http.delete<ResponseMessage>(this.deleteQuestionURL+`${id}`, httpOptions);
-    return null;
-  }
-
-  findQuestionByQuestionCategoryId(id: number): Observable<QuestionDTO[]>{
-    //let findQuestionByQuestionCategoryIdURL_temp = this.findQuestionByQuestionCategoryIdURL.replace("{id}", id.toString(10));
-    //return this.http.get<QuestionDTO[]>(this.findQuestionByQuestionCategoryIdURL+`${id}`);
-    return null;
-  }
-  findQuestionByQuestionLevelId(id: number): Observable<QuestionDTO[]>{
-    //let findQuestionByQuestionLevelIdURL_temp = this.findQuestionByQuestionLevelIdURL.replace("{id}", id.toString(10));
-    //return this.http.get<QuestionDTO[]>(this.findQuestionByQuestionLevelIdURL+`${id}`);
-    return null;
-  }
-  findQuestionByAnswerId(id: number): Observable<QuestionDTO[]>{
-    //let findQuestionByAnswerIdURL_temp = this.findQuestionByAnswerIdURL.replace("{id}", id.toString(10));
-    //return this.http.get<QuestionDTO[]>(this.findQuestionByAnswerIdURL+`${id}`);
-    return null;
-  }
-  findQuestionByQuestionCategoryIdAndQuestionLevelIdAndAnswerId(id0: number,id1: number,id2: number): Observable<QuestionDTO[]>{
-    //this.findQuestionByQuestionCategoryIdAndQuestionLevelIdAndAnswerIdURL = this.findQuestionByQuestionCategoryIdAndQuestionLevelIdAndAnswerIdURL.replace("{id0}", id0.toString(10)).replace("{id1}", id1.toString(10)).replace("{id2}", id2.toString(10));
-    //return this.http.get<QuestionDTO[]>(this.findQuestionByQuestionCategoryIdAndQuestionLevelIdAndAnswerIdURL+`${id0}/${id1}/${id2}`);
-    return null;
-  }
 }

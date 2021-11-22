@@ -14,25 +14,25 @@
       ></app-search>
       <app-level-list
         [levelList]="questionlevellist"
-        [addModeCategory]="addCatgMode"
-        [addModeLevel]="addLvlMode"
-        [editModeCategory]="editCatgMode"
-        [editModeLevel]="editLvlMode"
+        [addModeCategory]="addModeCategory"
+        [addModeLevel]="addModeLevel"
+        [editModeCategory]="editModeCategory"
+        [editModeLevel]="editModeLevel"
         [isAdmin]="isAdmin"
         [isSuper]="isSuper"
         (relayEdit)="receiveAndRelayInitiateEditLevel($event)"
         (relayDelete)="receiveAndRelayDeleteLevel($event)"
       ></app-level-list>
       <div *ngIf="isAdmin">
-        <button *ngIf="!editLvlMode && !addLvlMode && !editCatgMode && !addCatgMode" (click)="initiateAddLevel()"
+        <button *ngIf="!editModeLevel && !addModeLevel && !editModeCategory && !addModeCategory" (click)="initiateAddLevel()"
                 class="btn btn-sm btn-primary text-white m-3 p-3 ">Add Difficulty Level</button>
         <div class="card card-body m-3" *ngIf="showQuestionLevelForm">
           <app-level-form
             [item]="levelItem"
-            [addModeCategory]="addCatgMode"
-            [addModeLevel]="addLvlMode"
-            [editModeCategory]="editCatgMode"
-            [editModeLevel]="editLvlMode"
+            [addModeCategory]="addModeCategory"
+            [addModeLevel]="addModeLevel"
+            [editModeCategory]="editModeCategory"
+            [editModeLevel]="editModeLevel"
             (saveAdd)="receiveLevelFormSaveAdd($event)"
             (saveEdit)="receiveLevelFormSaveEdit($event)"
             (cancelAction)="receiveLevelFormCancel($event)"
@@ -54,10 +54,10 @@
         (searchTerm)="searchCategory($event)"
         ></app-search>
       <app-category-list [categorylist]="questioncategorylist"
-         [addModeCategory]="addCatgMode"
-         [addModeLevel]="addLvlMode"
-         [editModeCategory]="editCatgMode"
-         [editModeLevel]="editLvlMode"
+         [addModeCategory]="addModeCategory"
+         [addModeLevel]="addModeLevel"
+         [editModeCategory]="editModeCategory"
+         [editModeLevel]="editModeLevel"
          [isAdmin]="isAdmin"
          [isSuper]="isSuper"
          [paginationDisabledCategory]="paginationDisabledCategory"
@@ -65,16 +65,16 @@
          (relayDelete)="receiveAndRelayDeleteCategory($event)"
       ></app-category-list>
       <div *ngIf="isAdmin">
-        <button *ngIf="!editLvlMode && !addLvlMode && !editCatgMode && !addCatgMode" (click)="initiateAddCategory()"
+        <button *ngIf="!editModeLevel && !addModeLevel && !editModeCategory && !addModeCategory" (click)="initiateAddCategory()"
                 class="btn btn-sm btn-primary text-white m-3 p-3 ">Add Category</button>
 
         <div class="card card-body m-3" *ngIf="showQuestionCategoryForm">
           <app-category-form
             [item]="categoryItem"
-            [addModeCategory]="addCatgMode"
-            [addModeLevel]="addLvlMode"
-            [editModeCategory]="editCatgMode"
-            [editModeLevel]="editLvlMode"
+            [addModeCategory]="addModeCategory"
+            [addModeLevel]="addModeLevel"
+            [editModeCategory]="editModeCategory"
+            [editModeLevel]="editModeLevel"
             (saveAdd)="receiveCategoryFormSaveAdd($event)"
             (saveEdit)="receiveCategoryFormSaveEdit($event)"
             (cancelAction)="receiveCategoryFormCancel($event)"

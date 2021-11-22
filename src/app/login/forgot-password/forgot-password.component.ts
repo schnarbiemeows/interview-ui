@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {NotificationType} from "../../enum/notification-type.enum";
 import {NotificationService} from "../../services/notification/notification.service";
-import {CheckResetPasswordResponseDTO} from "../../models/CheckResetPasswordResponseDTO";
+import {CheckPasswordResetResponseDTO} from "../../models/CheckPasswordResetResponseDTO";
 import {PasswordResetDTO} from "../../models/PasswordResetDTO";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 
@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   public resetForm:PasswordResetDTO;
   private email:string;
 
-  constructor(private router: Router,private activatedroute: ActivatedRoute,
+  constructor(private router: Router, private activatedroute: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private notificationService: NotificationService) {
     this.activatedroute.params.subscribe(data => {
@@ -81,7 +81,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.authenticationService.checkReset(this.code).subscribe(
-        (response: CheckResetPasswordResponseDTO) => {
+        (response: CheckPasswordResetResponseDTO) => {
           if(!response.foundRecord) {
             if(null==response.emailAddress) {
               this.errorMsg = "something went wrong, please click the link below to return to the login page and try again";

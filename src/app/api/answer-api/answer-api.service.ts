@@ -35,7 +35,6 @@ export class AnswerApiService {
     return this.http.post<AnswerDTO>(this.updateAnswerURL, data, httpOptions);
   }
   deleteAnswer(id: number): Observable<ResponseMessage> {
-    //let deleteAnswerURL_temp = this.deleteAnswerURL.replace("{id}",id.toString(10));
     return this.http.delete<ResponseMessage>(this.deleteAnswerURL+`${id}`, httpOptions);
   }
 }

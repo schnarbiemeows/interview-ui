@@ -3,37 +3,85 @@ import {InterviewUserDTO} from "../app/models/InterviewUserDTO";
 import {InterviewUserDTOWrapper} from "../app/models/InterviewUserDTOWrapper";
 import {ResponseMessage} from "../app/models/ResponseMessage";
 import {CustomHttpRespone} from "../app/models/custom-http-response";
+import {Role} from "../app/enum/role.enum";
+import {of} from "rxjs/observable/of";
 
 export class InterviewUserApiServiceStub {
+  testUsers:InterviewUserDTO[] = [{
+    userId: 0,
+    authorizations:[],
+    emailAddr: 'emailAddrUser',
+    firstName: 'firstNameUser',
+    userActive: true,
+    userNotLocked: true,
+    joinDate: null,
+    lastLoginDate: null,
+    lastLoginDateDisplay: null,
+    lastName: 'lastNameUser',
+    password: 'passwordUser',
+    profileImage: 'profileImageUser',
+    roles: Role.USER,
+    userIdentifier: 'XXXZZZ',
+    userName: 'userNameUser'
+  },{
+    userId: 1,
+    authorizations:[],
+    emailAddr: 'emailAddrAdv',
+    firstName: 'firstNameAdv',
+    userActive: true,
+    userNotLocked: true,
+    joinDate: null,
+    lastLoginDate: null,
+    lastLoginDateDisplay: null,
+    lastName: 'lastNameAdv',
+    password: 'passwordAdv',
+    profileImage: 'profileImageAdv',
+    roles: Role.ADV_USER,
+    userIdentifier: 'XXXYYY',
+    userName: 'userNameAdv'
+  },{
+    userId: 2,
+    authorizations:[],
+    emailAddr: 'emailAddrAdmin',
+    firstName: 'firstNameAdmin',
+    userActive: true,
+    userNotLocked: true,
+    joinDate: null,
+    lastLoginDate: null,
+    lastLoginDateDisplay: null,
+    lastName: 'lastNameAdmin',
+    password: 'passwordAdmin',
+    profileImage: 'profileImageAdmin',
+    roles: Role.ADMIN,
+    userIdentifier: 'YYYZZZ',
+    userName: 'userNameAdmin'
+  }];
   getAllInterviewUser(): Observable<InterviewUserDTO[]> {
-    //return this.http.get<InterviewUserDTO[]>(this.getAllInterviewUserURL);
-    return null;
+    return of(this.testUsers);
   }
   findInterviewUserById(id: number): Observable<InterviewUserDTO> {
-    //let findInterviewUserByIdURL_temp = this.findInterviewUserByIdURL.replace("{id}",id.toString(10));
-    //return this.http.get<InterviewUserDTO>(this.findInterviewUserByIdURL+`${id}`);
-    return null;
+    return of(this.testUsers[id]);
   }
   createInterviewUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
-    //return this.http.post<InterviewUserDTO>(this.createInterviewUserURL, data, httpOptions);
-    return null;
+    data.userId = this.testUsers.length+1;
+    this.testUsers.push(data);
+    return of(data);
   }
   updateInterviewUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
-    //return this.http.post<InterviewUserDTO>(this.updateInterviewUserURL, data, httpOptions);
-    return null;
+    this.testUsers[data.userId] = data;
+    return of(data);
   }
 
   updateUserByUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
-    //return this.http.post<InterviewUserDTO>(this.updateUserByUserURL, data, httpOptions);
-    return null;
+    this.testUsers[data.userId] = data;
+    return of(data);
   }
   deleteInterviewUser(username: string): Observable<ResponseMessage> {
-    //let deleteInterviewUserURL_temp = this.deleteInterviewUserURL.replace("{id}",id.toString(10));
-    //return this.http.delete<ResponseMessage>(this.deleteInterviewUserURL+`${username}`, httpOptions);
-    return null;
+    this.testUsers = this.testUsers.filter(rec => rec.userName != username);
+    return of(new ResponseMessage("successfully deleted"));
   }
 
-  forgotPassword(email: string): Observable<CustomHttpRespone> {
+  /*forgotPassword(email: string): Observable<CustomHttpRespone> {
    //return this.http.get<CustomHttpRespone>(this.forgotPwdURL+`${email}`);
     return null;
   }
@@ -48,9 +96,9 @@ export class InterviewUserApiServiceStub {
   }
 
   public getUsersFromLocalCache(): InterviewUserDTO[] {
-    /*if (localStorage.getItem('users')) {
+    /!*if (localStorage.getItem('users')) {
       return JSON.parse(localStorage.getItem('users'));
-    }*/
+    }*!/
     return null;
-  }
+  }*/
 }

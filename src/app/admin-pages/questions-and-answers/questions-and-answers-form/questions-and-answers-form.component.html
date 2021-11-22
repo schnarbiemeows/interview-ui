@@ -32,7 +32,7 @@
       <div class="col">
           <label>Question:</label>
           <input type="text" class="form-control" required ngModel
-                 [(ngModel)]="item.questionTxt" name="questionTxt"
+                 [(ngModel)]="item.questionTxt" name="questionTxt" id="questionTxt"
                  #questionTxt="ngModel"
                  maxlength=256 >
         </div>
@@ -41,7 +41,7 @@
       <div class="col col-sm-4">
         <label>Answer:</label>
         <textarea rows="10" class="form-control" required ngModel
-                  [(ngModel)]="item.answerTxt" name="answerTxt"
+                  [(ngModel)]="item.answerTxt" name="answerTxt" id="answerTxt"
                   #answerTxt="ngModel"
                   maxlength=2048></textarea>
       </div>

@@ -1,8 +1,26 @@
 import {InterviewUserDTO} from "../app/models/InterviewUserDTO";
 import {InterviewUserDTOWrapper} from "../app/models/InterviewUserDTOWrapper";
+import {BehaviorSubject, Subscription} from "rxjs";
 
 export class InterviewUserServiceStub {
+
+  private subscriptions: Subscription[] = [];
+  private loaded = new BehaviorSubject<boolean>(false);
+  private addMode = new BehaviorSubject<boolean>(false);
+  private editMode = new BehaviorSubject<boolean>(false);
+  private showForm = new BehaviorSubject<boolean>(false);
+  private paginationDisabled = new BehaviorSubject<boolean>(false);
+  private fullinterviewuserlist: InterviewUserDTO[];
+  private interviewuserlist = new BehaviorSubject<InterviewUserDTO[]>(null);
+  public loaded$ = this.loaded.asObservable();
+  public addMode$ = this.addMode.asObservable();
+  public editMode$ = this.editMode.asObservable();
+  public showForm$ = this.showForm.asObservable();
+  public paginationDisabled$ = this.paginationDisabled.asObservable();
+  public interviewuserlist$ = this.interviewuserlist.asObservable();
+
   public searchInterviewUser(searchTerm: string): void {
+    console.log("inside the InterviewUserServiceStub.searchInterviewUser method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter( rec =>
       !this.isNullOrUndefined(rec.userId) && rec.userId.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
       !this.isNullOrUndefined(rec.authorizations) && rec.authorizations.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
@@ -26,6 +44,7 @@ export class InterviewUserServiceStub {
   }
 
   reload() {
+    console.log("inside the InterviewUserServiceStub.reload method");
     /*this.loaded.next(false);
     this.subscriptions.push(
       this.api.getAllInterviewUser().subscribe(interviewuserlist => {
@@ -41,6 +60,7 @@ export class InterviewUserServiceStub {
   }
 
   initiateAdd(): InterviewUserDTOWrapper {
+    console.log("inside the InterviewUserServiceStub.initiateAdd method");
     ////console.log("initiating item add ....")
     /*this.editMode.next(false);
     this.addMode.next(true);
@@ -52,6 +72,7 @@ export class InterviewUserServiceStub {
   }
 
   saveResults(interviewuser: InterviewUserDTOWrapper) {
+    console.log("inside the InterviewUserServiceStub.saveResults method");
     /*if(this.addMode.getValue()) {
       interviewuser.userName = interviewuser.newUserName;
       this.subscriptions.push(
@@ -73,6 +94,7 @@ export class InterviewUserServiceStub {
   }
 
   editItem(i: number): InterviewUserDTOWrapper {
+    console.log("inside the InterviewUserServiceStub.editItem method");
     /*this.editMode.next(true);
     this.paginationDisabled.next(true);
     let interviewuser = new InterviewUserDTOWrapper();
@@ -84,6 +106,7 @@ export class InterviewUserServiceStub {
   }
 
   deleteItem(i: number) {
+    console.log("inside the InterviewUserServiceStub.deleteItem method");
     /*this.subscriptions.push(
       this.api.deleteInterviewUser(this.interviewuserlist.getValue()[i].userName).subscribe(response => {
         this.reload();
@@ -93,38 +116,45 @@ export class InterviewUserServiceStub {
   }
 
   showAllUsers() {
+    console.log("inside the InterviewUserServiceStub.showAllUsers method");
     /*const results: InterviewUserDTO[] = [];
     this.interviewuserlist.next(this.fullinterviewuserlist);*/
   }
 
   showOnlyUsers(): void {
+    console.log("inside the InterviewUserServiceStub.showOnlyUsers method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter(rec => rec.roles == "ROLE_BASIC_USER"
       || rec.roles == "ROLE_ADV_USER" || rec.roles == "ROLE_PREMIUM_USER");
     this.interviewuserlist.next(results);*/
   }
 
   showOnlyAdmins() {
+    console.log("inside the InterviewUserServiceStub.showOnlyAdmins method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter(rec => rec.roles == "ROLE_ADMIN"
       || rec.roles == "ROLE_SUPER");
     this.interviewuserlist.next(results);*/
   }
 
   showBasicUsers() {
+    console.log("inside the InterviewUserServiceStub.showBasicUsers method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter(rec => rec.roles == "ROLE_BASIC_USER");
     this.interviewuserlist.next(results);*/
   }
 
   showAdvUsers() {
+    console.log("inside the InterviewUserServiceStub.showAdvUsers method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter(rec => rec.roles == "ROLE_ADV_USER");
     this.interviewuserlist.next(results);*/
   }
 
   showPremiumUsers() {
+    console.log("inside the InterviewUserServiceStub.showPremiumUsers method");
     /*const results: InterviewUserDTO[] = this.fullinterviewuserlist.filter(rec => rec.roles == "ROLE_PREMIUM_USER");
     this.interviewuserlist.next(results);*/
   }
 
   public destroy() {
+    console.log("inside the InterviewUserServiceStub.destroy method");
     //this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 

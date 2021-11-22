@@ -1,14 +1,16 @@
 import {InterviewUserDTO} from "../app/models/InterviewUserDTO";
 import {Observable} from "rxjs";
-import {CheckResetPasswordResponseDTO} from "../app/models/CheckResetPasswordResponseDTO";
+import {CheckPasswordResetResponseDTO} from "../app/models/CheckPasswordResetResponseDTO";
 import {PasswordResetDTO} from "../app/models/PasswordResetDTO";
 import {GoogleRequestDTO} from "../app/models/GoogleRequestDTO";
 import {HttpResponse} from "@angular/common/http";
 import {Role} from "../app/enum/role.enum";
+import {of} from "rxjs/observable/of";
 
 export class AuthenticationServiceStub {
 
-  logOut(): void {
+
+  public logOut(): void {
     /*this.token = null;
     this.loggedInUsername = null;
     localStorage.removeItem('user');
@@ -16,47 +18,46 @@ export class AuthenticationServiceStub {
     localStorage.removeItem('users');*/
   }
 
-  saveToken(token: string): void {
+  public saveToken(token: string): void {
     /*this.token = token;
     localStorage.setItem('token', token);*/
   }
 
-  addUserToLocalCache(user: InterviewUserDTO): void {
+  public addUserToLocalCache(user: InterviewUserDTO): void {
     //localStorage.setItem('user', JSON.stringify(user));
   }
 
   getUserFromLocalCache(): InterviewUserDTO {
-    console.log("inside AuthenticationServiceStub.getUserFromLocalCache method");
     const dto:InterviewUserDTO = {
-      userId: 0,
-      authorizations: [],
-      emailAddr: '',
-      firstName: '',
+      userId: 1,
+      authorizations:[],
+      emailAddr: 'emailAddr',
+      firstName: 'firstName',
       userActive: true,
       userNotLocked: true,
       joinDate: null,
       lastLoginDate: null,
       lastLoginDateDisplay: null,
-      lastName: '',
-      password: '',
-      profileImage: '',
+      lastName: 'lastName',
+      password: 'password',
+      profileImage: 'profileImage',
       roles: Role.USER,
-      userIdentifier: '',
-      userName: ''
+      userIdentifier: 'userIdentifier',
+      userName: 'userName'
     };
     return dto;
   }
 
-  loadToken(): void {
+  public loadToken(): void {
     //this.token = localStorage.getItem('token');
   }
 
-  getToken(): string {
+  public getToken(): string {
     //return this.token;
     return '';
   }
 
-  isUserLoggedIn(): boolean {
+  public isUserLoggedIn(): boolean {
     /*this.loadToken();
     if (this.token != null && this.token !== ''){
       if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
@@ -72,43 +73,68 @@ export class AuthenticationServiceStub {
     return true;
   }
 
-  checkReset(code: string): Observable<CheckResetPasswordResponseDTO> {
-    //return this.api.checkReset(code);
-    return null;
+  public checkReset(code: string): Observable<CheckPasswordResetResponseDTO> {
+    return of(new CheckPasswordResetResponseDTO(true,"email","unique"));
   }
 
-  resetPassword(email: string): Observable<any> {
-    //return this.api.resetPassword(email);
-    return null;
+  public resetPassword(email: string): Observable<any> {
+    return of("password reset");
   }
 
-  finalizeReset(dto: PasswordResetDTO): Observable<InterviewUserDTO> {
-    //return this.api.finalizeReset(dto);
-    return null;
+  public finalizeReset(dto: PasswordResetDTO): Observable<InterviewUserDTO> {
+    return of(dto);
   }
 
-  sendUsernameEmail(email: string): Observable<any> {
-    //return this.api.sendUsernameEmail(email);
-    return null;
+  public sendUsernameEmail(email: string): Observable<any> {
+    return of("email sent");
   }
 
-  postRecaptcha(obj: GoogleRequestDTO): Observable<any> {
-    //return this.api.postRecaptcha(obj);
-    return null;
+  public postRecaptcha(obj: GoogleRequestDTO): Observable<any> {
+    return of(obj);
   }
 
   public login(user: InterviewUserDTO): Observable<HttpResponse<InterviewUserDTO>> {
-   // return this.api.login(user);
-    return null;
+    return of(null);
+  }
+  public register(user: InterviewUserDTO): Observable<InterviewUserDTO> {
+    const dto:InterviewUserDTO = {
+      userId: 1,
+      authorizations:[],
+      emailAddr: 'emailAddr',
+      firstName: 'firstName',
+      userActive: true,
+      userNotLocked: true,
+      joinDate: null,
+      lastLoginDate: null,
+      lastLoginDateDisplay: null,
+      lastName: 'lastName',
+      password: 'password',
+      profileImage: 'profileImage',
+      roles: Role.USER,
+      userIdentifier: 'userIdentifier',
+      userName: 'userName'
+    };
+    return of(dto);
   }
 
-  register(user: InterviewUserDTO): Observable<InterviewUserDTO> {
-    //return this.api.register(user);
-    return null;
-  }
-
-  confirmEmail(id: string): Observable<InterviewUserDTO> {
-    //return this.api.confirmEmail(id);
-    return null;
+  public confirmEmail(id: string): Observable<InterviewUserDTO> {
+    const dto:InterviewUserDTO = {
+      userId: 1,
+      authorizations:[],
+      emailAddr: 'emailAddr',
+      firstName: 'firstName',
+      userActive: true,
+      userNotLocked: true,
+      joinDate: null,
+      lastLoginDate: null,
+      lastLoginDateDisplay: null,
+      lastName: 'lastName',
+      password: 'password',
+      profileImage: 'profileImage',
+      roles: Role.USER,
+      userIdentifier: 'userIdentifier',
+      userName: 'userName'
+    };
+    return of(dto);
   }
 }

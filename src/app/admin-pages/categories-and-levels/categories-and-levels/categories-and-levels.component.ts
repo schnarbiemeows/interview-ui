@@ -14,27 +14,27 @@ import {InterviewUserDTO} from "../../../models/InterviewUserDTO";
 @Component({
   selector: 'app-categories-and-levels2',
   templateUrl: './categories-and-levels.component.html',
-  styleUrls: ['./categories-and-levels.component.css'],
-  providers: [QuestionCategoryService, QuestionLevelService]
+  styleUrls: ['./categories-and-levels.component.css']
+  //providers: [QuestionCategoryService, QuestionLevelService]
 })
 export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
   currentUser: InterviewUserDTO;
   // modes and page states
   public loadedLevel: boolean = true;
   public loadedCategory:boolean = true;
-  private addLvlMode:boolean;
-  private editLvlMode:boolean;
-  private addCatgMode:boolean;
-  private editCatgMode:boolean;
+  private addModeLevel:boolean;
+  private editModeLevel:boolean;
+  private addModeCategory:boolean;
+  private editModeCategory:boolean;
   private showQuestionLevelForm: boolean;
   private showQuestionCategoryForm: boolean;
   private paginationDisabledCategory: boolean;
   private loadedLvlSub: Subscription = null;
   private loadedCatgSub: Subscription = null;
-  private addLvlModeSub: Subscription = null;
-  private editLvlModeSub: Subscription = null;
-  private addCatgModeSub: Subscription = null;
-  private editCatgModeSub: Subscription = null;
+  private addModeLevelSub: Subscription = null;
+  private editModeLevelSub: Subscription = null;
+  private addModeCategorySub: Subscription = null;
+  private editModeCategorySub: Subscription = null;
   private showLvlFormSub: Subscription = null;
   private showCatgFormSub: Subscription = null;
   private paginationDisabledCatgSub: Subscription = null;
@@ -59,17 +59,17 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentUser = this.authenticationService.getUserFromLocalCache();
     // subscribe to the page modes and states
-    this.addLvlModeSub = this.questionlevelService.addMode$.subscribe((data) => {
-      this.addLvlMode = data;
+    this.addModeLevelSub = this.questionlevelService.addMode$.subscribe((data) => {
+      this.addModeLevel = data;
     });
-    this.editLvlModeSub = this.questionlevelService.editMode$.subscribe((data) => {
-      this.editLvlMode = data;
+    this.editModeLevelSub = this.questionlevelService.editMode$.subscribe((data) => {
+      this.editModeLevel = data;
     });
-    this.addCatgModeSub = this.questionCategoryService.addMode$.subscribe((data) => {
-      this.addCatgMode = data;
+    this.addModeCategorySub = this.questionCategoryService.addMode$.subscribe((data) => {
+      this.addModeCategory = data;
     });
-    this.editCatgModeSub = this.questionCategoryService.editMode$.subscribe((data) => {
-      this.editCatgMode = data;
+    this.editModeCategorySub = this.questionCategoryService.editMode$.subscribe((data) => {
+      this.editModeCategory = data;
     });
     this.loadedLvlSub = this.questionlevelService.loaded$.subscribe((data) => {
       this.loadedLevel = data;
@@ -98,15 +98,15 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
   }
 
   public get isUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.USER;
   }
 
   public get isAdvUser(): boolean {
-    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.ADV_USER;
   }
 
   public get isPremUser(): boolean {
-    return this.getUserRole() === Role.SUPER_ADMIN;
+    return this.getUserRole() === Role.PREMIUM_USER;
   }
 
   public get isAdmin(): boolean {
@@ -123,7 +123,6 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
 
   reloadCategory() {
     this.questionCategoryService.reloadCategory();
-
   }
 
   reloadLevel() {
@@ -221,10 +220,10 @@ export class CategoriesAndLevelsComponent implements OnInit, OnDestroy {
     console.log("destroying");
     this.questionlevelService.destroy();
     this.questionCategoryService.destroy();
-    this.addLvlModeSub.unsubscribe();
-    this.editLvlModeSub.unsubscribe();
-    this.addCatgModeSub.unsubscribe();
-    this.editCatgModeSub.unsubscribe();
+    this.addModeLevelSub.unsubscribe();
+    this.editModeLevelSub.unsubscribe();
+    this.addModeCategorySub.unsubscribe();
+    this.editModeCategorySub.unsubscribe();
     this.loadedLvlSub.unsubscribe();
     this.loadedCatgSub.unsubscribe();
     this.showCatgFormSub.unsubscribe();
