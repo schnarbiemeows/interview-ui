@@ -3,78 +3,67 @@ import {Observable} from "rxjs";
 import {CheckPasswordResetResponseDTO} from "../app/models/CheckPasswordResetResponseDTO";
 import {PasswordResetDTO} from "../app/models/PasswordResetDTO";
 import {GoogleRequestDTO} from "../app/models/GoogleRequestDTO";
-import {HttpResponse} from "@angular/common/http";
+import {HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Role} from "../app/enum/role.enum";
 import {of} from "rxjs/observable/of";
+import {HeaderType} from "../app/enum/header-type.enum";
+
+const dto:InterviewUserDTO = {
+  userId: 1,
+  authorizations:[],
+  emailAddr: 'emailAddr',
+  firstName: 'firstName',
+  userActive: true,
+  userNotLocked: true,
+  joinDate: null,
+  lastLoginDate: null,
+  lastLoginDateDisplay: null,
+  lastName: 'lastName',
+  password: 'password',
+  profileImage: 'profileImage',
+  roles: Role.USER,
+  userIdentifier: 'userIdentifier',
+  userName: 'userName'
+};
 
 export class AuthenticationServiceStub {
 
-
   public logOut(): void {
-    /*this.token = null;
-    this.loggedInUsername = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('users');*/
+
   }
 
   public saveToken(token: string): void {
-    /*this.token = token;
-    localStorage.setItem('token', token);*/
+
   }
 
   public addUserToLocalCache(user: InterviewUserDTO): void {
-    //localStorage.setItem('user', JSON.stringify(user));
+
   }
 
   getUserFromLocalCache(): InterviewUserDTO {
-    const dto:InterviewUserDTO = {
-      userId: 1,
-      authorizations:[],
-      emailAddr: 'emailAddr',
-      firstName: 'firstName',
-      userActive: true,
-      userNotLocked: true,
-      joinDate: null,
-      lastLoginDate: null,
-      lastLoginDateDisplay: null,
-      lastName: 'lastName',
-      password: 'password',
-      profileImage: 'profileImage',
-      roles: Role.USER,
-      userIdentifier: 'userIdentifier',
-      userName: 'userName'
-    };
     return dto;
   }
 
   public loadToken(): void {
-    //this.token = localStorage.getItem('token');
+
   }
 
   public getToken(): string {
-    //return this.token;
-    return '';
+    return 'token';
   }
 
   public isUserLoggedIn(): boolean {
-    /*this.loadToken();
-    if (this.token != null && this.token !== ''){
-      if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
-        if (!this.jwtHelper.isTokenExpired(this.token)) {
-          this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
-          return true;
-        }
-      }
-    } else {
-      this.logOut();
-      return false;
-    }*/
     return true;
   }
 
   public checkReset(code: string): Observable<CheckPasswordResetResponseDTO> {
-    return of(new CheckPasswordResetResponseDTO(true,"email","unique"));
+    if(code=="NOT_FOUND") {
+      return of(new CheckPasswordResetResponseDTO(false,"email","unique"));
+    } else if(code=="NO_EMAIL") {
+      return of(new CheckPasswordResetResponseDTO(false,null,"unique"));
+    } else {
+      return of(new CheckPasswordResetResponseDTO(true,"email","unique"));
+    }
   }
 
   public resetPassword(email: string): Observable<any> {
@@ -94,47 +83,16 @@ export class AuthenticationServiceStub {
   }
 
   public login(user: InterviewUserDTO): Observable<HttpResponse<InterviewUserDTO>> {
-    return of(null);
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.set(HeaderType.JWT_TOKEN,"token");
+    let response = new HttpResponse<InterviewUserDTO>({ status : 200, headers: headers , body : dto });
+    return of(response);
   }
   public register(user: InterviewUserDTO): Observable<InterviewUserDTO> {
-    const dto:InterviewUserDTO = {
-      userId: 1,
-      authorizations:[],
-      emailAddr: 'emailAddr',
-      firstName: 'firstName',
-      userActive: true,
-      userNotLocked: true,
-      joinDate: null,
-      lastLoginDate: null,
-      lastLoginDateDisplay: null,
-      lastName: 'lastName',
-      password: 'password',
-      profileImage: 'profileImage',
-      roles: Role.USER,
-      userIdentifier: 'userIdentifier',
-      userName: 'userName'
-    };
     return of(dto);
   }
 
   public confirmEmail(id: string): Observable<InterviewUserDTO> {
-    const dto:InterviewUserDTO = {
-      userId: 1,
-      authorizations:[],
-      emailAddr: 'emailAddr',
-      firstName: 'firstName',
-      userActive: true,
-      userNotLocked: true,
-      joinDate: null,
-      lastLoginDate: null,
-      lastLoginDateDisplay: null,
-      lastName: 'lastName',
-      password: 'password',
-      profileImage: 'profileImage',
-      roles: Role.USER,
-      userIdentifier: 'userIdentifier',
-      userName: 'userName'
-    };
     return of(dto);
   }
 }

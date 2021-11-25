@@ -7,17 +7,14 @@ import {InterviewUserDTO} from "../../models/InterviewUserDTO";
 import {PasswordResetDTO} from "../../models/PasswordResetDTO";
 import {GoogleRequestDTO} from "../../models/GoogleRequestDTO";
 import {Role} from "../../enum/role.enum";
-import {NotifierService} from "angular-notifier";
-import {MockJwtTokenObj} from "../../../testing/mockJwtTokenObj";
+import configData from '../../../assets/data/test-config.json';
+
 
 describe('AuthenticationApiService', () => {
   let service: AuthenticationApiService;
   let httpTestingController: HttpTestingController;
-  let jwtServiceSpy:jasmine.SpyObj<JwtHelperService>;
+  let properties = new Map();
   const host = environment.apiUrl;
-  let token: string = null;
-  let tempToken: string = 'token';
-  let loggedInUsername: string = null;
   const loginURL: string = `${host}/interviewuser/login`;
   const registerURL: string = `${host}/interviewuser/register`;
   const confirmEmailURL: string = `${host}/interviewuser/confirmemail`;
@@ -62,27 +59,13 @@ describe('AuthenticationApiService', () => {
   };
   let store = {};
   beforeEach(() => {
-    jwtServiceSpy = jasmine.createSpyObj('JwtHelperService', ['decodeToken','isTokenExpired']);
-    jwtServiceSpy.decodeToken.and.returnValue(returnMockToken());
-    jwtServiceSpy.isTokenExpired.and.returnValue(false);
-    /*store = {};
-    const mockSessionStorage = {
-      getItem: (key: string): string => /!*key in store ? store[key] : null*!/ getFromLocalStorage(store,key),
-      setItem: (key: string, value: string) => /!*store[key] = `${value}`*!/ setItemIntoLocalStorage(store, key, value),
-      removeItem: (key: string) => delete store[key],
-      clear: () => store = {}
-    };
-    spyOn(Storage.prototype, 'getItem').and.callFake(mockSessionStorage.getItem);
-    spyOn(Storage.prototype, 'setItem').and.callFake(mockSessionStorage.setItem);
-    spyOn(Storage.prototype, 'removeItem').and.callFake(mockSessionStorage.removeItem);
-    spyOn(Storage.prototype, 'clear').and.callFake(mockSessionStorage.clear);*/
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthenticationApiService,
-        { provide: JwtHelperService, useValue: jwtServiceSpy}]
+      providers: [AuthenticationApiService]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AuthenticationApiService);
+
   });
   afterEach(() => {
     httpTestingController.verify();
@@ -314,48 +297,40 @@ describe('AuthenticationApiService', () => {
       req.flush(response);
     })
   );
-  it('should logOut', () => {
+  it('should do 7 steps: logOut(),saveToken(),addUserToLocalCache(),' +
+    'getUserFromLocalCache(),loadToken(),getToken(),isUserLoggedIn()', () => {
+    populateDataMap(JSON.stringify(configData));
+    // first, log out just to clear the local storage
     service.logOut();
-    expect(service).toBeTruthy();
-  });
-  /*it('should saveToken', () => {
-    service.saveToken(tempToken);
-    expect(service.token).toEqual(tempToken);
-    expect(store['token']).toEqual('token');
-  });*/
-  /*it('should addUserToLocalCache', () => {
-    service.addUserToLocalCache(dtoTemp);
-    expect(JSON.parse(store['user'])).toEqual(dtoTemp);
-  });*/
-  it('should addUserToLocalCache and getUserFromLocalCache', () => {
-    service.addUserToLocalCache(dtoTemp);
-    dto = service.getUserFromLocalCache();
-    expect(dto).toEqual(dtoTemp);
-  });
-  it('should saveToken, loadToken and then get token', () => {
-    console.log("saving token in localstorage = XXX");
-    service.saveToken("XXX");
+    // next check isUserLoggedIn, it should return false;
+    let tOrF:boolean = service.isUserLoggedIn();
+    expect(tOrF).toBeFalse();
+    // also, there should be no user in the local cache
+    let user:InterviewUserDTO = service.getUserFromLocalCache();
+    expect(user).toBeFalsy();
+    // now saveToken, then loadToken, and then getToken, we should retrieve a token
+    const tokenInput = properties.get("testusertoken");
+    service.saveToken(tokenInput);
     service.loadToken();
-    let result = service.getToken();
-    expect(result).toEqual("XXX");
-  });
-  /*it('should verify isUserLoggedIn as true', () => {
-    service.saveToken("XXX");
-    let tOrF = service.isUserLoggedIn();
+    const tokenOutput = service.getToken();
+    expect(tokenOutput).toEqual(tokenInput);
+    // now check again to make sure the user is logged in
+    tOrF = service.isUserLoggedIn();
     expect(tOrF).toBeTrue();
+    // add user to the cache and then check again to make sure they are there
+    service.addUserToLocalCache(dtoTemp);
+    user = service.getUserFromLocalCache();
+    expect(user).toBeTruthy();
   });
-  function getFromLocalStorage(localstorage, input) {
-    console.log("inside the mock local storage with input = " + input);
-    if(input in store) {
-      console.log("input is in store");
+  function populateDataMap(data: string) {
+    let dataArray = data.replace("[","").replace("]","").split("},");
+    for(let str of dataArray) {
+      str = str.trim();
+      if(!str.endsWith("}")) { str += "}"; }
+      const jsonObject = JSON.parse(str);
+      for (let element in jsonObject) {
+        properties.set(element,jsonObject[element].toString());
+      }
     }
-    return input in store ? store[input] : null;
-  }
-  function setItemIntoLocalStorage(localstorage,key,value) {
-    console.log("inside the save mock local storage with input = " + key + " , " + value );
-  }*/
-  function returnMockToken() {
-    console.log("inside returnMockToken");
-    new MockJwtTokenObj("mock_token")
   }
 });

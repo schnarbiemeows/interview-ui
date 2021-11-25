@@ -1,6 +1,5 @@
-import {environment} from "../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpResponse} from "@angular/common/http";
 import {InterviewUserDTO} from "../app/models/InterviewUserDTO";
 import {Observable} from "rxjs";
 import {CheckPasswordResetResponseDTO} from "../app/models/CheckPasswordResetResponseDTO";

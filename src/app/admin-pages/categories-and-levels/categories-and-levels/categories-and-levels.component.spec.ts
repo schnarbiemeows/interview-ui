@@ -11,6 +11,7 @@ import {QuestionLevelServiceStub} from "../../../../testing/question-level-servi
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import {QuestionLevelDTO} from "../../../models/QuestionLevelDTO";
 import {QuestionCategoryDTO} from "../../../models/QuestionCategoryDTO";
+import {SharedModule} from "../../../shared/shared.module";
 
 describe('CategoriesAndLevelsComponent', () => {
   let component: CategoriesAndLevelsComponent;

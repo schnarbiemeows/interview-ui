@@ -2,9 +2,9 @@ import {fakeAsync, TestBed} from '@angular/core/testing';
 import { InterviewUserApiService } from './interview-user-api.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {environment} from "../../../environments/environment";
-import {QuestionCategoryDTO} from "../../models/QuestionCategoryDTO";
 import {InterviewUserDTOWrapper} from "../../models/InterviewUserDTOWrapper";
 import {InterviewUserDTO} from "../../models/InterviewUserDTO";
+
 
 describe('InterviewUserApiService', () => {
   let service: InterviewUserApiService;

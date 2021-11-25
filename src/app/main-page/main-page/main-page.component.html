@@ -44,6 +44,7 @@
                     <select class="form-control custom-select"
                             [(ngModel)]="filterCategoryValue"
                             required
+                            id="questionCategoryId_dropdown"
                             name="questionCategoryId_dropdown">
                       <option *ngFor="let option of questioncategorylist" [value]="option.value">
                         {{ option.viewValue }}
@@ -55,6 +56,7 @@
                     <select class="form-control custom-select"
                             [(ngModel)]="filterDifficultyValue"
                             required
+                            id="questionLevelId_dropdown"
                             name="questionLevelId_dropdown">
                       <option *ngFor="let option of questionlevellist" [value]="option.value">
                         {{ option.viewValue }}

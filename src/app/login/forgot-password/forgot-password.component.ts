@@ -16,9 +16,8 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
 export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
   showLoading: boolean = false;
-  saveChangesMsg: string = "Save Changes";
   public code:string;
-  private uniqueId:string = null;
+  public uniqueId:string = null;
   public showErrorMsg:boolean = false;
   public errorMsg:string = '';
   public showResetForm:boolean = false;
@@ -28,54 +27,14 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   public showResendBtn:boolean = false;
   private subscriptions: Subscription[] = [];
   public resetForm:PasswordResetDTO;
-  private email:string;
+  public email:string;
 
   constructor(private router: Router, private activatedroute: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private notificationService: NotificationService) {
     this.activatedroute.params.subscribe(data => {
       this.code = data.code;
-      console.log('code = ' + this.code);
     })
-  }
-
-  showAnErrorMessage() {
-    this.showErrorMsg = true;
-    this.showLogin = false;
-    this.showResetForm = false;
-    this.showSuccessMessage = false;
-    this.showResendBtn = false;
-  }
-
-  showTheResetForm() {
-    this.showErrorMsg = false;
-    this.showLogin = false;
-    this.showResetForm = true;
-    this.showSuccessMessage = false;
-    this.showResendBtn = false;
-    this.resetForm = {
-      password: null,
-      uniqueId: this.uniqueId,
-      emailAddress: this.email
-    };
-  }
-
-  showASuccessMessage() {
-    this.showErrorMsg = false;
-    this.showLogin = true;
-    this.showResetForm = false;
-    this.showSuccessMessage = true;
-    this.showResendBtn = false;
-    this.successMsg = "Your password has been reset successfully";
-  }
-
-  showApasswordResetHasBeenSent() {
-    this.showErrorMsg = false;
-    this.showLogin = false;
-    this.showResetForm = false;
-    this.showSuccessMessage = true;
-    this.showResendBtn = false;
-    this.successMsg = "A password email has been sent to the email address provided";
   }
 
   ngOnInit(): void {
@@ -107,6 +66,45 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     );
   }
 
+  public showAnErrorMessage() {
+    this.showErrorMsg = true;
+    this.showLogin = false;
+    this.showResetForm = false;
+    this.showSuccessMessage = false;
+    this.showResendBtn = false;
+  }
+
+  public showTheResetForm() {
+    this.showErrorMsg = false;
+    this.showLogin = false;
+    this.showResetForm = true;
+    this.showSuccessMessage = false;
+    this.showResendBtn = false;
+    this.resetForm = {
+      password: null,
+      uniqueId: this.uniqueId,
+      emailAddress: this.email
+    };
+  }
+
+  private showASuccessMessage() {
+    this.showErrorMsg = false;
+    this.showLogin = true;
+    this.showResetForm = false;
+    this.showSuccessMessage = true;
+    this.showResendBtn = false;
+    this.successMsg = "Your password has been reset successfully";
+  }
+
+  private showApasswordResetHasBeenSent() {
+    this.showErrorMsg = false;
+    this.showLogin = false;
+    this.showResetForm = false;
+    this.showSuccessMessage = true;
+    this.showResendBtn = false;
+    this.successMsg = "A password email has been sent to the email address provided";
+  }
+
   public resendPassword(): void {
     this.subscriptions.push(
       this.authenticationService.resetPassword(this.email).subscribe(
@@ -120,7 +118,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmitPasswordChange(form: PasswordResetDTO): void {
+  public onSubmitPasswordChange(form: PasswordResetDTO): void {
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.finalizeReset(this.resetForm).subscribe(newuserinfo => {

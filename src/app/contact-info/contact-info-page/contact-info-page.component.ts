@@ -67,9 +67,9 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
       newUserName: this.interviewuserwrapper.userName
     }
   }
-  public displayMainPage():void {
+  /*public displayMainPage():void {
     this.router.navigate(['mainpage']);
-  }
+  }*/
 
   private sendNotificationMessage(notificationType: NotificationType, message: string): void {
     if (message) {
@@ -79,11 +79,7 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  onSubmitInfoChange(form: ChangeUserInfoForm): void {
+  onSubmitInfoChange(): void {
     this.showLoading = true;
     this.interviewuserwrapper.newUserName = this.changeUserInfoForm.newUserName;
     this.interviewuserwrapper.newEmailAddr = this.changeUserInfoForm.newEmailAddr;
@@ -95,13 +91,12 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
         this.sendNotificationMessage(NotificationType.SUCCESS, "information updated.");
         this.showLoading = false;
         this.reload();
-
       })
     );
 
   }
 
-  onSubmitPasswordChange(form: ChangePasswordForm): void {
+  onSubmitPasswordChange(): void {
     this.showLoading = true;
     this.interviewuserwrapper.newPassword = this.changePasswordForm.newPassword;
     this.interviewuserwrapper.password = this.changePasswordForm.oldPassword;
@@ -111,13 +106,16 @@ export class ContactInfoPageComponent implements OnInit, OnDestroy {
           this.sendNotificationMessage(NotificationType.SUCCESS, "information updated.");
           this.showLoading = false;
           this.reload();
-
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         })
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
 

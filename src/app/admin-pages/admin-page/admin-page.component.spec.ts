@@ -7,6 +7,7 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
 import {Router} from "@angular/router";
 import { Location } from "@angular/common";
 import {routes} from "../admin-pages-routing.module";
+import {SharedModule} from "../../shared/shared.module";
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;

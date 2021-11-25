@@ -44,4 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-/src/assets/testing/testdata.txt
+/src/assets/data/testdata.txt
+/src/assets/data/test_data.json

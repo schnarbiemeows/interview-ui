@@ -129,18 +129,15 @@ export class QuestionsAndAnswersComponent implements OnInit {
 
   public receiveFormSaveAdd(newItem: QuestionAnswerItemDTO) {
     newItem.evntOperId = this.currentUser.userName;
-    console.log("receiving add question-answer form save");
     this.questionanswerservice.saveResults(newItem);
   }
 
   public receiveFormSaveEdit(editItem: QuestionAnswerItemDTO) {
     editItem.evntOperId = this.currentUser.userName;
-    console.log("receiving edit question-answer form save ");
     this.questionanswerservice.saveResults(editItem);
   }
 
   public receiveFormCancel() {
-    console.log("receiving question-answer form cancel");
     this.questionanswerservice.reload();
   }
 
@@ -190,7 +187,6 @@ export class QuestionsAndAnswersComponent implements OnInit {
 
   public resetFullList() {
     this.questionanswerservice.resetFullList();
-    console.log("resetting the full list");
   }
 
   private sendNotificationMessage(notificationType: NotificationType, message: string): void {
@@ -202,7 +198,6 @@ export class QuestionsAndAnswersComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    console.log("destroying");
     this.questionanswerservice.destroy();
     /**
      * 13 total Subscriptions

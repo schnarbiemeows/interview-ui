@@ -50,7 +50,7 @@
             </div>
           </div>
           <div *ngIf="showChangeInfo" class="card">
-            <form #infoForm="ngForm" (ngSubmit)="onSubmitInfoChange(infoForm.value)">
+            <form #infoForm="ngForm" (ngSubmit)="onSubmitInfoChange()">
               <div class="card-body">
                 <div class="form-group">
                   <label for="newFirstName">First Name</label>
@@ -98,7 +98,7 @@
           </div>
           <div *ngIf="showChangePwd" class="card m-3">
             <form class="form" #passwordForm="ngForm"
-                  (ngSubmit)="onSubmitPasswordChange(passwordForm.value)">
+                  (ngSubmit)="onSubmitPasswordChange()">
               <div class="card-body">
                 <div class="form-group">
                   <label for="oldpassword">old password</label>

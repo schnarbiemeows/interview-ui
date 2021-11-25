@@ -54,13 +54,10 @@ export class QuestionAndAnswersService {
   constructor(private questionApi: QuestionApiService,
               private answerApi: AnswerApiService,
               private questionCategoryApi: QuestionCategoryApiService,
-              private questionLevelApi: QuestionLevelApiService) {
-    console.log("inside the QuestionAndAnswersService constructor");
-  }
-
+              private questionLevelApi: QuestionLevelApiService) {}
 
   public reload() {
-    console.log("inside the QuestionAndAnswersService.reload method");
+    //console.log("inside the QuestionAndAnswersService.reload method");
     this.loaded.next(false);
     /**
      * load all of the questions
@@ -88,7 +85,6 @@ export class QuestionAndAnswersService {
             this.paginationDisabled.next(false);
             this.totalQuestions.next(this.fullquestionItemlist.length);
             this.reFilter(this.filterCategoryValue.getValue(),this.filterDifficultyValue.getValue());
-            console.log("reloading and then refiltering");
           })
         );
       })
@@ -96,7 +92,7 @@ export class QuestionAndAnswersService {
   }
 
   public getCategories() {
-    console.log("inside the QuestionAndAnswersService.getCategories method");
+    //console.log("inside the QuestionAndAnswersService.getCategories method");
     this.subscriptions.push(
       this.questionCategoryApi.getAllQuestionCategory().subscribe(questioncategorylist => {
         for (let entry of questioncategorylist) {
@@ -112,7 +108,7 @@ export class QuestionAndAnswersService {
   }
 
   public getLevels() {
-    console.log("inside the QuestionAndAnswersService.getLevels method");
+    //console.log("inside the QuestionAndAnswersService.getLevels method");
     this.subscriptions.push(
       this.questionLevelApi.getAllQuestionLevel().subscribe(questionlevellist => {
         for (let entry of questionlevellist) {
@@ -128,7 +124,7 @@ export class QuestionAndAnswersService {
   }
 
   public initiateAdd(): QuestionAnswerItemDTO {
-    console.log("inside the QuestionAndAnswersService.initiateAdd method");
+    //console.log("inside the QuestionAndAnswersService.initiateAdd method");
     this.editMode.next(false);
     this.addMode.next(true);
     this.showQuestionForm.next(true);
@@ -136,6 +132,16 @@ export class QuestionAndAnswersService {
     let item = new QuestionAnswerItemDTO();
     this.filterCategoryDropdown(item);
     this.filterDifficultyDropdown(item);
+    return item;
+  }
+
+  public initiateEditItem(i: number): QuestionAnswerItemDTO {
+    //console.log("inside the QuestionAndAnswersService.initiateEditItem method");
+    this.editMode.next(true);
+    this.addMode.next(false);
+    this.paginationDisabled.next(true);
+    this.showQuestionForm.next(true);
+    let item = this.questionItemlist.getValue()[i];
     return item;
   }
 
@@ -155,23 +161,10 @@ export class QuestionAndAnswersService {
     }
   }
 
-  public initiateEditItem(i: number): QuestionAnswerItemDTO {
-    console.log("inside the QuestionAndAnswersService.initiateEditItem method");
-    this.editMode.next(true);
-    this.paginationDisabled.next(true);
-    this.showQuestionForm.next(true);
-    let item = this.questionItemlist.getValue()[i];
-    /*this.filterCategoryDropdown(item);
-    this.filterDifficultyDropdown(item);*/
-    return item;
-  }
-
   public deleteItem(i: number) {
-    console.log("inside the QuestionAndAnswersService.deleteItem method");
     this.subscriptions.push(
       this.questionApi.deleteQuestion(this.questionItemlist.getValue()[i].questionId).subscribe(response => {
         this.reload();
-        this.paginationDisabled.next(false);
       })
     );
   }
@@ -195,7 +188,7 @@ export class QuestionAndAnswersService {
   }
 
   public saveResults(questionAnswerItem: QuestionAnswerItemDTO) {
-    console.log("inside the QuestionAndAnswersService.saveResults method");
+    //console.log("inside the QuestionAndAnswersService.saveResults method");
     if (this.addMode.getValue()) {
       this.subscriptions.push(
         this.questionApi.createQuestionAnswerPair(questionAnswerItem).subscribe(question => {
@@ -212,13 +205,9 @@ export class QuestionAndAnswersService {
   }
 
   public searchQuestionsAndAnswers(searchTerm: string): void {
-    const results: QuestionAnswerItemDTO[] = [];
-    this.fullquestionItemlist.forEach(question => {
-      if (!this.isNullOrUndefined(question.questionTxt) && question.questionTxt.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        !this.isNullOrUndefined(question.answerTxt) && question.answerTxt.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
-        results.push(question);
-      }
-    })
+    const results: QuestionAnswerItemDTO[] = this.fullquestionItemlist.filter(question =>
+      !this.isNullOrUndefined(question.questionTxt) && question.questionTxt.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        !this.isNullOrUndefined(question.answerTxt) && question.answerTxt.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
     this.questionItemlist.next(results);
     if (results.length === 0 || !searchTerm) {
       this.questionItemlist.next(this.fullquestionItemlist);
@@ -232,7 +221,7 @@ export class QuestionAndAnswersService {
   }
 
   public filter(params: FilterParamsDTO) {
-    console.log("inside the QuestionAndAnswersService.filter method");
+    //console.log("inside the QuestionAndAnswersService.filter method");
     this.reFilter(params.filterCategoryValue, params.filterDifficultyValue);
   }
 
@@ -248,11 +237,10 @@ export class QuestionAndAnswersService {
     this.totalQuestions.next(this.questionItemlist.getValue().length);
     this.filterCategoryValue.next(categoryVal);
     this.filterDifficultyValue.next(difficultyVal);
-    console.log("setting the category and difficulty levels");
   }
 
   public resetFullList() {
-    console.log("inside the QuestionAndAnswersService.resetFullList method");
+    //console.log("inside the QuestionAndAnswersService.resetFullList method");
     this.questionItemlist.next(this.fullquestionItemlist);
     this.totalQuestions.next(this.questionItemlist.getValue().length);
     this.filterCategoryValue.next(null);
@@ -264,7 +252,6 @@ export class QuestionAndAnswersService {
   }
 
   public destroy() {
-    console.log("inside the QuestionAndAnswersService.destroy method");
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

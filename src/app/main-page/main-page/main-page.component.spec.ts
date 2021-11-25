@@ -15,6 +15,7 @@ import {QuestionLevelApiServiceStub} from "../../../testing/question-level-api-s
 import {AnswerService} from "../../services/answer/answer.service";
 import {AnswerServiceStub} from "../../../testing/answer-service-stub";
 import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../../shared/shared.module";
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -23,7 +24,7 @@ describe('MainPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule,FormsModule],
+      imports: [RouterTestingModule,FormsModule, SharedModule],
       declarations: [ MainPageComponent ],
       providers: [HttpTestingController,{ provide: NotificationService, useClass: NotificationServiceStub},
         { provide: AuthenticationService, useClass: AuthenticationServiceStub},
@@ -43,6 +44,73 @@ describe('MainPageComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    fixture.detectChanges();
+    // is user logged in = true
+    expect(component.isLoggedIn).toBeTrue();
+    expect(component.userPrivileges).toBeTrue();
+    expect(component.advUserPrivileges).toBeFalse();
+    expect(component.premiumUserPrivileges).toBeFalse();
+    expect(component.adminPrivileges).toBeFalse();
+    expect(component.superPrivileges).toBeFalse();
+    expect(component.questioncategorylist.length).toBeGreaterThan(0);
+    expect(component.questioncategorymap.get(0)).toBeTruthy();
+    expect(component.questionlevellist.length).toBeGreaterThan(0);
+    expect(component.questionlevelmap.get(0)).toBeTruthy();
+    expect(component.fullquestionItemlist.length).toBeGreaterThan(0);
+    expect(component.questionItemlist.length).toBeGreaterThan(0);
+    expect(component.showQuestionForm).toBeFalse();
+    expect(component.filterCategoryValue).toBeNull();
+    expect(component.filterDifficultyValue).toBeNull();
+  });
+  it('should showQuestion()', () => {
+    component.filterDifficultyValue = 0;
+    component.filterCategoryValue = 0;
+    component.showQuestion();
+    expect(component.showQuestionMode).toBeTrue();
+    expect(component.showAnswerMode).toBeFalse();
+    expect(component.questionItem).toBeTruthy();
+    component.filterDifficultyValue = 4;
+    component.filterCategoryValue = 4;
+    component.showQuestion();
+    expect(component.showQuestionMode).toBeFalse();
+    expect(component.showAnswerMode).toBeFalse();
+    expect(component.questionItem).toBeNull();
+  });
+  it('should showAnswer()', () => {
+    component.showAnswer();
+    expect(component.showAnswerMode).toBeTrue();
+  });
+  it('should showNextQuestion()', () => {
+    component.filterDifficultyValue = 0;
+    component.filterCategoryValue = 0;
+    component.showQuestion();
+    component.showNextQuestion();
+    expect(component.showQuestionMode).toBeTrue();
+    expect(component.showAnswerMode).toBeFalse();
+    expect(component.questionItem).toBeTruthy();
+  });
+  it('should isUser()', () => {
+    const tOrF:boolean = component.isUser;
+    expect(tOrF).toBeTrue();
+  });
+  it('should isAdvUser', () => {
+    const tOrF:boolean = component.isAdvUser;
+    expect(tOrF).toBeFalse();
+  });
+  it('should isPremUser', () => {
+    const tOrF:boolean = component.isPremUser;
+    expect(tOrF).toBeFalse();
+  });
+  it('should isAdmin()', () => {
+    const tOrF:boolean = component.isAdmin;
+    expect(tOrF).toBeFalse();
+  });
+  it('should isSuper', () => {
+    const tOrF:boolean = component.isSuper;
+    expect(tOrF).toBeFalse();
+  });
+  it('should isUserLoggedIn', () => {
+    const tOrF:boolean = component.isUserLoggedIn();
+    expect(tOrF).toBeTrue();
   });
 });

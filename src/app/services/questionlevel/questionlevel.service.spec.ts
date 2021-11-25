@@ -1,24 +1,23 @@
 import {TestBed, tick} from '@angular/core/testing';
-
 import { QuestionLevelService } from './question-level.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {AuthenticationServiceStub} from "../../../testing/authentication-service-stub";
 import {QuestionLevelApiService} from "../../api/question-level-api/question-level-api.service";
 import {QuestionLevelApiServiceStub} from "../../../testing/question-level-api-service-stub";
-import {AuthenticationService} from "../authentication/authentication.service";
 import {QuestionLevelDTO} from "../../models/QuestionLevelDTO";
 import {Subscription} from "rxjs";
 
 describe('QuestionlevelService', () => {
   let service: QuestionLevelService;
   let httpTestingController: HttpTestingController;
+  let questionLevelApiServiceStub: QuestionLevelApiServiceStub;
   let susbscriptions: Subscription[] = [];
 
   beforeEach(() => {
+    questionLevelApiServiceStub = new QuestionLevelApiServiceStub();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [QuestionLevelService,
-      { provide: QuestionLevelApiService, useClass: QuestionLevelApiServiceStub}]
+      { provide: QuestionLevelApiService, useValue: questionLevelApiServiceStub}]
     });
     service = TestBed.inject(QuestionLevelService);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -45,17 +44,20 @@ describe('QuestionlevelService', () => {
     service.reloadLevel();
     service.searchQuestionLevel('EASY');
     let list = [];
+    let count = 0;
     susbscriptions.push(service.questionlevellist$.subscribe(rec => {
       list = rec;
-      expect(list.length).toBe(1);
+      if(count==0) {
+        expect(list.length).toBe(1);
+        count = 1;
+      } else if(count ==1) {
+        expect(list.length).toBe(0);
+        count = 2;
+      } else {
+        expect(list.length).toBe(3);
+      }
     }));
-    service.reloadLevel();
-    service.searchQuestionLevel('HARD');
-    list = [];
-    susbscriptions.push(service.questionlevellist$.subscribe(rec => {
-      list = rec;
-      expect(list.length).toBe(1);
-    }));
+    service.searchQuestionLevel('SUPER');
   });
   it('should initiateAddLevel', () => {
     const item = service.initiateAddLevel();

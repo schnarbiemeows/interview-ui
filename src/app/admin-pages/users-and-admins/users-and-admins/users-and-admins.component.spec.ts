@@ -6,6 +6,9 @@ import {InterviewUserServiceStub} from "../../../../testing/interview-user-servi
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {InterviewUserService} from "../../../services/interviewuser/interview-user.service";
 import {InterviewUserDTOWrapper} from "../../../models/InterviewUserDTOWrapper";
+import {SharedModule} from "../../../shared/shared.module";
+import {RouterTestingModule} from "@angular/router/testing";
+import {NotificationService} from "../../../services/notification/notification.service";
 
 describe('UsersAndAdminsComponent', () => {
   let component: UsersAndAdminsComponent;
@@ -16,6 +19,7 @@ describe('UsersAndAdminsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [],
       declarations: [ UsersAndAdminsComponent ],
       providers: [HttpTestingController,
         { provide: AuthenticationService, useClass: AuthenticationServiceStub},

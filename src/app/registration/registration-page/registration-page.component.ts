@@ -36,6 +36,7 @@ export class RegistrationPageComponent implements OnInit {
           this.recaptchaValid = true;
         },
         (errorResponse: any) => {
+          this.recaptchaValid = false;
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         }
@@ -47,12 +48,12 @@ export class RegistrationPageComponent implements OnInit {
     console.log(`reCAPTCHA error encountered; details:`, errorDetails);
   }
 
-  public displayLogin():void {
+  /*public displayLogin():void {
     this.router.navigate(['/login']);
   }
   public displayMainPage():void {
     this.router.navigate(['/mainpage']);
-  }
+  }*/
 
   public onRegister(user: InterviewUserDTO): void {
     this.showLoading = true;

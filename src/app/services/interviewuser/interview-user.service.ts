@@ -75,42 +75,37 @@ export class InterviewUserService {
     return interviewuser;
   }
 
+  editItem(i: number): InterviewUserDTOWrapper {
+    this.editMode.next(true);
+    this.addMode.next(false);
+    this.showForm.next(true);
+    this.paginationDisabled.next(true);
+    let interviewuser = new InterviewUserDTOWrapper();
+    interviewuser.fromDto(this.interviewuserlist.getValue()[i]);
+    return interviewuser;
+  }
+
   saveResults(interviewuser: InterviewUserDTOWrapper) {
     if(this.addMode.getValue()) {
       interviewuser.userName = interviewuser.newUserName;
       this.subscriptions.push(
-        this.api.createInterviewUser(interviewuser).subscribe(interviewuser => {
-          //this.interviewuser = new InterviewUserDTOWrapper();
+        this.api.createInterviewUser(interviewuser).subscribe(returnlist => {
           this.reload();
-          this.paginationDisabled.next(false);
         })
       );
     } else if(this.editMode.getValue()) {
       this.subscriptions.push(
-        this.api.updateInterviewUser(interviewuser).subscribe(interviewuser => {
-          //this.interviewuser = new InterviewUserDTOWrapper();
+        this.api.updateInterviewUser(interviewuser).subscribe(returnlist => {
           this.reload();
-          this.paginationDisabled.next(false);
         })
       );
     }
-  }
-
-  editItem(i: number): InterviewUserDTOWrapper {
-    this.editMode.next(true);
-    this.paginationDisabled.next(true);
-    let interviewuser = new InterviewUserDTOWrapper();
-    interviewuser.fromDto(this.interviewuserlist.getValue()[i]);
-    //console.log("user id = " + this.interviewuser.userId);
-    this.showForm.next(true);
-    return interviewuser;
   }
 
   deleteItem(i: number) {
     this.subscriptions.push(
       this.api.deleteInterviewUser(this.interviewuserlist.getValue()[i].userName).subscribe(response => {
         this.reload();
-        this.paginationDisabled.next(false);
       })
     );
   }

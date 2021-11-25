@@ -3,26 +3,13 @@ import { QuestionsAndAnswersComponent } from './questions-and-answers.component'
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {AuthenticationServiceStub} from "../../../../testing/authentication-service-stub";
 import {NotificationServiceStub} from "../../../../testing/notification-service-stub";
-import {QuestionLevelServiceStub} from "../../../../testing/question-level-service-stub";
-import {QuestionCategoryServiceStub} from "../../../../testing/question-category-service-stub";
 import {NotificationService} from "../../../services/notification/notification.service";
 import {AuthenticationService} from "../../../services/authentication/authentication.service";
-import {QuestionCategoryService} from "../../../services/questioncategory/question-category.service";
-import {QuestionLevelService} from "../../../services/questionlevel/question-level.service";
 import {QuestionAndAnswersServiceStub} from "../../../../testing/questions-and-answers-service-stub";
 import {QuestionAndAnswersService} from "../../../services/question-and-answers/question-and-answers.service";
 import {QuestionAnswerItemDTO} from "../../../models/QuestionAnswerItemDTO";
-import {NotificationType} from "../../../enum/notification-type.enum";
-import {QuestionApiService} from "../../../api/question-api/question-api.service";
-import {QuestionApiServiceStub} from "../../../../testing/question-api-service-stub";
-import {AnswerApiServiceStub} from "../../../../testing/answer-api-service-stub";
-import {AnswerApiService} from "../../../api/answer-api/answer-api.service";
-import {QuestionCategoryApiService} from "../../../api/question-category-api/question-category-api.service";
-import {QuestionCategoryApiServiceStub} from "../../../../testing/question-category-api-service-stub";
-import {QuestionLevelApiServiceStub} from "../../../../testing/question-level-api-service-stub";
-import {QuestionLevelApiService} from "../../../api/question-level-api/question-level-api.service";
-import {HttpClient} from "@angular/common/http";
-import {AppModule} from "../../../app.module";
+import {SharedModule} from "../../../shared/shared.module";
+
 
 describe('QuestionsAndAnswersComponent', () => {
   let component: QuestionsAndAnswersComponent;
@@ -31,18 +18,8 @@ describe('QuestionsAndAnswersComponent', () => {
   let authService: AuthenticationServiceStub;
   let notificationService: NotificationServiceStub;
   let questionAndAnswersService: QuestionAndAnswersServiceStub;
-  /*let questionApiService: QuestionApiServiceStub;
-  let answerApiService: AnswerApiServiceStub;
-  let questionCategoryApiService: QuestionCategoryApiServiceStub;
-  let questionLevelApiService: QuestionLevelApiServiceStub;*/
+
   beforeEach(async () => {
-    /*authService = new AuthenticationServiceStub();
-    notificationService = new NotificationServiceStub();
-    questionAndAnswersService = new QuestionAndAnswersServiceStub();
-    questionApiService = new QuestionApiServiceStub();
-    answerApiService = new AnswerApiServiceStub();
-    questionCategoryApiService = new QuestionCategoryApiServiceStub();
-    questionLevelApiService = new QuestionLevelApiServiceStub();*/
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [ QuestionsAndAnswersComponent ],
@@ -50,11 +27,7 @@ describe('QuestionsAndAnswersComponent', () => {
         { provide: NotificationService, useClass: NotificationServiceStub},
         { provide: AuthenticationService, useClass: AuthenticationServiceStub},
         { provide: QuestionAndAnswersService, useClass: QuestionAndAnswersServiceStub}
-        /*,
-        { provide: QuestionApiService, useValue: questionApiService},
-        { provide: AnswerApiService, useValue: answerApiService},
-        { provide: QuestionCategoryApiService, useValue: questionCategoryApiService},
-        { provide: QuestionLevelApiService, useValue: questionLevelApiService}*/
+
       ]
     })
     .compileComponents();

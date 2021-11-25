@@ -68,12 +68,14 @@ export class InterviewUserApiServiceStub {
     return of(data);
   }
   updateInterviewUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
-    this.testUsers[data.userId] = data;
+    let myIndex:number = this.testUsers.findIndex(rec => rec.userId == data.userId);
+    this.testUsers[myIndex] = data;
     return of(data);
   }
 
   updateUserByUser(data: InterviewUserDTOWrapper): Observable<InterviewUserDTO> {
-    this.testUsers[data.userId] = data;
+    let myIndex:number = this.testUsers.findIndex(rec => rec.userId == data.userId);
+    this.testUsers[myIndex] = data;
     return of(data);
   }
   deleteInterviewUser(username: string): Observable<ResponseMessage> {

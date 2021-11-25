@@ -29,9 +29,6 @@ export class QuestionLevelService {
 
   constructor(private api: QuestionLevelApiService) { }
 
-  /*public changeLoaded(input: any) {
-    this.loadedLevel.next(input);
-  }*/
   private changeAddMode(input: any) {
     this.addModeLevel.next(input);
   }
@@ -60,11 +57,6 @@ export class QuestionLevelService {
 
   public searchQuestionLevel(searchTerm: string): void {
     const results: QuestionLevelDTO[] = this.fullquestionlevellist.filter(rec => !this.isNullOrUndefined(rec.questionLevelDesc) && rec.questionLevelDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-    /*for (const questionlevel of this.fullquestionlevellist) {
-      if(!this.isNullOrUndefined(questionlevel.questionLevelDesc) && questionlevel.questionLevelDesc.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
-        results.push(questionlevel);
-      }
-    }*/
     this.questionlevellist.next(results);
     if (results.length === 0 || !searchTerm) {
       this.questionlevellist.next(this.fullquestionlevellist);
@@ -114,7 +106,6 @@ export class QuestionLevelService {
   }
 
   public destroy() {
-    console.log("calling the QuestionLevelService.destroy() method");
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 

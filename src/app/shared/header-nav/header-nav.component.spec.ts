@@ -10,8 +10,6 @@ import {RouterTestingModule} from "@angular/router/testing";
 describe('HeaderNavComponent', () => {
   let component: HeaderNavComponent;
   let fixture: ComponentFixture<HeaderNavComponent>;
-  let authService: AuthenticationServiceStub;
-  let notificationService: NotificationServiceStub;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

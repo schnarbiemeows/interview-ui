@@ -52,30 +52,30 @@ export class LoginPageComponent implements OnInit {
     this.subscriptions.push(
       this.authenticationService.postRecaptcha(googleObj).subscribe(
         (response: HttpResponse<any>) => {
+          console.log(response);
           this.recaptchaValid = true;
         },
-        (errorResponse: any) => {
+        (errorResponse: HttpErrorResponse) => {
+          this.recaptchaValid = false;
           this.sendNotificationMessage(NotificationType.ERROR, errorResponse.error.message);
           this.showLoading = false;
         }
       )
     );
-
   }
 
   public onError(errorDetails: RecaptchaErrorParameters): void {
     console.log(`reCAPTCHA error encountered; details:`, errorDetails);
   }
 
-  public displayRegistration():void {
+  /*public displayRegistration():void {
     this.router.navigate(['register']);
   }
   public displayMainPage():void {
     this.router.navigate(['mainpage']);
-  }
+  }*/
 
   public onLogin(user: InterviewUserDTO): void {
-    console.log("here");
     if(this.validateForm(user)) {
       this.showLoading = true;
       this.subscriptions.push(
@@ -154,9 +154,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   private validateForm(user: InterviewUserDTO):boolean {
-    /*console.log("username = " + user.userName);
-    if(user.userName!=null&&user.userName!=='undefined'&&user.userName!='')*/
-    return true;
+      if(user.userName!=null&&user.userName!=='undefined'&&user.userName!=''&&
+        user.password!=null&&user.password!=='undefined'&&user.password!='')
+      return true;
+      else return false;
   }
   private sendNotificationMessage(notificationType: NotificationType, message: string): void {
     if (message) {

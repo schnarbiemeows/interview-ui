@@ -170,10 +170,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
     } else {
       this.showQuestionMode = false;
       this.showAnswerMode = false;
+      this.questionItem = null;
     }
   }
 
-  getRandomInt(max) {
+  private getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
@@ -187,7 +188,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.showQuestion();
   }
 
-  public displayLogin():void {
+  /*public displayLogin():void {
     this.router.navigate(['login']);
   }
   public displayRegistration():void {
@@ -196,7 +197,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public displayAccountInfo() {
     this.router.navigate(['userinfo']);
-  }
+  }*/
+
   public get isUser(): boolean {
     return this.getUserRole() === Role.USER;
   }
@@ -213,7 +215,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
     if(this.isUserLoggedIn()) {
       return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
     }
-    return false;
   }
 
   public get isSuper(): boolean {
@@ -224,42 +225,39 @@ export class MainPageComponent implements OnInit, OnDestroy {
     return this.authenticationService.isUserLoggedIn();
   }
 
-  public onLogOut(): void {
+  /*public onLogOut(): void {
     this.authenticationService.logOut();
     this.isLoggedIn = false;
     this.sendNotificationMessage(NotificationType.SUCCESS, `You've been successfully logged out`);
-  }
+  }*/
 
-  public gotoAdminConsole():void {
-    this.router.navigate(['/admin']);
-  }
   private getUserRole(): string {
     return this.authenticationService.getUserFromLocalCache().roles;
   }
-  private sendNotificationMessage(notificationType: NotificationType, message: string): void {
+  /*private sendNotificationMessage(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
     }
-  }
+  }*/
 
-  filterQuestions() {
+  private filterQuestions() {
     const results: QuestionAnswerItemDTO[] = [];
     this.fullquestionItemlist.forEach(question => {
       if ( (this.filterCategoryValue === null || this.filterCategoryValue == question.questionCategoryId) &&
         (this.filterDifficultyValue === null || this.filterDifficultyValue == question.questionLevelId) ) {
         results.push(question);
       }
-    })
+    });
     this.questionItemlist = results;
   }
 
-  resetFullList() {
+  /*resetFullList() {
     this.questionItemlist = this.fullquestionItemlist;
     this.filterCategoryValue = null;
     this.filterDifficultyValue = null;
-  }
+  }*/
 
   onSubmit(e) {
     e.preventDefault();
@@ -267,10 +265,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  displayAboutPage() {
-    this.router.navigate(['/about']);
   }
 
 }

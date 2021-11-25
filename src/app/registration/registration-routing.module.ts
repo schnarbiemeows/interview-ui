@@ -4,7 +4,7 @@ import {RegistrationPageComponent} from "./registration-page/registration-page.c
 import {RegisterEmailSentComponent} from "./register-email-sent/register-email-sent.component";
 import {ConfirmEmailComponent} from "./confirm-email/confirm-email.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: RegistrationPageComponent},
   { path: 'emailsent/:email', component: RegisterEmailSentComponent},
   { path: 'confirmemail/:code', component: ConfirmEmailComponent}

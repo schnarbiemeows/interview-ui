@@ -38,7 +38,6 @@ export class AuthenticationService {
   }
 
   public getUserFromLocalCache(): InterviewUserDTO {
-    console.log("inside AuthenticationService.getUserFromLocalCache method");
     return JSON.parse(localStorage.getItem('user'));
   }
 
