@@ -1,10 +1,10 @@
 import {Observable} from "rxjs/Observable";
-import {AnswerDTO} from "../app/models/AnswerDTO";
+import {AnswerDto} from "../app/models/answer-dto";
 import {ResponseMessage} from "../app/models/ResponseMessage";
 import {of} from "rxjs/observable/of";
 
 export class AnswerApiServiceStub {
-  answers:AnswerDTO[] = [
+  answers:AnswerDto[] = [
     {
       answerId: 0,
       answerTxt: "a cool language",
@@ -24,18 +24,18 @@ export class AnswerApiServiceStub {
         evntOperId: "admin"
       }
     ];
-  public getAllAnswer(): Observable<AnswerDTO[]> {
+  public getAllAnswer(): Observable<AnswerDto[]> {
     return of(this.answers);
   }
-  public findAnswerById(id: number): Observable<AnswerDTO> {
+  public findAnswerById(id: number): Observable<AnswerDto> {
     return of(this.answers[id]);
   }
-  public createAnswer(data: AnswerDTO): Observable<AnswerDTO> {
+  public createAnswer(data: AnswerDto): Observable<AnswerDto> {
     data.answerId = this.answers.length+1;
     this.answers.push(data);
     return of(data);
   }
-  public updateAnswer(data: AnswerDTO): Observable<AnswerDTO> {
+  public updateAnswer(data: AnswerDto): Observable<AnswerDto> {
     this.answers[data.answerId] = data;
     return of(data);
   }

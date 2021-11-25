@@ -6,7 +6,7 @@ import {NotificationService} from "../../services/notification/notification.serv
 import {Subscription} from "rxjs";
 import {QuestionDTO} from "../../models/QuestionDTO";
 import {QuestionAnswerItemDTO} from "../../models/QuestionAnswerItemDTO";
-import {AnswerDTO} from "../../models/AnswerDTO";
+import {AnswerDto} from "../../models/answer-dto";
 import {ForeignKeyOptionsDTO} from "../../models/ForeignKeyOptionsDTO";
 import {QuestionService} from "../../services/question/question.service";
 import {AnswerService} from "../../services/answer/answer.service";
@@ -144,7 +144,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       dto.questionId = item.questionId;
       dto.questionTxt = item.questionTxt;
       dto.answerId = item.answerId;
-      let  answer:AnswerDTO = answermap.get(item.answerId);
+      let  answer:AnswerDto = answermap.get(item.answerId);
       dto.answerTxt = answer.answerTxt;
       dto.questionLevelId = item.questionLevelId;
       dto.questionCategoryId = item.questionCategoryId;

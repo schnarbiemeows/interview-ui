@@ -6,7 +6,7 @@ import {QuestionAnswerItemDTO} from "../../../models/QuestionAnswerItemDTO";
 import {ForeignKeyOptionsDTO} from "../../../models/ForeignKeyOptionsDTO";
 import {FormsModule} from "@angular/forms";
 import {QuestionDTO} from "../../../models/QuestionDTO";
-import {AnswerDTO} from "../../../models/AnswerDTO";
+import {AnswerDto} from "../../../models/answer-dto";
 
 @Component({
   template: '<app-questions-and-answers-form\n' +
@@ -30,7 +30,7 @@ export class TestHostComponent {
     evntTmestmp: null,
     evntOperId: "schnarbiemeows"
   };
-  answer:AnswerDTO = {
+  answer:AnswerDto = {
     answerTxt: "answerTxt",
     evntTmestmp: null,
     evntOperId: 'schnarbiemeows'

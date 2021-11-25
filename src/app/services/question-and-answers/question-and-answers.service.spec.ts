@@ -13,7 +13,7 @@ import {Subscription} from "rxjs";
 import {QuestionAnswerItemDTO} from "../../models/QuestionAnswerItemDTO";
 import {ForeignKeyOptionsDTO} from "../../models/ForeignKeyOptionsDTO";
 import {QuestionDTO} from "../../models/QuestionDTO";
-import {AnswerDTO} from "../../models/AnswerDTO";
+import {AnswerDto} from "../../models/answer-dto";
 import {FilterParamsDTO} from "../../models/FilterParamsDTO";
 
 describe('QuestionAndAnswersService', () => {
@@ -46,7 +46,7 @@ describe('QuestionAndAnswersService', () => {
     evntTmestmp: null,
     evntOperId: "schnarbiemeows"
   };
-  const newAnswer:AnswerDTO = {
+  const newAnswer:AnswerDto = {
     answerTxt: 'use the sed command - sed s/x/y/g <file name>',
     evntTmestmp: null,
     evntOperId: 'schnarbiemeows'

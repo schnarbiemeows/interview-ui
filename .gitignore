@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 /src/assets/data/testdata.txt
 /src/assets/data/test_data.json
+/src/assets/data/test-config.json

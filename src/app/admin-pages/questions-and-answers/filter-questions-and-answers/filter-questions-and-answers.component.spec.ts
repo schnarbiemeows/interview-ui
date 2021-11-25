@@ -3,7 +3,7 @@ import { FilterQuestionsAndAnswersComponent } from './filter-questions-and-answe
 import {Component} from "@angular/core";
 import {QuestionAnswerItemDTO} from "../../../models/QuestionAnswerItemDTO";
 import {QuestionDTO} from "../../../models/QuestionDTO";
-import {AnswerDTO} from "../../../models/AnswerDTO";
+import {AnswerDto} from "../../../models/answer-dto";
 import {ForeignKeyOptionsDTO} from "../../../models/ForeignKeyOptionsDTO";
 import {FilterParamsDTO} from "../../../models/FilterParamsDTO";
 import {FormsModule} from "@angular/forms";

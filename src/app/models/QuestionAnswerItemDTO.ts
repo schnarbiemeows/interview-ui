@@ -1,6 +1,6 @@
 import {InterviewUserDTO} from "./InterviewUserDTO";
 import {QuestionDTO} from "./QuestionDTO";
-import {AnswerDTO} from "./AnswerDTO";
+import {AnswerDto} from "./answer-dto";
 
 export class QuestionAnswerItemDTO {
   questionId?: number;
@@ -20,7 +20,7 @@ export class QuestionAnswerItemDTO {
     this.questionTxt = '';
   }
 
-  fromDtos(question: QuestionDTO, answer: AnswerDTO) {
+  fromDtos(question: QuestionDTO, answer: AnswerDto) {
     this.questionId = question.questionId;
     this.questionCategoryId = question.questionCategoryId;
     this.questionLevelId = question.questionLevelId;

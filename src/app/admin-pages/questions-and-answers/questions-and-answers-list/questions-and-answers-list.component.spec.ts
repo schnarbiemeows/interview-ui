@@ -4,7 +4,7 @@ import {Component} from "@angular/core";
 import {QuestionCategoryDTO} from "../../../models/QuestionCategoryDTO";
 import {QuestionAnswerItemDTO} from "../../../models/QuestionAnswerItemDTO";
 import {QuestionDTO} from "../../../models/QuestionDTO";
-import {AnswerDTO} from "../../../models/AnswerDTO";
+import {AnswerDto} from "../../../models/answer-dto";
 import {LevelListComponent} from "../../categories-and-levels/level-list/level-list.component";
 import {NgxPaginationModule} from "ngx-pagination";
 

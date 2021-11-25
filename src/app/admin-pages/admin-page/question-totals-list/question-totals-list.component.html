@@ -1,0 +1,31 @@
+<div class="card border-info">
+  <div class="card-body table-responsive">
+    <table class="table table-bordered table-hover rounded">
+      <thead>
+      <tr class="d-flex">
+        <th class="col-8 text-center">
+          <div class="text-size-10 p-3">Category</div>
+        </th>
+        <th class="col-1 text-center">
+          <div class="text-size-8 p-3">Easy</div>
+        </th>
+        <th class="col-1 text-center">
+          <div class="text-size-6 p-1 pt-3">Medium</div>
+        </th>
+        <th class="col-1 text-center">
+          <div class="text-size-6 p-1 pt-3">Hard</div>
+        </th>
+        <th class="col-1 text-center">
+          <div class="text-size-6 p-1 pt-3">Total</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody
+        *ngFor="let dto of questionTotalsList">
+      <app-question-totals-list-item
+        [item]="dto" >
+      </app-question-totals-list-item>
+      </tbody>
+    </table>
+  </div>
+</div>

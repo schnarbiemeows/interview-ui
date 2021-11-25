@@ -84,6 +84,11 @@ export class QuestionAndAnswersServiceStub {
   public resetFullList() {
 
   }
+
+  public getQuestionTotals() {
+
+  }
+
   destroy() {
 
   }

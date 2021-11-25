@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../../../environments/environment';
 import { ResponseMessage } from '../../models/ResponseMessage';
-import { AnswerDTO } from '../../models/AnswerDTO';
+import { AnswerDto } from '../../models/answer-dto';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
@@ -21,18 +21,18 @@ export class AnswerApiService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAnswer(): Observable<AnswerDTO[]> {
-    return this.http.get<AnswerDTO[]>(this.getAllAnswerURL);
+  getAllAnswer(): Observable<AnswerDto[]> {
+    return this.http.get<AnswerDto[]>(this.getAllAnswerURL);
   }
-  findAnswerById(id: number): Observable<AnswerDTO> {
+  findAnswerById(id: number): Observable<AnswerDto> {
     //let findAnswerByIdURL_temp = this.findAnswerByIdURL.replace("{id}",id.toString(10));
-    return this.http.get<AnswerDTO>(this.findAnswerByIdURL+`${id}`);
+    return this.http.get<AnswerDto>(this.findAnswerByIdURL+`${id}`);
   }
-  createAnswer(data: AnswerDTO): Observable<AnswerDTO> {
-    return this.http.post<AnswerDTO>(this.createAnswerURL, data, httpOptions);
+  createAnswer(data: AnswerDto): Observable<AnswerDto> {
+    return this.http.post<AnswerDto>(this.createAnswerURL, data, httpOptions);
   }
-  updateAnswer(data: AnswerDTO): Observable<AnswerDTO> {
-    return this.http.post<AnswerDTO>(this.updateAnswerURL, data, httpOptions);
+  updateAnswer(data: AnswerDto): Observable<AnswerDto> {
+    return this.http.post<AnswerDto>(this.updateAnswerURL, data, httpOptions);
   }
   deleteAnswer(id: number): Observable<ResponseMessage> {
     return this.http.delete<ResponseMessage>(this.deleteAnswerURL+`${id}`, httpOptions);

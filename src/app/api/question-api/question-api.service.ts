@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../../../environments/environment';
 import { ResponseMessage } from '../../models/ResponseMessage';
 import { QuestionDTO } from '../../models/QuestionDTO';
 import { QuestionAnswerItemDTO } from "../../models/QuestionAnswerItemDTO";
+import {QuestionTotalsDto} from "../../admin-pages/admin-page/models/question-totals-dto";
+import {catchError} from "rxjs/operators";
+import {throwError} from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -23,7 +26,7 @@ export class QuestionApiService {
   deleteQuestionURL : string = `${this.host}/question/delete/`;
   createQuestionAnswerURL : string = `${this.host}/question/createpair/`;
   updateQuestionAnswerURL : string = `${this.host}/question/updatepair/`;
-
+  getAllQuestionTotalsURL : string = `${this.host}/question/totals`;
   constructor(private http: HttpClient) { }
 
   getAllQuestion(): Observable<QuestionDTO[]> {
@@ -47,5 +50,25 @@ export class QuestionApiService {
   }
   updateQuestionAnswerPair(data: QuestionAnswerItemDTO): Observable<QuestionAnswerItemDTO> {
     return this.http.post<QuestionAnswerItemDTO>(this.updateQuestionAnswerURL, data, httpOptions);
+  }
+  getAllQuestionTotals(): Observable<QuestionTotalsDto[]> {
+    return this.http.get<QuestionTotalsDto[]>(this.getAllQuestionTotalsURL).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }

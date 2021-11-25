@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminPagesRoutingModule } from './admin-pages-routing.module';
-import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {AdminPageComponent} from "./admin-page/admin-page/admin-page.component";
 import {SharedModule} from "../shared/shared.module";
 import {FormsModule} from "@angular/Forms";
 import {NgxPaginationModule} from "ngx-pagination";
@@ -23,6 +23,8 @@ import { UsersAndAdminsListComponent } from './users-and-admins/users-and-admins
 import { UsersAndAdminsListItemComponent } from './users-and-admins/users-and-admins-list-item/users-and-admins-list-item.component';
 import { UsersAndAdminsFormComponent } from './users-and-admins/users-and-admins-form/users-and-admins-form.component';
 import {QuestionAndAnswersServiceStub} from "../../testing/questions-and-answers-service-stub";
+import {QuestionTotalsListItemComponent} from "./admin-page/question-totals-list-item/question-totals-list-item.component";
+import { QuestionTotalsListComponent } from './admin-page/question-totals-list/question-totals-list.component';
 
 
 @NgModule({
@@ -40,11 +42,13 @@ import {QuestionAndAnswersServiceStub} from "../../testing/questions-and-answers
     QuestionsAndAnswersListComponent,
     QuestionsAndAnswersFormComponent,
     QuestionsAndAnswersListItemComponent,
+    QuestionTotalsListItemComponent,
     UsersAndAdminsComponent,
     UsersAndAdminsSidebarComponent,
     UsersAndAdminsListComponent,
     UsersAndAdminsListItemComponent,
-    UsersAndAdminsFormComponent],
+    UsersAndAdminsFormComponent,
+    QuestionTotalsListComponent],
   imports: [
     CommonModule,
     AdminPagesRoutingModule,

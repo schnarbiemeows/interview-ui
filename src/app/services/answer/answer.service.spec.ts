@@ -2,7 +2,7 @@ import { TestBed, fakeAsync, tick  } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AnswerService } from './answer.service';
 import {environment} from "../../../environments/environment";
-import {AnswerDTO} from "../../models/AnswerDTO";
+import {AnswerDto} from "../../models/answer-dto";
 
 describe('AnswerService', () => {
   let service: AnswerService;
@@ -92,7 +92,7 @@ describe('AnswerService', () => {
           }
         ]
       };
-      const newAnswer:AnswerDTO = {
+      const newAnswer:AnswerDto = {
         answerTxt: 'use the sed command - sed s/x/y/g <file name>',
         evntTmestmp: null,
         evntOperId: 'schnarbiemeows'
@@ -121,7 +121,7 @@ describe('AnswerService', () => {
           }
         ]
       };
-      const editAnswer:AnswerDTO = {
+      const editAnswer:AnswerDto = {
         answerId: 63,
         answerTxt: 'use the sed command - sed s/x/y/g <file name>',
         evntTmestmp: null,

@@ -1,4 +1,4 @@
-export interface AnswerDTO{
+export interface AnswerDto {
 	answerId?: number;
 	answerTxt?: string;
 	evntTmestmp?: Date;

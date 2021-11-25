@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import {GoogleRequestDTO} from "./GoogleRequestDTO";
 import {QuestionAnswerItemDTO} from "./QuestionAnswerItemDTO";
 import {QuestionDTO} from "./QuestionDTO";
-import {AnswerDTO} from "./AnswerDTO";
+import {AnswerDto} from "./answer-dto";
 import {CheckPasswordResetResponseDTO} from "./CheckPasswordResetResponseDTO";
 
 describe('ModelsTester', () => {
@@ -19,7 +19,7 @@ describe('ModelsTester', () => {
     const obj = new QuestionAnswerItemDTO();
     expect(obj).toBeTruthy();
   });
-  it('should populate a QuestionAnswerItemDTO object from a QuestionDTO and an AnswerDTO', () => {
+  it('should populate a QuestionAnswerItemDTO object from a QuestionDTO and an AnswerDto', () => {
     let question:QuestionDTO = {
       questionId: 0,
       questionCategoryId: 0,
@@ -29,7 +29,7 @@ describe('ModelsTester', () => {
       evntTmestmp: null,
       evntOperId: ''
     };
-    let answer:AnswerDTO = {
+    let answer:AnswerDto = {
       answerId:0,
       answerTxt: 'ANSWER',
       evntTmestmp: null,

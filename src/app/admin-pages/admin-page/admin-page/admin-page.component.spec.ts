@@ -2,12 +2,12 @@ import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AdminPageComponent } from './admin-page.component';
 import {HttpTestingController} from "@angular/common/http/testing";
-import {AuthenticationServiceStub} from "../../../testing/authentication-service-stub";
-import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {AuthenticationServiceStub} from "../../../../testing/authentication-service-stub";
+import {AuthenticationService} from "../../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
 import { Location } from "@angular/common";
-import {routes} from "../admin-pages-routing.module";
-import {SharedModule} from "../../shared/shared.module";
+import {routes} from "../../admin-pages-routing.module";
+import {SharedModule} from "../../../shared/shared.module";
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;

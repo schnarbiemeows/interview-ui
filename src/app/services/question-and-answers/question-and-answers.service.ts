@@ -6,10 +6,11 @@ import {BehaviorSubject, Subscription} from "rxjs";
 import {QuestionLevelDTO} from "../../models/QuestionLevelDTO";
 import {QuestionAnswerItemDTO} from "../../models/QuestionAnswerItemDTO";
 import {FilterParamsDTO} from "../../models/FilterParamsDTO";
-import {AnswerDTO} from "../../models/AnswerDTO";
+import {AnswerDto} from "../../models/answer-dto";
 import {QuestionDTO} from "../../models/QuestionDTO";
 import {ForeignKeyOptionsDTO} from "../../models/ForeignKeyOptionsDTO";
 import {QuestionCategoryApiService} from "../../api/question-category-api/question-category-api.service";
+import {QuestionTotalsDto} from "../../admin-pages/admin-page/models/question-totals-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class QuestionAndAnswersService {
   private questioncategorylist = new BehaviorSubject<ForeignKeyOptionsDTO[]>(null);
   private questionlevellistTemp:ForeignKeyOptionsDTO[] = [];
   private questionlevellist = new BehaviorSubject<ForeignKeyOptionsDTO[]>(null);
+  private questionTotalsList = new BehaviorSubject<QuestionTotalsDto[]>(null);
   private questionCategoryFormListTemp:ForeignKeyOptionsDTO[] = [];
   private questionCategoryFormList = new BehaviorSubject<ForeignKeyOptionsDTO[]>(null);
   private questionLevelFormListTemp:ForeignKeyOptionsDTO[] = [];
@@ -43,6 +45,7 @@ export class QuestionAndAnswersService {
   public showForm$ = this.showQuestionForm.asObservable();
   public questioncategorylist$ = this.questioncategorylist.asObservable();
   public questionlevellist$ = this.questionlevellist.asObservable();
+  public questionTotalsList$ = this.questionTotalsList.asObservable();
   public questionCategoryFormList$ = this.questionCategoryFormList.asObservable();
   public questionLevelFormList$ = this.questionLevelFormList.asObservable();
   public questionItemlist$ = this.questionItemlist.asObservable();
@@ -175,7 +178,7 @@ export class QuestionAndAnswersService {
       dto.questionId = item.questionId;
       dto.questionTxt = item.questionTxt;
       dto.answerId = item.answerId;
-      let  answer:AnswerDTO = answermap.get(item.answerId);
+      let  answer:AnswerDto = answermap.get(item.answerId);
       dto.answerTxt = answer.answerTxt;
       dto.questionLevelId = item.questionLevelId;
       dto.questionCategoryId = item.questionCategoryId;
@@ -251,6 +254,13 @@ export class QuestionAndAnswersService {
     this.questionLevelFormList.next(this.questionlevellist.getValue());
   }
 
+  public getQuestionTotals() {
+    this.subscriptions.push(
+      this.questionApi.getAllQuestionTotals().subscribe(questionTotalsList => {
+        this.questionTotalsList.next(questionTotalsList);
+      })
+    );
+  }
   public destroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }

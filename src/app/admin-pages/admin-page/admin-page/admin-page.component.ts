@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {Role} from "../../enum/role.enum";
-import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {Role} from "../../../enum/role.enum";
+import {AuthenticationService} from "../../../services/authentication/authentication.service";
+import {QuestionAndAnswersService} from "../../../services/question-and-answers/question-and-answers.service";
+import {QuestionTotalsDto} from "../models/question-totals-dto";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-admin-page',
@@ -25,9 +28,12 @@ export class AdminPageComponent implements OnInit {
   showQuestionCategories:boolean = false;
   showQuestionLevels:boolean = false;
   showAnswers:boolean = false;
+  questionTotals:QuestionTotalsDto[] ;
+  public subscriptions:Subscription[] = [];
 
   constructor(private router: Router,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private questionService: QuestionAndAnswersService) { }
 
   ngOnInit() {
     this.userPrivileges = this.isUser;
@@ -35,6 +41,12 @@ export class AdminPageComponent implements OnInit {
     this.premiumUserPrivileges = this.isPremUser;
     this.adminPrivileges = this.isAdmin;
     this.superPrivileges = this.isSuper;
+    this.subscriptions.push(
+      this.questionService.questionTotalsList$.subscribe( data=> {
+        this.questionTotals = data;
+      })
+    );
+    this.questionService.getQuestionTotals();
   }
 
   public gotoAdminConsole():void {

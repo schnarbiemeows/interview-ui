@@ -3,7 +3,7 @@ import { QuestionsAndAnswersListItemComponent } from './questions-and-answers-li
 import {Component} from "@angular/core";
 import {QuestionAnswerItemDTO} from "../../../models/QuestionAnswerItemDTO";
 import {QuestionDTO} from "../../../models/QuestionDTO";
-import {AnswerDTO} from "../../../models/AnswerDTO";
+import {AnswerDto} from "../../../models/answer-dto";
 
 @Component({
   template: '<app-questions-and-answers-list-item\n' +
@@ -28,7 +28,7 @@ export class TestHostComponent {
     evntTmestmp: null,
     evntOperId: "schnarbiemeows"
   };
-  newAnswer:AnswerDTO = {
+  newAnswer:AnswerDto = {
     answerTxt: 'use the sed command - sed s/x/y/g <file name>',
     evntTmestmp: null,
     evntOperId: 'schnarbiemeows'
