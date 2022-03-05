@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {ForeignKeyOptionsDTO} from "../../../models/ForeignKeyOptionsDTO";
 import {FilterParamsDTO} from "../../../models/FilterParamsDTO";
 
@@ -7,7 +7,7 @@ import {FilterParamsDTO} from "../../../models/FilterParamsDTO";
   templateUrl: './filter-questions-and-answers.component.html',
   styleUrls: ['./filter-questions-and-answers.component.css']
 })
-export class FilterQuestionsAndAnswersComponent implements OnInit {
+export class FilterQuestionsAndAnswersComponent implements OnInit, OnChanges {
 
   @Input() totalQuestions: number;
   @Input() questioncategorylist: ForeignKeyOptionsDTO[];
@@ -20,9 +20,12 @@ export class FilterQuestionsAndAnswersComponent implements OnInit {
   @Output() reset = new EventEmitter<void>();
   @Output() input1 = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {
+    console.log("filter constructor, category value = " + this.filterCategoryValue);
+  }
 
   ngOnInit(): void {
+    console.log("filter ngOnInit, category value = " + this.filterCategoryValue);
   }
 
   onSubmit(e) {
@@ -41,5 +44,12 @@ export class FilterQuestionsAndAnswersComponent implements OnInit {
     this.filterCategoryValue = null;
     this.filterDifficultyValue = null;
     this.reset.emit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const catValue = changes['filterCategoryValue'];
+    if(catValue != undefined) {
+      console.log("change happened, first change = " + catValue.isFirstChange() + " , currentValue = " + catValue.currentValue + " , previousValue = " + catValue.previousValue);
+    }
   }
 }

@@ -26,12 +26,10 @@ export class LevelListItemComponent implements OnInit {
   }
 
   editLevelItem(param: any) {
-    console.log("edit level item " + this.i + " clicked!");
     this.onEdit.emit(param);
   }
 
   deleteLevelItem(param: any) {
-    console.log("delete level item " + this.i + " clicked!");
     this.onDelete.emit(param);
   }
 }

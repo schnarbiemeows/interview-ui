@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   questionlevellist: ForeignKeyOptionsDTO[] = [];
   questionlevelmap = new Map();
   answermap = new Map();
-
+  mainPageMessages:string[] = ["Note: there are no HARD questions at this time, stay tuned!"]
   constructor(private router: Router,
               private questionservice: QuestionService,
               private questioncategoryservice: QuestionCategoryApiService,

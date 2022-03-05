@@ -78,6 +78,13 @@ export class QuestionCategoryService {
     this.changeEditMode(false);
     this.changeAddMode(true);
     this.disablePagination(true);
+    this.categoryItem = {
+      questionCategoryId: null,
+      questionCategoryDesc: '',
+      evntTmestmp: null,
+      evntOperId: '',
+      displayCde: ''
+    };
     return this.categoryItem;
   }
 

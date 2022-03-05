@@ -1,6 +1,12 @@
 <header-nav></header-nav>
 <div class="jumbotron-fluid" id="maincontainer">
+  <div class="block text-center">
+    <app-message-board
+      [messages]="mainPageMessages">
+    </app-message-board>
+  </div>
   <div class="container">
+
     <div class="row">
       <div class="col d-none d-lg-block mb-4">
         <h1>Welcome to the Interview Question Generator!</h1>

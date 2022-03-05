@@ -25,12 +25,10 @@ export class LevelListComponent implements OnInit {
   }
 
   public receiveAndRelayEdit(event:any) {
-    console.log("relaying edit = " + event);
     this.relayEdit.emit(event);
   }
 
   public receiveAndRelayDelete(event:any) {
-    console.log("relaying delete = " + event);
     this.relayDelete.emit(event);
   }
 }

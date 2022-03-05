@@ -9,6 +9,7 @@
                   [(ngModel)]="filterCategoryValue"
                   required
                   name="questionCategoryId_dropdown">
+            <option class="dropdown-item" disabled selected value="null">Select an Option</option>
             <option *ngFor="let option of questioncategorylist" [value]="option.value">
               {{ option.viewValue }}
             </option>
@@ -18,6 +19,7 @@
                   [(ngModel)]="filterDifficultyValue"
                   required
                   name="questionLevelId_dropdown">
+            <option class="dropdown-item" disabled selected value="null">Select an Option</option>
             <option *ngFor="let option of questionlevellist" [value]="option.value">
               {{ option.viewValue }}
             </option>

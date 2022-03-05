@@ -18,7 +18,7 @@ import {InterviewUserDTO} from "../../../models/InterviewUserDTO";
   styleUrls: ['./questions-and-answers.component.css']
   //providers: [QuestionCategoryService, QuestionLevelService,QuestionAndAnswersService]
 })
-export class QuestionsAndAnswersComponent implements OnInit {
+export class QuestionsAndAnswersComponent implements OnInit, OnDestroy {
 
   currentUser: InterviewUserDTO;
   // modes and page states
@@ -59,9 +59,12 @@ export class QuestionsAndAnswersComponent implements OnInit {
 
   constructor(private questionanswerservice: QuestionAndAnswersService,
               private authenticationService: AuthenticationService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService) {
+    console.log("component constructor");
+  }
 
   ngOnInit(): void {
+    console.log("component init");
     this.currentUser = this.authenticationService.getUserFromLocalCache();
     /**
      * 13 total Subscriptions
@@ -108,7 +111,6 @@ export class QuestionsAndAnswersComponent implements OnInit {
     });
     this.onComplete().then(this.getCategories).then(this.getLevels);
     this.questionanswerservice.reload();
-    console.log("done init");
   }
 
   private onComplete() {
@@ -198,6 +200,7 @@ export class QuestionsAndAnswersComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    console.log("component destroy");
     this.questionanswerservice.destroy();
     /**
      * 13 total Subscriptions
